@@ -3,6 +3,18 @@
 #include <string.h>
 #include <stdbool.h>
 
+bool determineTriangle(int a, int b, int c)
+{
+    if ((a+b > c) && (a+c > b) && (b+c > a))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 bool determineLeapYear(int year)
 {
     if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0))
@@ -68,7 +80,6 @@ int main()
     printf("The sum of the two integers in step version is: %d\n", stepResult);
 
     int selfcheckResult = selfcheck_PlusOrMinus();
-    */
 
     bool result = determineLeapYear(2020);
     if (result == 1)
@@ -79,6 +90,9 @@ int main()
     {
         printf("2020 is not a leap year.\n");
     }
+       */
 
+    int triangleResult = determineTriangle(3, 4, 12);
+    printf("The triangle side length is %s\n", triangleResult ? "valid" : "not valid");
     return 0;
 }

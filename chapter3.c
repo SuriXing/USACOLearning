@@ -3,6 +3,61 @@
 #include <string.h>
 #include <stdbool.h>
 
+void returnCommentToGrades()
+{
+    char grade;
+    printf("Enter your grade (A, B, C, D, F): \n");
+    scanf(" %c", &grade);
+    switch (grade) {
+        case 'A':
+            printf("Excellent work!\n");
+            break;
+        case 'B':
+            printf("Good job!\n");
+            break;
+        case 'C':
+            printf("You passed.\n");
+            break;
+        case 'D':
+            printf("You need to improve.\n");
+            break;
+        case 'F':
+            printf("You failed. Please try again.\n");
+            break;
+        default:
+            printf("Invalid grade entered.\n");
+    }
+}
+
+void twoIntegersCalculation() {
+    char operation;
+    int a, b;
+    
+    printf("Enter two integers and the operation you want at the end\n");
+    scanf("%d %d %c", &a, &b, &operation);
+
+    if (operation == '+') {
+        printf("The sum of %d and %d is: %d\n", a, b, a + b);
+    }
+    else if (operation == '-') {
+        printf("The difference of %d and %d is: %d\n", a, b, a - b);
+    }
+    else if (operation == '*') {
+        printf("The product of %d and %d is: %d\n", a, b, a * b);
+    }
+    else if (operation == '/') {
+        if (b != 0) {
+            printf("The division of %d by %d is: %.2f\n", a, b, (double)a / b);
+        }
+        else {
+            printf("Division by zero is not allowed.\n");
+        }
+    }
+    else {
+        printf("Invalid operation. Please use +, -, *, or /.\n");   
+    }
+}
+
 bool determineTriangle(int a, int b, int c)
 {
     if ((a+b > c) && (a+c > b) && (b+c > a))
@@ -90,9 +145,14 @@ int main()
     {
         printf("2020 is not a leap year.\n");
     }
-       */
 
     int triangleResult = determineTriangle(3, 4, 12);
     printf("The triangle side length is %s\n", triangleResult ? "valid" : "not valid");
+
+    twoIntegersCalculation();
+    */
+
+    returnCommentToGrades();
+
     return 0;
 }

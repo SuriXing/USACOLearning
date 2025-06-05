@@ -3,6 +3,22 @@
 #include <string.h>
 #include <stdbool.h>
 
+void printAstrics(int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        printf("*");
+    }
+}
+
+int changeValue(int *a, int *b)
+{
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+    return 0;
+}
+
 void returnCommentToGrades()
 {
     char grade;
@@ -150,9 +166,11 @@ int main()
     printf("The triangle side length is %s\n", triangleResult ? "valid" : "not valid");
 
     twoIntegersCalculation();
+    
+    returnCommentToGrades();
     */
 
-    returnCommentToGrades();
+    printAstrics(7);
 
     return 0;
 }

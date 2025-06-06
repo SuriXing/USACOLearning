@@ -3,6 +3,44 @@
 #include <string.h>
 #include <stdbool.h>
 
+void printArray(int array[], int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        printf("%d, ", array[i]);
+    }
+
+    printf("\n");
+}
+
+void makeArraySmallToBig(int array[], int n)
+{
+    for (int i = 0; i < n - 1; i++)
+    {
+        for (int j = 0; j < n - i - 1; j++)
+        {
+            if (array[j] > array[j + 1])
+            {
+                int temp = array[j];
+                array[j] = array[j + 1];
+                array[j + 1] = temp;
+            }
+        }
+    }
+}
+
+int averageOfArray(int array[], int n)
+{
+    int sum;
+
+    for (int i = 0; i < n; i++)
+    {
+        sum += array[i];
+    }
+
+    return sum/n;
+}
+
 void printAstrics(int n)
 {
     for (int i = 0; i < n; i++)
@@ -143,6 +181,9 @@ int sumOf2int_stepversion()
 
 int main()
 {
+
+    int array[5] = {12, 33, 12, 41, 1};
+
     /*
     int resultForSum = sumOf2int();
     printf("The sum of the two integers is: %d\n", result);
@@ -168,9 +209,15 @@ int main()
     twoIntegersCalculation();
     
     returnCommentToGrades();
-    */
 
     printAstrics(7);
+    */
+
+    printArray(array, 5);
+
+    makeArraySmallToBig(array, 5);
+
+    printArray(array, 5);
 
     return 0;
 }

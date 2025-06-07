@@ -3,6 +3,38 @@
 #include <string.h>
 #include <stdbool.h>
 
+int evenNumSum(int n)
+{
+    int sum = 0;
+
+    for (int i = 2; i <= n; i += 2)
+    {
+        sum += i;
+    }
+
+    return sum;
+}
+
+void abcd()
+{
+    for (int i = 1; i < 10; i++)
+    {
+        for (int j = 0; j < 10; j++)
+        {
+            for (int k = 0; k < 10; k++)
+            {
+                for (int h = 0; h < 10; h++)
+                {
+                    if ((((10*i + j) * (10*k + h)) == 1000*i + 100*j + 10*k + h))
+                    {
+                        printf("%d\n", (1000*i + 100*j + 10*k +h));
+                    }
+                }
+            }
+        }
+    }
+}
+
 void printArray(int array[], int n)
 {
     for (int i = 0; i < n; i++)
@@ -211,13 +243,18 @@ int main()
     returnCommentToGrades();
 
     printAstrics(7);
-    */
 
     printArray(array, 5);
 
     makeArraySmallToBig(array, 5);
 
     printArray(array, 5);
+
+    abcd();
+    */
+
+    int sum = evenNumSum(4);
+    printf("%d\n", sum);
 
     return 0;
 }

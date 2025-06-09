@@ -3,6 +3,22 @@
 #include <string.h>
 #include <stdbool.h>
 
+int whichOneIsBIgger(int a, int b)
+{
+    if (a>b)
+    {
+        return a;
+    }
+    else if (a == b)
+    {
+        return a;
+    }
+    else
+    {
+        return b;
+    }
+}
+
 int evenNumSum(int n)
 {
     int sum = 0;

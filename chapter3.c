@@ -3,7 +3,39 @@
 #include <string.h>
 #include <stdbool.h>
 
-int whichOneIsBIgger(int a, int b)
+int howManyLowerThanAverage(int grades[10])
+{
+    int sum;
+    int count;
+
+    for (int i = 0; i <= 10; i++)
+    {
+        sum += grades[i];
+    }
+
+    for (int i = 0; i <= 10; i++)
+    {
+        if (grades[i] < sum/10)
+        {
+            count += 1;
+        }
+    }
+
+    return count;
+}
+
+int gcdOfTwoNum(int a, int b)
+{
+    while (b != 0)
+    {
+        int temp = b;
+        b = a % b;
+        a = temp;
+    }
+    return a;
+}
+
+int whichOneIsBigger(int a, int b)
 {
     if (a>b)
     {
@@ -232,6 +264,8 @@ int main()
 
     int array[5] = {12, 33, 12, 41, 1};
 
+    int grades[10] = {37, 90, 100, 90, 40 , 25, 18, 59, 1, 10};
+
     /*
     int resultForSum = sumOf2int();
     printf("The sum of the two integers is: %d\n", result);
@@ -267,10 +301,16 @@ int main()
     printArray(array, 5);
 
     abcd();
-    */
 
     int sum = evenNumSum(4);
     printf("%d\n", sum);
+
+    int gcd = gcdOfTwoNum(17, 25);
+    printf("The gcd of 17 & 25 is %d\n", gcd);
+    */
+
+    int count = howManyLowerThanAverage(grades);
+    printf("%d\n", count);
 
     return 0;
 }

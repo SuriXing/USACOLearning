@@ -3,6 +3,24 @@
 #include <string.h>
 #include <stdbool.h>
 
+void returnSquare(int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            if (j == n-1)
+            {
+                printf("*\n");
+            }
+            else
+            {
+                printf("*");
+            }
+        }
+    }
+}
+
 int howManyLowerThanAverage(int grades[10])
 {
     int sum;
@@ -33,6 +51,16 @@ int gcdOfTwoNum(int a, int b)
         a = temp;
     }
     return a;
+}
+
+int findLcmOfTwoInt(int a, int b)
+{
+    if ((a <= 0) || (b <= 0))
+    {
+        return 0;
+    }
+
+    return (a * b)/gcdOfTwoNum(a, b);
 }
 
 int whichOneIsBigger(int a, int b)
@@ -307,10 +335,15 @@ int main()
 
     int gcd = gcdOfTwoNum(17, 25);
     printf("The gcd of 17 & 25 is %d\n", gcd);
-    */
 
     int count = howManyLowerThanAverage(grades);
     printf("%d\n", count);
+    
+    returnSquare(5);
+    */
+
+    int lcm = findLcmOfTwoInt(12, 18);
+    printf("%d\n", lcm);
 
     return 0;
 }

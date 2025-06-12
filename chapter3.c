@@ -3,6 +3,33 @@
 #include <string.h>
 #include <stdbool.h>
 
+bool containsSeven(int num)
+{
+    while (num > 0)
+    {
+        int digit = num % 10;
+        if (digit == 7)
+        {
+            return true;
+        }
+        num /= 10;
+    }
+    return false;
+}
+
+int sumOfSquares_seven(int n)
+{
+    int sum = 0;
+    for (int i = 1; i < n; i++)
+    {
+        if (i % 7 != 0 && !containsSeven(i))
+        {
+            sum += i * i;
+        }
+    }
+    return sum;
+}
+
 void returnSquare(int n)
 {
     for (int i = 0; i < n; i++)
@@ -340,10 +367,13 @@ int main()
     printf("%d\n", count);
     
     returnSquare(5);
-    */
 
     int lcm = findLcmOfTwoInt(12, 18);
     printf("%d\n", lcm);
+    */
+
+    int sumOfSquare = sumOfSquares_seven(21);
+    printf("Result: %d\n", sumOfSquare);
 
     return 0;
 }

@@ -3,6 +3,35 @@
 #include <string.h>
 #include <stdbool.h>
 
+void printMultiplicationTable()
+{
+    for (int i = 1; i <= 9; i++) 
+    {
+        for (int j = 1; j <= i; j++) 
+        {
+            printf("%d * %d=%-2d  ", j, i, i * j);
+        }
+        printf("\n");
+    }
+}
+
+int absoluteValue(int n)
+{
+    int count = 0;
+
+    if (n <= 0)
+    {
+        return n;
+    }
+
+    for (int i = 0; i < n; i++)
+    {
+        count ++;
+    }
+
+    return count;
+}
+
 bool containsSeven(int num)
 {
     while (num > 0)

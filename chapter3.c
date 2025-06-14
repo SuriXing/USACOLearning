@@ -3,6 +3,29 @@
 #include <string.h>
 #include <stdbool.h>
 
+int sumOfFraction(int n)
+{
+    int count = 0;
+    for (int i = 1; i <= n; i++)
+    {
+        count += 1/i;
+    }
+    return count;
+}
+
+void printTriangle(int rows)
+{
+    int num = 1;
+    for (int i = 1; i <= rows; i++)
+    {
+        for (int j = 1; j <= i; j++)
+        {
+            printf("%d", num++);
+        }
+        printf("\n");
+    }
+}
+
 void printMultiplicationTable()
 {
     for (int i = 1; i <= 9; i++) 
@@ -399,10 +422,11 @@ int main()
 
     int lcm = findLcmOfTwoInt(12, 18);
     printf("%d\n", lcm);
-    */
 
     int sumOfSquare = sumOfSquares_seven(21);
     printf("Result: %d\n", sumOfSquare);
+    */
+    printTriangle(5);
 
     return 0;
 }

@@ -3,6 +3,23 @@
 #include <string.h>
 #include <stdbool.h>
 
+void printCenteredNumberTriangle(int rows)
+{
+    int current_num = 1;
+    for (int i = 1; i <= rows; i++) 
+    {
+        int leading_spaces = (rows - i) * 2;
+        for (int s = 0; s < leading_spaces; s++) {
+            printf(" ");
+        }
+        for (int j = 1; j <= i; j++) 
+        {
+            printf("%-3d", current_num++);
+        }
+        printf("\n\n");
+    }
+}
+
 int sumOfFraction(int n)
 {
     int count = 0;
@@ -426,7 +443,7 @@ int main()
     int sumOfSquare = sumOfSquares_seven(21);
     printf("Result: %d\n", sumOfSquare);
     */
-    printTriangle(5);
+    printCenteredNumberTriangle(5);
 
     return 0;
 }

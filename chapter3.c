@@ -3,6 +3,8 @@
 #include <string.h>
 #include <stdbool.h>
 
+
+
 void printCenteredNumberTriangle(int rows)
 {
     int current_num = 1;
@@ -38,6 +40,21 @@ void printTriangle(int rows)
         for (int j = 1; j <= i; j++)
         {
             printf("%d", num++);
+        }
+        printf("\n");
+    }
+}
+
+void printTriangle(int rows) 
+{
+    int start_num = (rows * (rows + 1)) / 2;
+    int num = start_num;
+    
+    for (int i = 1; i <= rows; i++)
+    {
+        for (int j = 1; j <= i; j++)
+        {
+            printf("%d ", num--);
         }
         printf("\n");
     }
@@ -443,7 +460,6 @@ int main()
     int sumOfSquare = sumOfSquares_seven(21);
     printf("Result: %d\n", sumOfSquare);
     */
-    printCenteredNumberTriangle(5);
 
     return 0;
 }

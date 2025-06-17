@@ -22,6 +22,23 @@ void printCenteredNumberTriangle(int rows)
     }
 }
 
+void printCenteredNumberTriangle2(int rows)
+{
+    int current_num = 1;
+    for (int i = 1; i <= rows; i++) 
+    {
+        int leading_spaces = (rows - i) * 2;
+        for (int s = 0; s < leading_spaces; s++) {
+            printf(" ");
+        }
+        for (int j = 1; j <= i; j++) 
+        {
+            printf("%-3d", current_num++);
+        }
+        printf("\n\n");
+    }
+}
+
 int sumOfFraction(int n)
 {
     int count = 0;

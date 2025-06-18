@@ -5,6 +5,22 @@
 
 
 
+void bubbleSort(int arr[], int n)
+{
+    for (int i = 0; i < n - 1; i++)
+    {
+        for (int j = 0; j < n - i - 1; j++)
+        {
+            if (arr[j] > arr[j + 1])
+            {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
 void printCenteredNumberTriangle(int rows)
 {
     int current_num = 1;
@@ -62,7 +78,7 @@ void printTriangle(int rows)
     }
 }
 
-void printTriangle(int rows) 
+void printReversedTriangle(int rows) 
 {
     int start_num = (rows * (rows + 1)) / 2;
     int num = start_num;
@@ -477,6 +493,8 @@ int main()
     int sumOfSquare = sumOfSquares_seven(21);
     printf("Result: %d\n", sumOfSquare);
     */
+   int arr[] = {5, 2, 9, 1, 5, 6};
+   bubbleSort(arr, 6);
 
     return 0;
 }

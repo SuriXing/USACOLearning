@@ -3,6 +3,17 @@
 #include <string.h>
 #include <stdbool.h>
 
+void matrixAdd(int n, int m, int A[][m], int B[][m], int C[][m])
+{
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            C[i][j] = A[i][j] + B[i][j];
+        }
+    }
+}
+
 void selectionSort(int arr[], int n) {
     for (int i = 0; i < n - 1; i++)
     {

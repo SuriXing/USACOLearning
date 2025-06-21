@@ -3,6 +3,31 @@
 #include <string.h>
 #include <stdbool.h>
 
+int sumOfNumOnEdgeOfRectangle(int n, int m, int matrix[][m])
+{
+    int sum = 0;
+
+       for (int j = 0; j < m; j++)
+    {
+        sum += matrix[0][j];
+        if (n > 1)
+        {
+            sum += matrix[n - 1][j];
+        }
+    }
+
+    for (int i = 1; i < n - 1; i++)
+    {
+        sum += matrix[i][0];
+        if (m > 1)
+        {
+            sum += matrix[i][m - 1];
+        }
+    }
+
+    return sum;
+}
+
 void matrixAdd(int n, int m, int A[][m], int B[][m], int C[][m])
 {
     for (int i = 0; i < n; i++)

@@ -3,6 +3,22 @@
 #include <string.h>
 #include <stdbool.h>
 
+int sumOfConsecutiveNum(int num)
+{
+    int sum = 0;
+    for (int i = 1; i <= num; i++)
+    {
+        sum += i;
+    }
+
+    return sum;
+}
+
+int grade(int hwGrade, int examGrade, int testGrade)
+{
+    return (hwGrade/5.0) + (examGrade*3.0/10) + (testGrade/2.0);
+}
+
 int sumOfNumOnEdgeOfRectangle(int n, int m, int matrix[][m])
 {
     int sum = 0;

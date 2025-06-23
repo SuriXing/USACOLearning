@@ -3,6 +3,32 @@
 #include <string.h>
 #include <stdbool.h>
 
+int strLength(const char* str)
+{
+    int count = 0;
+    while (*str != '\0')
+    {
+        count++;
+        str++;
+    }
+    return count;
+}
+
+int countNotSpaceChars(const char* str)
+{
+    int count = 0;
+    while (*str != '\0')
+    {
+        if ((*str != ' ') && (*str != '\n') && (*str != '\r')) 
+        {
+            count++;
+        }
+        str++;
+    }
+    return count;
+}
+
+
 int sumOfConsecutiveNum(int num)
 {
     int sum = 0;
@@ -578,9 +604,12 @@ int main()
 
     int sumOfSquare = sumOfSquares_seven(21);
     printf("Result: %d\n", sumOfSquare);
+    
+    int arr[] = {5, 2, 9, 1, 5, 6};
+    bubbleSort(arr, 6);
     */
-   int arr[] = {5, 2, 9, 1, 5, 6};
-   bubbleSort(arr, 6);
+    int numberInStr = countNotSpaceChars("ABCD123 674");//10
+    printf("%d\n", numberInStr);
 
     return 0;
 }

@@ -3,6 +3,28 @@
 #include <string.h>
 #include <stdbool.h>
 
+int returnGreaterNum(int a, int b)
+{
+    if (a > b)
+    {
+        return a;
+    }
+    else
+    {
+        return b;
+    }
+}
+
+int abvalue(int num)
+{
+    int count = 0;
+    for (int i = 1; i <= num; i++)
+    {
+        count++;
+    }
+    return count;
+}
+
 int strLength(const char* str)
 {
     int count = 0;

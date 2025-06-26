@@ -3,6 +3,25 @@
 #include <string.h>
 #include <stdbool.h>
 
+void printLeftToRightTriangle(int rows)
+{
+    int num = 1;
+    for (int i = 1; i <= rows; i++)
+    {
+        int leadingSpaces = (rows - i) * 3;
+        for (int space = 0; space < leadingSpaces; space++)
+        {
+            printf(" ");
+        }
+        
+        for (int j = 1; j <= i; j++)
+        {
+            printf("%2d ", num++);
+        }
+        printf("\n");
+    }
+}
+
 void simpleSort(int array[], int size)
 {
     for (int i = 0; i < size - 1; i++)
@@ -645,9 +664,11 @@ int main()
     
     int arr[] = {5, 2, 9, 1, 5, 6};
     bubbleSort(arr, 6);
-    */
+    
     int numberInStr = countNotSpaceChars("ABCD123 674");//10
     printf("%d\n", numberInStr);
+    */
+    printLeftToRightTriangle(6);
 
     return 0;
 }

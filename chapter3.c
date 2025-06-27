@@ -3,6 +3,26 @@
 #include <string.h>
 #include <stdbool.h>
 
+void printCenteredReversedTriangle(int rows) 
+{
+    int start_num = (rows * (rows + 1)) / 2;
+    int num = start_num;
+    
+    for (int i = 1; i <= rows; i++)
+    {
+        for (int space = 1; space <= rows - i; space++)
+        {
+            printf("  ");
+        }
+        
+        for (int j = 1; j <= i; j++)
+        {
+            printf("%-2d ", num--);
+        }
+        printf("\n");
+    }
+}
+
 void printLeftToRightTriangle(int rows)
 {
     int num = 1;

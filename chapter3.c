@@ -3,6 +3,45 @@
 #include <string.h>
 #include <stdbool.h>
 
+/*
+Problem:
+The Merry Milk Makers company has N (1 ≤ N ≤ 5000) farmers, each with a certain amount of milk to sell at a certain price. The company wants to buy at least M (1 ≤ M ≤ 2,000,000) units of milk, spending the least amount of money possible.
+
+Given:
+
+N farmers, each with a price per unit (in cents) and maximum amount they can sell
+M = total units needed
+
+Output:
+The minimum cost to buy at least M units of milk
+*/
+
+typedef struct {
+    int price;
+    int amount;
+} Farmer;
+
+int compareFarmers(const void *a, const void *b)
+{
+    return ((Farmer*)a)->price - ((Farmer*)b)->price;
+}
+
+int mixMilk(int N, int M, Farmer farmers[])
+{
+    qsort(farmers, N, sizeof(Farmer), compareFarmers);
+    int cost = 0, remaining = M;
+    
+    for (int i = 0; i < N && remaining > 0; i++) {
+        int take = remaining < farmers[i].amount ? remaining : farmers[i].amount;
+        cost += take * farmers[i].price;
+        remaining -= take;
+    }
+    
+    return cost;
+}
+
+// problem solved//
+
 void simpleSort(int array[], int size)
 {
     for (int i = 0; i < size - 1; i++)

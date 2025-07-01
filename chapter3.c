@@ -3,6 +3,29 @@
 #include <string.h>
 #include <stdbool.h>
 
+void printDiagnolTriangle(int rows)
+{
+    int current = 1;
+    int diagnol = 1;
+    
+    for (int i = 0; i < rows; i++)
+    {
+        int num = current;
+        int step = diagnol;
+        
+        for (int j = 0; j < rows - i; j++)
+        {
+            printf("%d ", num);
+            num += step;
+            step++;
+        }
+        
+        printf("\n");
+        current += diagnol;
+        diagnol++;
+    }
+}
+
 /*
 Problem:
 The Merry Milk Makers company has N (1 ≤ N ≤ 5000) farmers, each with a certain amount of milk to sell at a certain price. The company wants to buy at least M (1 ≤ M ≤ 2,000,000) units of milk, spending the least amount of money possible.

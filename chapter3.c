@@ -3,6 +3,18 @@
 #include <string.h>
 #include <stdbool.h>
 
+void printMultiplicationTable_81()
+{
+    for (int i = 1; i <= 9; i++) 
+    {
+        for (int j = 1; j <= i; j++) 
+        {
+            printf("%d * %d=%-2d  ", j, i, i * j);
+        }
+        printf("\n");
+    }
+}
+
 void printDiagnolTriangle(int rows)
 {
     int current = 1;
@@ -749,8 +761,9 @@ int main()
     
     int numberInStr = countNotSpaceChars("ABCD123 674");//10
     printf("%d\n", numberInStr);
-    */
+    
     printLeftToRightTriangle(6);
-
+    */
+   printMultiplicationTable_81();
     return 0;
 }

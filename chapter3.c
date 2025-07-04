@@ -3,6 +3,18 @@
 #include <string.h>
 #include <stdbool.h>
 
+void printMultiplicationTable_81()
+{
+    for (int i = 1; i <= 9; i++) 
+    {
+        for (int j = 1; j <= i; j++) 
+        {
+            printf("%d * %d=%-2d  ", j, i, i * j);
+        }
+        printf("\n");
+    }
+}
+
 void printCenteredPascalTriangle(int rows)
 {
     for (int i = 0; i < rows; i++)
@@ -13,7 +25,7 @@ void printCenteredPascalTriangle(int rows)
             printf("%d ", number);
             number = (number * (i - j)) / (j + 1);
         }
-        int count = rows - j;
+        int count = rows - i;
         while(count > 0)
         {
             printf(" ");
@@ -32,18 +44,6 @@ void printPascalTriangle(int rows)
         {
             printf("%d ", number);
             number = (number * (i - j)) / (j + 1);
-        }
-        printf("\n");
-    }
-}
-
-void printMultiplicationTable_81()
-{
-    for (int i = 1; i <= 9; i++) 
-    {
-        for (int j = 1; j <= i; j++) 
-        {
-            printf("%d * %d=%-2d  ", j, i, i * j);
         }
         printf("\n");
     }

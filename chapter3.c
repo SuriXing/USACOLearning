@@ -3,6 +3,20 @@
 #include <string.h>
 #include <stdbool.h>
 
+void printAdditionTriangle(int rows)
+{
+    for (int i = 0; i < rows; i++)
+    {
+        int number = 1;
+        for (int j = 0; j <= i; j++)
+        {
+            printf("%d ", number);
+            number = (number * (i - j)) / (j + 1);
+        }
+        printf("\n");
+    }
+}
+
 void printMultiplicationTable_81()
 {
     for (int i = 1; i <= 9; i++) 
@@ -763,7 +777,10 @@ int main()
     printf("%d\n", numberInStr);
     
     printLeftToRightTriangle(6);
+    
+    printMultiplicationTable_81();
     */
-   printMultiplicationTable_81();
+
+    printAdditionTriangle(7);
     return 0;
 }

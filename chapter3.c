@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdbool.h>
 
-void printAdditionTriangle2(int rows)
+void printCenteredPascalTriangle(int rows)
 {
     for (int i = 0; i < rows; i++)
     {
@@ -13,11 +13,17 @@ void printAdditionTriangle2(int rows)
             printf("%d ", number);
             number = (number * (i - j)) / (j + 1);
         }
+        int count = rows - j;
+        while(count > 0)
+        {
+            printf(" ");
+            count --;
+        }
         printf("\n");
     }
 }
 
-void printAdditionTriangle(int rows)
+void printPascalTriangle(int rows)
 {
     for (int i = 0; i < rows; i++)
     {
@@ -795,6 +801,6 @@ int main()
     printMultiplicationTable_81();
     */
 
-    printAdditionTriangle(7);
+    printCenteredPascalTriangle(7);
     return 0;
 }

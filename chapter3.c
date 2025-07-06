@@ -3,6 +3,20 @@
 #include <string.h>
 #include <stdbool.h>
 
+void printAdditionTriangle2(int rows)
+{
+    for (int i = 0; i < rows; i++)
+    {
+        int number = 1;
+        for (int j = 0; j <= i; j++)
+        {
+            printf("%d ", number);
+            number = (number * (i - j)) / (j + 1);
+        }
+        printf("\n");
+    }
+}
+
 void printAdditionTriangle(int rows)
 {
     for (int i = 0; i < rows; i++)

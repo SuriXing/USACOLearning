@@ -3,6 +3,18 @@
 #include <string.h>
 #include <stdbool.h>
 
+void printRhombusOfAstrics(int side)
+{
+    for (int i = 1; i <= side; i++)
+    {
+        for (int j = 1; j <= side; j++)
+        {
+            printf("*");
+        }
+        printf("\n");
+    }
+}
+
 void printMultiplicationTable_81()
 {
     for (int i = 1; i <= 9; i++) 
@@ -813,8 +825,10 @@ int main()
     printLeftToRightTriangle(6);
     
     printMultiplicationTable_81();
-    */
 
     printCenteredPascalTriangle(7);
+    */
+
+    printRhombusOfAstrics(3);
     return 0;
 }

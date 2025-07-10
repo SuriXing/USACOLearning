@@ -3,6 +3,18 @@
 #include <string.h>
 #include <stdbool.h>
 
+void printRectangleOfAstrics(int row, int column)
+{
+    for (int i = 0; i < row; i++)
+    {
+        for (int j = 0; j < column; j++)
+        {
+            printf("*");
+        }
+        printf("\n");
+    }
+}
+
 void printRhombusOfAstrics(int side)
 {
     for (int i = 1; i <= side; i++)
@@ -829,6 +841,6 @@ int main()
     printCenteredPascalTriangle(7);
     */
 
-    printRhombusOfAstrics(3);
+    printRectangleOfAstrics(3,5);
     return 0;
 }

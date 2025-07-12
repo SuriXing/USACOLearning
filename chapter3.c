@@ -3,25 +3,31 @@
 #include <string.h>
 #include <stdbool.h>
 
-int selectArrange(int* array, int rows)
-{
-    for (int i = 0; i< row; i++)
-    {
-        array[i] = findSmallestNum(array, rows);
-    }
-}
 
-int findSmallestNumInArray(int* array, int row)
+int findSmallestNum(int* array, int start, int end)
 {
-    int smallestNum = 0;
-    for (int i = 0; i < row; i++)
+    int smallestNum = start;
+    for (int i = start + 1; i < end; i++)
     {
-        if (array[i] < smallestNum)
+        if (array[i] < array[smallestNum])
         {
-            smallestNum = array[i];
+            smallestNum = i;
         }
     }
     return smallestNum;
+}
+
+void selectArrange(int* array, int rows)
+{
+    for (int i = 0; i < rows; i++)
+    {
+        int smallestNum = findSmallestNum(array, i, rows);
+        
+        // Swap the found smallest element with the first element of the unsorted part
+        int temp = array[i];
+        array[i] = array[smallestNum];
+        array[smallestNum] = temp;
+    }
 }
 
 void printRectangleOfAstrics(int row, int column)

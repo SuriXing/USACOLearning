@@ -3,6 +3,16 @@
 #include <string.h>
 #include <stdbool.h>
 
+int sumOfFraction(int n)
+{
+    int count = 0;
+    for (int i = 1; i <= n; i++)
+    {
+        count += 1/i;
+    }
+    return count;
+}
+
 void bubbleSort(int arr[], int n)
 {
     for (int i = 0; i < n - 1; i++)
@@ -414,16 +424,6 @@ void printCenteredNumberTriangle2(int rows)
         }
         printf("\n\n");
     }
-}
-
-int sumOfFraction(int n)
-{
-    int count = 0;
-    for (int i = 1; i <= n; i++)
-    {
-        count += 1/i;
-    }
-    return count;
 }
 
 void printTriangle(int rows)

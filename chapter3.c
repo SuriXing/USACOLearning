@@ -3,6 +3,32 @@
 #include <string.h>
 #include <stdbool.h>
 
+int fourleafCloverNum(int num)
+{
+    int ones = 0;
+    int ten = 0;
+    int hundred = 0;
+    int thousand = 0;
+    
+    ones = num % 10;
+    ten = (num / 10) % 10;
+    hundred = (num / 100) % 10;
+    thousand = (num / 1000) % 10;
+
+     
+    if ((ones * ones * ones * ones) + 
+        (ten * ten * ten * ten) + 
+        (hundred * hundred * hundred * hundred) + 
+        (thousand * thousand * thousand * thousand) == num)
+    {
+        return 1;
+    }
+    else
+    {
+        return -1;
+    }
+}
+
 void printScalableStar(int size)
 {
     for (int i = 0; i < size; i++) printf(" ");
@@ -896,8 +922,11 @@ int main()
     printCenteredPascalTriangle(7);
 
     printRectangleOfAstrics(3,5);
-    */
 
     printScalableStar(5);
+    */
+
+    fourleafCloverNum(1634);
+    
     return 0;
 }

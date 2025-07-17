@@ -3,6 +3,35 @@
 #include <string.h>
 #include <stdbool.h>
 
+void printScalableStar(int size)
+{
+    for (int i = 0; i < size; i++) printf(" ");
+    printf("*\n");
+    
+    for (int i = 1; i < size; i++)
+    {
+        for (int j = 0; j < size - i; j++) printf(" ");
+        printf("*");
+        for (int j = 0; j < 2*i - 1; j++) printf(" ");
+        printf("*\n");
+    }
+    
+    printf(" ");
+    for (int i = 0; i < 2*size - 1; i++) printf("*");
+    printf("\n");
+    
+    for (int i = size - 1; i > 0; i--)
+    {
+        for (int j = 0; j < size - i; j++) printf(" ");
+        printf("*");
+        for (int j = 0; j < 2*i - 1; j++) printf(" ");
+        printf("*\n");
+    }
+    
+    for (int i = 0; i < size; i++) printf(" ");
+    printf("*\n");
+}
+
 void printLeftToRightTriangle(int rows)
 {
     int num = 1;
@@ -865,8 +894,10 @@ int main()
     printMultiplicationTable_81();
 
     printCenteredPascalTriangle(7);
-    */
 
     printRectangleOfAstrics(3,5);
+    */
+
+    printScalableStar(5);
     return 0;
 }

@@ -3,6 +3,11 @@
 #include <string.h>
 #include <stdbool.h>
 
+int findPriceAfterTax(int price, int tax)
+{
+    return (price + (price * (tax/100)));
+}
+
 void printScalableStar2(int size)
 {
     for (int i = 0; i < size; i++) printf(" ");

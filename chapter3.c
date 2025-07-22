@@ -8,6 +8,11 @@ int findPriceAfterTax(int price, int tax)
     return (price + (price * (tax/100)));
 }
 
+int findPriceAfterTax2(int price, int tax)
+{
+    return (price + (price * (tax/100)));
+}
+
 void printScalableStar2(int size)
 {
     for (int i = 0; i < size; i++) printf(" ");

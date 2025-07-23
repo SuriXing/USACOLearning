@@ -3,6 +3,14 @@
 #include <string.h>
 #include <stdbool.h>
 
+
+/*
+int findTreasure(int array[int a][int b])
+{
+
+}
+*/
+
 int findPriceAfterTax(int price, int tax)
 {
     return (price + (price * (tax/100)));
@@ -192,7 +200,7 @@ void printRhombusOfAstrics(int side)
     }
 }
 
-void printMultiplicationTable_81()
+void printMultiplicationTable__81()
 {
     for (int i = 1; i <= 9; i++) 
     {

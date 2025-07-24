@@ -2,14 +2,33 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <time.h>
 
-
-/*
-int findTreasure(int array[int a][int b])
+void findTreasure(int a, int b)
 {
+    srand(time(0));
+    int num1 = rand() % a;
+    int num2 = rand() % b;
 
-}
-*/
+    int Xaxis = 0;
+    int Yaxis = 0;
+
+    while(1)
+    {
+        printf("Enter coordinates (X Y): ");
+        scanf("%d %d", &Xaxis, &Yaxis);
+        
+        if ((Xaxis == num1) && (Yaxis == num2))
+        {
+            printf("Congratulations, You found the treasure at (%d, %d)!\n", num1, num2);
+            break;
+        }
+        else
+        {
+            printf("Please try again\n");
+        }
+    }
+}      
 
 int findPriceAfterTax(int price, int tax)
 {
@@ -971,9 +990,11 @@ int main()
     printRectangleOfAstrics(3,5);
 
     printScalableStar(5);
-    */
 
     fourleafCloverNum(1634);
+    */
+
+    findTreasure(5, 6);
 
     return 0;
 }

@@ -4,6 +4,45 @@
 #include <stdbool.h>
 #include <time.h>
 
+typedef struct { int x; int y; } Point;
+
+void findTreasure_smart(int a, int b)
+{
+    srand(time(0));
+    Point treasure = { rand() % a, rand() % b };
+    Point guess;
+    int attempts = 0;
+    const int max_attempts = 5;
+
+    while (attempts < max_attempts)
+    {
+        printf("Attempt %d/%d: Enter coordinates (X Y): ", attempts + 1, max_attempts);
+        if (scanf("%d %d", &guess.x, &guess.y) != 2)
+        {
+            printf("Invalid input! Please enter two integers.\n");
+            while (getchar() != '\n');
+            continue;
+        }
+
+        if (guess.x == treasure.x && guess.y == treasure.y)
+        {
+            printf("Congratulations! You found the treasure at (%d, %d)!\n", treasure.x, treasure.y);
+            return;
+        } 
+        else
+        {
+            printf("Wrong guess. ");
+            if (guess.x < treasure.x) printf("Go right. ");
+            if (guess.x > treasure.x) printf("Go left. ");
+            if (guess.y < treasure.y) printf("Go up. ");
+            if (guess.y > treasure.y) printf("Go down. ");
+            printf("\n");
+        }
+        attempts++;
+    }
+    printf("Game over! The treasure was at (%d, %d).\n", treasure.x, treasure.y);
+}
+
 void findTreasure(int a, int b)
 {
     srand(time(0));

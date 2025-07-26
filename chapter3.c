@@ -4,6 +4,47 @@
 #include <stdbool.h>
 #include <time.h>
 
+/*Problem Statement
+Farmer John is painting a fence that has 100 wooden panels labeled 1 to 100. Each cow paints a consecutive range of panels. However, some cows might paint overlapping ranges.
+
+Given the ranges painted by each cow, calculate:
+
+The ​total number of panels painted at least once.
+The ​longest contiguous stretch of panels painted by a single cow​ (even if other cows paint parts of it).
+​Input Format:
+
+Line 1: Two integers a and b (the range painted by the first cow).
+Line 2: Two integers c and d (the range painted by the second cow).
+​Output Format:
+
+A single line with two integers:
+First integer: Total panels painted at least once.
+Second integer: Longest contiguous stretch by one cow.*/
+
+int max(int x, int y)
+{
+    return (x > y) ? x : y;
+}
+
+int min(int x, int y)
+{
+    return (x < y) ? x : y;
+}
+
+typedef struct _Ranges 
+{
+    int range_start; 
+    int range_end;
+} Ranges;
+
+int FencePainting(Ranges firstCow, Ranges secondCow)
+{
+    int total_painted = (firstCow.range_end - firstCow.range_start + 1) + (secondCow.range_end - secondCow.range_start + 1);
+    int overlap = max(0, min(firstCow.range_end, secondCow.range_end) - max(firstCow.range_start, secondCow.range_start) + 1);
+
+    return (total_painted - overlap);
+}
+
 typedef struct { int x; int y; } Point;
 
 void findTreasure_smart(int a, int b)
@@ -70,11 +111,6 @@ void findTreasure(int a, int b)
 }      
 
 int findPriceAfterTax(int price, int tax)
-{
-    return (price + (price * (tax/100)));
-}
-
-int findPriceAfterTax2(int price, int tax)
 {
     return (price + (price * (tax/100)));
 }

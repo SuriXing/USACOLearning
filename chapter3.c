@@ -45,6 +45,20 @@ int FencePainting(Ranges firstCow, Ranges secondCow)
     return (total_painted - overlap);
 }
 
+int FencePainting_onlyOverlap(const Ranges* cows, int count)
+{
+    int start_max=0;
+    int end_min=0;
+
+    for (int i = 0; i < count; i++)
+    {
+        start_max = max(start_max, cows[i].range_start);
+        end_min = min(end_min, cows[i].range_end);
+    }
+
+    return (end_min - start_max +1);
+}
+
 typedef struct { int x; int y; } Point;
 
 void findTreasure_smart(int a, int b)

@@ -4,6 +4,49 @@
 #include <stdbool.h>
 #include <time.h>
 
+/*Given N cows (where N ≥ 1), each painting a range [a_i, b_i] on a fence with panels labeled 1 to 100, calculate:
+
+​Total panels painted at least once​ (union of all ranges).
+​Longest contiguous stretch painted by any single cow.*/
+
+#include <stdio.h>
+
+typedef struct _Range
+{
+    int start;
+    int end;
+} Range;
+
+int FencePainting_Hard()
+{
+    int n;
+    scanf("%d", &n);
+
+    Range cows[n];
+    int min_start = 101;
+    int max_end = 0;
+    int longest_stretch = 0;
+
+    for (int i = 0; i < n; i++)
+    {
+        scanf("%d %d", &cows[i].start, &cows[i].end);
+        
+        if (cows[i].start < min_start) min_start = cows[i].start;
+        if (cows[i].end > max_end) max_end = cows[i].end;
+        
+        int length = cows[i].end - cows[i].start + 1;
+        if (length > longest_stretch)
+        {
+            longest_stretch = length;
+        }
+    }
+
+    int total_painted = max_end - min_start + 1;
+
+    printf("%d %d\n", total_painted, longest_stretch);
+    return 0;
+}
+
 /*Problem Statement
 Farmer John is painting a fence that has 100 wooden panels labeled 1 to 100. Each cow paints a consecutive range of panels. However, some cows might paint overlapping ranges.
 

@@ -4,6 +4,24 @@
 #include <stdbool.h>
 #include <time.h>
 
+/*Problem Statement:​​
+Farmer John wants to paint a fence with N wooden panels labeled 1 to N. He hires M cows to help, where each cow paints a ​consecutive range​ of panels (e.g., [a_i, b_i]). However, some cows might paint overlapping ranges.
+
+​Your Task:​​
+Given the ranges painted by each cow, calculate:
+
+​Total number of panels painted at least once​ (union of all ranges).
+​Longest contiguous stretch painted by a single cow​ (even if others overlap).
+​Input Format:​​
+
+Line 1: Two integers N (number of panels, 1 ≤ N ≤ 1000) and M (number of cows, 1 ≤ M ≤ 100).
+Next M lines: Two integers a_i and b_i (1 ≤ a_i ≤ b_i ≤ N), representing the range painted by the i-th cow.
+​Output Format:​​
+
+A single line with two integers:
+First integer: Total panels painted at least once.
+Second integer: Longest contiguous stretch by one cow.*/
+
 /*Given N cows (where N ≥ 1), each painting a range [a_i, b_i] on a fence with panels labeled 1 to 100, calculate:
 
 ​Total panels painted at least once​ (union of all ranges).
@@ -202,6 +220,32 @@ void printScalableStar2(int size)
 }
 
 int fourleafCloverNum(int num)
+{
+    int ones = 0;
+    int ten = 0;
+    int hundred = 0;
+    int thousand = 0;
+    
+    ones = num % 10;
+    ten = (num / 10) % 10;
+    hundred = (num / 100) % 10;
+    thousand = (num / 1000) % 10;
+
+     
+    if ((ones * ones * ones * ones) + 
+        (ten * ten * ten * ten) + 
+        (hundred * hundred * hundred * hundred) + 
+        (thousand * thousand * thousand * thousand) == num)
+    {
+        return 1;
+    }
+    else
+    {
+        return -1;
+    }
+}
+
+int fourleafCloverNum2(int num)
 {
     int ones = 0;
     int ten = 0;

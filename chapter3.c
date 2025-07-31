@@ -4,6 +4,25 @@
 #include <stdbool.h>
 #include <time.h>
 
+int threeDigitSum17()
+{
+    int count = 0;
+
+    for (int num = 100; num <= 999; num++)
+    {
+        int hundred = num / 100;
+        int ten = (num / 10) % 10;
+        int unit = num % 10;
+
+        if (hundred + ten + unit == 17)
+        {
+            count++;
+        }
+    }
+
+    return count;
+}
+
 /*Problem Statement:​​
 Farmer John wants to paint a fence with N wooden panels labeled 1 to N. He hires M cows to help, where each cow paints a ​consecutive range​ of panels (e.g., [a_i, b_i]). However, some cows might paint overlapping ranges.
 

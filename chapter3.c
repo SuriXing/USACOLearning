@@ -46,8 +46,6 @@ Second integer: Longest contiguous stretch by one cow.*/
 ​Total panels painted at least once​ (union of all ranges).
 ​Longest contiguous stretch painted by any single cow.*/
 
-#include <stdio.h>
-
 typedef struct _Range
 {
     int start;
@@ -403,6 +401,18 @@ void printRectangleOfAstrics(int row, int column)
 }
 
 void printRhombusOfAstrics(int side)
+{
+    for (int i = 1; i <= side; i++)
+    {
+        for (int j = 1; j <= side; j++)
+        {
+            printf("*");
+        }
+        printf("\n");
+    }
+}
+
+void printSquareOfAstrics(int side)
 {
     for (int i = 1; i <= side; i++)
     {

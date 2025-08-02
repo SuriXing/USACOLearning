@@ -4,24 +4,7 @@
 #include <stdbool.h>
 #include <time.h>
 
-int threeDigitSum17()
-{
-    int count = 0;
 
-    for (int num = 100; num <= 999; num++)
-    {
-        int hundred = num / 100;
-        int ten = (num / 10) % 10;
-        int unit = num % 10;
-
-        if (hundred + ten + unit == 17)
-        {
-            count++;
-        }
-    }
-
-    return count;
-}
 
 /*Problem Statement:​​
 Farmer John wants to paint a fence with N wooden panels labeled 1 to N. He hires M cows to help, where each cow paints a ​consecutive range​ of panels (e.g., [a_i, b_i]). However, some cows might paint overlapping ranges.
@@ -45,6 +28,35 @@ Second integer: Longest contiguous stretch by one cow.*/
 
 ​Total panels painted at least once​ (union of all ranges).
 ​Longest contiguous stretch painted by any single cow.*/
+
+int fenceProblem()
+{
+    int N, M;
+    scanf("%d %d", &N, &M);
+
+    int min_start = N + 1;
+    int max_end = 0;
+    int longest_stretch = 0;
+
+    for (int i = 0; i < M; i++)
+    {
+        int a, b;
+        scanf("%d %d", &a, &b);
+
+        if (a < min_start) min_start = a;
+        if (b > max_end) max_end = b;
+
+        int length = b - a + 1;
+        if (length > longest_stretch) {
+            longest_stretch = length;
+        }
+    }
+
+    int total_painted = max_end - min_start + 1;
+
+    printf("%d %d\n", total_painted, longest_stretch);
+    return 0;
+}
 
 typedef struct _Range
 {
@@ -207,7 +219,7 @@ int findPriceAfterTax(int price, int tax)
     return (price + (price * (tax/100)));
 }
 
-void printScalableStar2(int size)
+void printScalablehouse(int size)
 {
     for (int i = 0; i < size; i++) printf(" ");
     printf("*\n");
@@ -262,7 +274,7 @@ int fourleafCloverNum(int num)
     }
 }
 
-int fourleafCloverNum2(int num)
+int fiveleafCloverNum(int num)
 {
     int ones = 0;
     int ten = 0;
@@ -1197,9 +1209,10 @@ int main()
     printScalableStar(5);
 
     fourleafCloverNum(1634);
-    */
 
     findTreasure(5, 6);
+    */
 
+    fenceProblem();
     return 0;
 }

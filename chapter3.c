@@ -4,7 +4,100 @@
 #include <stdbool.h>
 #include <time.h>
 
+int fencing()
+{
+    int N, M;
+    scanf("%d %d", &N, &M);
 
+    bool covered[N + 1];
+    int sensor_count[N + 1];
+
+    for (int i = 0; i <= N; i++) {
+        covered[i] = false;
+        sensor_count[i] = 0;
+    }
+
+    for (int i = 0; i < M; i++) {
+        int a, b;
+        scanf("%d %d", &a, &b);
+        for (int j = a; j <= b; j++) {
+            covered[j] = true;
+            sensor_count[j]++;
+        }
+    }
+
+    int total_covered = 0;
+    for (int i = 1; i <= N; i++)
+    {
+        if (covered[i])
+        {
+            total_covered++;
+        }
+    }
+
+    int K;
+    scanf("%d", &K);
+    printf("%d %d\n", total_covered, sensor_count[K]);
+
+    return 0;
+}
+
+int fencing2()
+{
+    int N, M;
+    scanf("%d %d", &N, &M);
+
+    bool covered[N + 1];
+    int sensor_count[N + 1];
+
+    for (int i = 0; i <= N; i++) {
+        covered[i] = false;
+        sensor_count[i] = 0;
+    }
+
+    for (int i = 0; i < M; i++) {
+        int a, b;
+        scanf("%d %d", &a, &b);
+        for (int j = a; j <= b; j++) {
+            covered[j] = true;
+            sensor_count[j]++;
+        }
+    }
+
+    int total_covered = 0;
+    for (int i = 1; i <= N; i++)
+    {
+        if (covered[i])
+        {
+            total_covered++;
+        }
+    }
+
+    int K;
+    scanf("%d", &K);
+    printf("%d %d\n", total_covered, sensor_count[K]);
+
+    return 0;
+}
+
+int threeDigitSum17()
+{
+    int count = 0;
+
+    for (int num = 100; num <= 999; num++)
+    {
+        int hundred = num / 100;
+        int ten = (num / 10) % 10;
+        int unit = num % 10;
+
+        if (hundred + ten + unit == 17)
+        {
+            count++;
+        }
+    }
+
+    return count;
+}
 
 /*Problem Statement:​​
 Farmer John wants to paint a fence with N wooden panels labeled 1 to N. He hires M cows to help, where each cow paints a ​consecutive range​ of panels (e.g., [a_i, b_i]). However, some cows might paint overlapping ranges.

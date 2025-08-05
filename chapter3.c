@@ -42,7 +42,7 @@ int fencing()
     return 0;
 }
 
-int fencing2()
+int fencing_fast()
 {
     int N, M;
     scanf("%d %d", &N, &M);

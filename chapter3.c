@@ -4,6 +4,23 @@
 #include <stdbool.h>
 #include <time.h>
 
+/*Problem: Cow Routing (Bronze/Silver)​​
+​Input File:​​ cowroute.in
+​Output File:​​ cowroute.out
+
+​Problem Statement:​​
+Farmer John's cows need to travel from farm A to farm B (1 ≤ A, B ≤ 1000; A ≠ B). There are N (1 ≤ N ≤ 100) available bidirectional cow routes, each operated by a different company. Route i has a cost C_i (1 ≤ C_i ≤ 100) and passes through M_i farms in a specific order (3 ≤ M_i ≤ 100). A cow can use a route if it boards at any farm along the route and disembarks at any subsequent farm (but cannot go backward).
+
+​Task:​​ Find the minimum total cost for a cow to travel from A to B. If it’s impossible, output -1.
+
+
+
+int cowTransitionProblem(int a, int b, int n)
+{
+
+}
+*/
+
 int fencing()
 {
     int N, M;
@@ -1323,8 +1340,9 @@ int main()
     fourleafCloverNum(1634);
 
     findTreasure(5, 6);
-    */
 
     fenceProblem();
+    */
+    printLeftToRightTriangle(6);
     return 0;
 }

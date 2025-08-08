@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <time.h>
+#include <limits.h>
 
 /*Problem: Cow Routing (Bronze/Silver)​​
 ​Input File:​​ cowroute.in
@@ -12,14 +13,63 @@
 Farmer John's cows need to travel from farm A to farm B (1 ≤ A, B ≤ 1000; A ≠ B). There are N (1 ≤ N ≤ 100) available bidirectional cow routes, each operated by a different company. Route i has a cost C_i (1 ≤ C_i ≤ 100) and passes through M_i farms in a specific order (3 ≤ M_i ≤ 100). A cow can use a route if it boards at any farm along the route and disembarks at any subsequent farm (but cannot go backward).
 
 ​Task:​​ Find the minimum total cost for a cow to travel from A to B. If it’s impossible, output -1.
-
-
-
-int cowTransitionProblem(int a, int b, int n)
-{
-
-}
 */
+
+void solveCowRouting()
+{
+    int A, B, N;
+    scanf("%d %d %d", &A, &B, &N);
+
+    int to[1001][100000];
+    int cost[1001][100000];
+    int edge_count[1001] = {0};
+
+    for (int i = 0; i < N; i++)
+    {
+        int Ci, Mi;
+        scanf("%d %d", &Ci, &Mi);
+        int route[100];
+        for (int j = 0; j < Mi; j++)
+        {
+            scanf("%d", &route[j]);
+        }
+        
+        for (int j = 0; j < Mi; j++)
+        {
+            for (int k = j + 1; k < Mi; k++)
+            {
+                int u = route[j], v = route[k];
+                to[u][edge_count[u]] = v;
+                cost[u][edge_count[u]++] = Ci;
+            }
+        }
+    }
+
+    int min_cost[1001];
+    for (int i = 0; i < 1001; i++) min_cost[i] = INT_MAX;
+    min_cost[A] = 0;
+
+    int queue[1001], front = 0, rear = 0;
+    queue[rear++] = A;
+
+    while (front < rear)
+    {
+        int u = queue[front++];
+        // Explore all edges from u
+        for (int i = 0; i < edge_count[u]; i++)
+        {
+            int v = to[u][i];
+            int new_cost = min_cost[u] + cost[u][i];
+            if (new_cost < min_cost[v]) {
+                min_cost[v] = new_cost;
+                queue[rear++] = v;
+            }
+        }
+    }
+
+    // Output result
+    printf("%d\n", min_cost[B] == INT_MAX ? -1 : min_cost[B]);
+}
 
 int fencing()
 {

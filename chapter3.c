@@ -4,6 +4,119 @@
 #include <stdbool.h>
 #include <time.h>
 #include <limits.h>
+#include <assert.h>
+
+void nlanterns(int n)
+{
+    assert(n > 0);
+
+    for (int i = 1; i * i <= n; i++)//needs to be平方数because only square numbers has a odd number of divisors
+    {
+        printf("%d\n", i*i);
+    }
+}
+
+/*Of course! Here is a classic and excellent USACO Bronze problem that covers fundamental concepts like simulation and basic input/output handling.
+
+### Problem: The Bovine Shuffle (USACO Bronze, December 2017)
+
+**Problem Description:**
+Farmer John's `N` cows (`3 <= N <= 100`) are standing in a row. Each cow has a distinct integer ID number. To mix things up, he performs a "shuffle," which is a specific set of instructions on how the cows should rearrange themselves.
+
+The shuffle is described by a permutation of `N` numbers, `a1, a2, ..., aN`. This means that the cow currently in position `i` will move to position `a_i` during the shuffle.
+
+For example, if the shuffle is defined by `[2, 3, 1]` for 3 cows:
+*   The cow in position 1 moves to position 2.
+*   The cow in position 2 moves to position 3.
+*   The cow in position 3 moves to position 1.
+
+Farmer John performs this shuffle exactly **three times**. Your task is to determine the final order of the cows after three shuffles.
+
+**Input Format:**
+*   **Line 1:** The integer `N`.
+*   **Line 2:** The `N` integers `p1, p2, ..., pN`, which are the IDs of the cows in their initial order (from position 1 to position N).
+*   **Line 3:** The `N` integers `a1, a2, ..., aN`, which define the shuffle. This line describes where each position's cow moves *to*.
+
+**Output Format:**
+*   `N` lines, each containing the ID of a cow. The first line should be the cow in position 1 after three shuffles, the second line the cow in position 2, and so on.
+
+**Example:**
+Input (`shuffle.in`):
+```
+3
+1 2 3
+2 3 1
+```
+Output (`shuffle.out`):
+```
+2
+3
+1
+```
+
+**Explanation:**
+Let's trace the shuffles step-by-step:
+*   **Start:** `[Cow1, Cow2, Cow3]` at positions `[1, 2, 3]`
+*   **After 1st shuffle:**
+    *   Cow1 (pos 1) moves to pos 2.
+    *   Cow2 (pos 2) moves to pos 3.
+    *   Cow3 (pos 3) moves to pos 1.
+    *   New order: `[Cow3, Cow1, Cow2]`
+*   **After 2nd shuffle:**
+    *   Cow3 (pos 1) moves to pos 2.
+    *   Cow1 (pos 2) moves to pos 3.
+    *   Cow2 (pos 3) moves to pos 1.
+    *   New order: `[Cow2, Cow3, Cow1]`
+*   **After 3rd shuffle:**
+    *   Cow2 (pos 1) moves to pos 2.
+    *   Cow3 (pos 2) moves to pos 3.
+    *   Cow1 (pos 3) moves to pos 1.
+    *   **Final order:** `[Cow1, Cow2, Cow3]`? Wait, that's not right!
+
+Wait, let's track the *positions* more carefully. The shuffle rule `[2, 3, 1]` means "the cow from position `i` goes to position `a_i`".
+
+A more reliable method is to think backwards or use an array to simulate the movement.
+
+**Key Insight & Solution Approach:**
+This is a perfect problem for **simulation** and **array manipulation**.
+
+1.  **Read the Inputs:** Read `N`, the initial list of cow IDs, and the shuffle permutation.
+2.  **Simulate the Shuffle Three Times:** You need to apply the same shuffle transformation to the order of cows three times.
+3.  **How to Apply One Shuffle:**
+    *   Create a new temporary array `new_order` of size `N`.
+    *   For each current position `i` (from 0 to N-1 in code):
+        *   The cow currently at position `i` is supposed to move to position `shuffle[i] - 1` (we subtract 1 because array indices start at 0, but the problem's positions start at 1).
+    *   So, we set `new_order[shuffle[i] - 1] = current_order[i]`.
+4.  **Repeat:** After calculating `new_order`, this becomes the `current_order` for the next shuffle. Repeat this process two more times.
+5.  **Output:** After three iterations, print the final `current_order`, one cow per line.
+
+**Why this is a great Bronze problem:**
+*   It teaches how to read input and format output.
+*   It involves basic array operations and creating temporary arrays.
+*   It requires understanding and applying a simple algorithm (simulation) multiple times.
+*   It has a straightforward concept (applying a permutation) that is fundamental to many computer science problems.
+
+You can find this problem and test your solution on the official USACO website: [USACO 2017 December Contest, Bronze - Problem 1. The Bovine Shuffle](http://www.usaco.org/index.php?page=viewproblem2&cpid=760)
+
+Good luck! Try to code it yourself first. The feeling of getting it accepted is fantastic*/
+
+/*Here's a USACO Bronze-level practice problem for you:
+
+​Problem: Cow Gymnastics​
+​Problem Statement:​​
+In cow gymnastics, Farmer John's cows perform exercises in a rectangular arena. The cows are initially arranged in a certain order, and Farmer John records their positions. After some time, the cows rearrange themselves, and Farmer John records their new positions.
+
+Given the initial and final positions of the cows, determine how many pairs of cows (A, B) switched their relative order. That is, in the initial arrangement, cow A was ahead of cow B, but in the final arrangement, cow B is ahead of cow A.
+
+​Input:​​
+
+The first line contains an integer N (1 ≤ N ≤ 10), the number of cows.
+The second line contains N distinct integers representing the initial order of cows (each cow is labeled uniquely from 1 to N).
+The third line contains N distinct integers representing the final order of cows.
+​Output:​​
+
+A single integer, the number of pairs (A, B) where the relative order of A and B changed.*/
+
 
 /*Problem: Cow Routing (Bronze/Silver)​​
 ​Input File:​​ cowroute.in
@@ -1392,7 +1505,9 @@ int main()
     findTreasure(5, 6);
 
     fenceProblem();
-    */
+    
     printLeftToRightTriangle(6);
     return 0;
+    */
+    nlanterns(6);
 }

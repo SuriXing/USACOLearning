@@ -8,6 +8,7 @@
 
 int sumOfConsecutiveNum(int num)
 {
+    assert(num > 0);
     int sum = 0;
     for (int i = 1; i <= num; i++)
     {
@@ -17,13 +18,24 @@ int sumOfConsecutiveNum(int num)
     return sum;
 }
 
+#define HWGRADE 5.0
+#define EXAMGRADE (3.0/10)
+#define TESTGRADE 2.0
+
 int grade(int hwGrade, int examGrade, int testGrade)
 {
-    return (hwGrade/5.0) + (examGrade*3.0/10) + (testGrade/2.0);
+    assert(hwGrade > 0);
+    assert(examGrade > 0);
+    assert(testGrade > 0);
+    return (hwGrade/HWGRADE) + (examGrade* EXAMGRADE) + (testGrade/TESTGRADE);
 }
 
 int sumOfNumOnEdgeOfRectangle(int n, int m, int matrix[][m])
 {
+    assert(n > 0);
+    assert(m > 0);
+    assert(matrix != NULL);
+
     int sum = 0;
 
        for (int j = 0; j < m; j++)
@@ -49,6 +61,12 @@ int sumOfNumOnEdgeOfRectangle(int n, int m, int matrix[][m])
 
 void matrixAdd(int n, int m, int A[][m], int B[][m], int C[][m])
 {
+    assert(n > 0);
+    assert(m > 0);
+    assert(A != NULL);
+    assert(B != NULL);
+    assert(C != NULL);
+
     for (int i = 0; i < n; i++)
     {
         for (int j = 0; j < m; j++)
@@ -58,7 +76,10 @@ void matrixAdd(int n, int m, int A[][m], int B[][m], int C[][m])
     }
 }
 
-void selectionSort(int arr[], int n) {
+void selectionSort(int arr[], int n)
+{
+    assert(n > 0);
+    assert(arr != NULL);
     for (int i = 0; i < n - 1; i++)
     {
         int minIndex = i;
@@ -96,6 +117,7 @@ void insertionSort(int arr[], int n)
 
 void printCenteredNumberTriangle(int rows)
 {
+    assert(rows > 0);
     int current_num = 1;
     for (int i = 1; i <= rows; i++) 
     {
@@ -113,6 +135,7 @@ void printCenteredNumberTriangle(int rows)
 
 void printCenteredNumberTriangle2(int rows)
 {
+    assert(rows > 0);
     int current_num = 1;
     for (int i = 1; i <= rows; i++) 
     {
@@ -130,6 +153,7 @@ void printCenteredNumberTriangle2(int rows)
 
 void printTriangle(int rows)
 {
+    assert(rows > 0);
     int num = 1;
     for (int i = 1; i <= rows; i++)
     {
@@ -143,6 +167,7 @@ void printTriangle(int rows)
 
 void printReversedTriangle(int rows) 
 {
+    assert(rows > 0);
     int start_num = (rows * (rows + 1)) / 2;
     int num = start_num;
     
@@ -170,19 +195,7 @@ void printMultiplicationTable()
 
 int absoluteValue(int n)
 {
-    int count = 0;
-
-    if (n <= 0)
-    {
-        return n;
-    }
-
-    for (int i = 0; i < n; i++)
-    {
-        count ++;
-    }
-
-    return count;
+    return (n < 0) ? -n : n;
 }
 
 bool containsSeven(int num)
@@ -232,6 +245,7 @@ void returnSquare(int n)
 
 int howManyLowerThanAverage(int grades[10])
 {
+    assert(grades != NULL);
     int sum;
     int count;
 
@@ -274,18 +288,7 @@ int findLcmOfTwoInt(int a, int b)
 
 int whichOneIsBigger(int a, int b)
 {
-    if (a>b)
-    {
-        return a;
-    }
-    else if (a == b)
-    {
-        return a;
-    }
-    else
-    {
-        return b;
-    }
+    return (a >= b) ? a : b;
 }
 
 int evenNumSum(int n)

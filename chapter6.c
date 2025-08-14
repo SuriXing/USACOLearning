@@ -6,12 +6,12 @@
 #include <limits.h>
 #include <assert.h>
 
-int sumOfFraction(int n)
+float sumOfFraction(int n)
 {
-    int count = 0;
+    float count = 0;
     for (int i = 1; i <= n; i++)
     {
-        count += 1/i;
+        count += 1.0/i;
     }
     return count;
 }
@@ -94,9 +94,11 @@ void printSquareOfAstrics(int side)
     }
 }
 
+#define MINMULTIPLIER 1
+#define MAXMULTIPLIER 9
 void printMultiplicationTable__81()
 {
-    for (int i = 1; i <= 9; i++) 
+    for (int i = MINMULTIPLIER; i <= MAXMULTIPLIER; i++) 
     {
         for (int j = 1; j <= i; j++) 
         {
@@ -266,12 +268,7 @@ int returnGreaterNum(int a, int b)
 
 int abvalue(int num)
 {
-    int count = 0;
-    for (int i = 1; i <= num; i++)
-    {
-        count++;
-    }
-    return count;
+    return (num > 0) ? num : (-num);
 }
 
 int strLength(const char* str)

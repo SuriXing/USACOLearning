@@ -6,6 +6,36 @@
 #include <limits.h>
 #include <assert.h>
 
+void printStringDescending(const char* str)
+{
+    assert(NULL != str);
+
+    int arr[256] = {0};
+    
+    const char* pCur = str;
+
+    while (*pCur != '\0')
+    {
+        arr[*pCur] = 1;
+
+        pCur++;
+    }
+
+    printf("printStringDescending\n");
+    printf("Original String: %s\n", str);
+    printf("After Descending sort:");
+
+    for(int i = 256; i > 0; i--)
+    {
+        if (arr[i] == 1)
+        {
+            printf("%c", (char)i);
+        }
+    }
+
+    printf("\n");
+}
+
 float sumOfFraction(int n)
 {
     float count = 0;
@@ -298,5 +328,10 @@ int countNotSpaceChars(const char* str)
 
 int main()
 {
-	return 0;
+    // test for printStringDescending
+    printStringDescending("kjhgtfrertyujhgv");
+    printStringDescending("opqrstuvwxyz");
+    printStringDescending("pkhgvdrh");
+
+    return 0;
 }

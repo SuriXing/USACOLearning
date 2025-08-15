@@ -6,6 +6,36 @@
 #include <limits.h>
 #include <assert.h>
 
+void printStringAscending(const char* str)
+{
+    assert(NULL != str);
+
+    int arr[256] = {0};
+    
+    const char* pCur = str;
+
+    while (*pCur != '\0')
+    {
+        arr[*pCur] = 1;
+
+        pCur++;
+    }
+
+    printf("printStringAscending\n");
+    printf("Original String: %s\n", str);
+    printf("After Ascending sort:");
+
+    for(int i = 0; i < 256; i++)
+    {
+        if (arr[i] == 1)
+        {
+            printf("%c", (char)i);
+        }
+    }
+
+    printf("\n");
+}
+
 void printStringDescending(const char* str)
 {
     assert(NULL != str);
@@ -332,6 +362,11 @@ int main()
     printStringDescending("kjhgtfrertyujhgv");
     printStringDescending("opqrstuvwxyz");
     printStringDescending("pkhgvdrh");
+    
+    // test for printStringAscending
+    printStringAscending("qwerty");
+    printStringAscending("fghjujuhygtfr");
+    printStringAscending("nmlkjihgfedcba");
 
     return 0;
 }

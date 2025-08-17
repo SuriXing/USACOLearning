@@ -6,6 +6,39 @@
 #include <limits.h>
 #include <assert.h>
 
+void printStringAscendingRepeat(const char* str)
+{
+    assert(NULL != str);
+
+    int arr[256] = {0};
+    
+    const char* pCur = str;
+
+    while (*pCur != '\0')
+    {
+        arr[*pCur] += 1;
+
+        pCur++;
+    }
+
+    printf("printStringAscending\n");
+    printf("Original String: %s\n", str);
+    printf("After Ascending sort:");
+
+    for (int i = 0; i < 256; i++)
+    {
+        if (arr[i] > 0)
+        {
+            for (int j = 0; j < arr[i]; j++)
+            {
+                printf("%c", (char)i);
+            }
+        }
+    }
+
+    printf("\n");
+}
+
 void printStringAscending(const char* str)
 {
     assert(NULL != str);

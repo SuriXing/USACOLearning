@@ -19,6 +19,26 @@ int arrayFindMin(Array* pArray);
 bool arraySort(Array* pArray);
 bool arrayTraversal(Array* pArray);
 bool arrayPrint(Array* pArray);
+bool arrayPrint2(Array* pArray);
+
+bool arrayPrint2(Array* pArray)
+{
+    assert(NULL != pArray);
+
+    if (NULL == pArray)
+    {
+        return false;
+    }
+
+    for (int i = 0; i < pArray->length; i++)
+    {
+        printf("%d ", pArray->items[i]);
+    }
+
+    printf("\n");
+
+    return true;
+}
 
 bool arrayPrint(Array* pArray)
 {

@@ -16,6 +16,8 @@ bool arrayDeleteFromEnd(Array* pArray);
 bool arrayDeleteAt(Array* pArray, int at);
 int arrayFindMax(Array* pArray);
 int arrayFindMin(Array* pArray);
+int arrayFindMax2(Array* pArray);
+int arrayFindMin2(Array* pArray);
 bool arraySort(Array* pArray);
 bool arrayTraversal(Array* pArray);
 bool arrayPrint(Array* pArray);
@@ -39,6 +41,51 @@ bool arrayPrint2(Array* pArray)
 
     return true;
 }
+
+int arrayFindMax2(Array* pArray)
+{
+    assert(NULL != pArray);
+
+    if (NULL == pArray)
+    {
+        return 0;
+    }
+
+    int max = pArray->items[0];
+
+    for (int i = 0; i < pArray->length; i++)
+    {
+        if (pArray->items[i] > max)
+        {
+            max = pArray->items[i];
+        }
+    }
+
+    return max;
+}
+
+int arrayFindMin2(Array* pArray)
+{
+    assert(NULL != pArray);
+
+    if (NULL == pArray)
+    {
+        return 0;
+    }
+
+    int min = pArray->items[0];
+
+    for (int i = 0; i < pArray->length; i++)
+    {
+        if (pArray->items[i] < min)
+        {
+            min = pArray->items[i];
+        }
+    }
+
+    return min;
+}
+
 
 bool arrayPrint(Array* pArray)
 {

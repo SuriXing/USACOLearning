@@ -11,16 +11,23 @@ typedef struct _Array
 bool arrayInsertAt(Array* pArray, int at, int newElement);
 bool arrayInsertAtBeginning(Array* pArray, int newElement);
 bool arrayInsertAtEnd(Array* pArray, int newElement);
+
 bool arrayDeleteFromBeginning(Array* pArray);
 bool arrayDeleteFromEnd(Array* pArray);
 bool arrayDeleteAt(Array* pArray, int at);
+bool arrayDeleteFromBeginning2(Array* pArray);
+bool arrayDeleteFromEnd2(Array* pArray);
 bool arrayDeleteAt2(Array* pArray, int at);
+
 int arrayFindMax(Array* pArray);
 int arrayFindMin(Array* pArray);
 int arrayFindMax2(Array* pArray);
 int arrayFindMin2(Array* pArray);
+
 bool arraySort(Array* pArray);
+
 bool arrayTraversal(Array* pArray);
+
 bool arrayPrint(Array* pArray);
 bool arrayPrint2(Array* pArray);
 
@@ -105,6 +112,23 @@ bool arrayDeleteAt2(Array* pArray, int at)
     pArray->length = pArray->length-1;
 
     return true;
+}
+
+
+bool arrayDeleteFromBeginning2(Array* pArray)
+{
+    assert(NULL != pArray);
+    assert(pArray->length >= 1);
+
+    return arrayDeleteAt2(pArray, 0);
+}
+
+bool arrayDeleteFromEnd2(Array* pArray)
+{
+    assert(NULL != pArray);
+    assert(pArray->length >= 1);
+
+    return arrayDeleteAt2(pArray, pArray->length-1);
 }
 
 bool arrayPrint(Array* pArray)

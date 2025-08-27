@@ -12,9 +12,14 @@ bool arrayInsertAt(Array* pArray, int at, int newElement);
 bool arrayInsertAtBeginning(Array* pArray, int newElement);
 bool arrayInsertAtEnd(Array* pArray, int newElement);
 
+bool arrayInsertAt2(Array* pArray, int at, int newElement);
+bool arrayInsertAtBeginning2(Array* pArray, int newElement);
+bool arrayInsertAtEnd2(Array* pArray, int newElement);
+
 bool arrayDeleteFromBeginning(Array* pArray);
 bool arrayDeleteFromEnd(Array* pArray);
 bool arrayDeleteAt(Array* pArray, int at);
+
 bool arrayDeleteFromBeginning2(Array* pArray);
 bool arrayDeleteFromEnd2(Array* pArray);
 bool arrayDeleteAt2(Array* pArray, int at);
@@ -25,8 +30,6 @@ int arrayFindMax2(Array* pArray);
 int arrayFindMin2(Array* pArray);
 
 bool arraySort(Array* pArray);
-
-bool arrayTraversal(Array* pArray);
 
 bool arrayPrint(Array* pArray);
 bool arrayPrint2(Array* pArray);
@@ -250,6 +253,42 @@ int arrayFindMin(Array* pArray)
     return min;
 }
 
+bool arrayInsertAt2(Array* pArray, int at, int newElement)
+{
+    assert(NULL != pArray);
+    assert(at <= pArray->length);
+    assert(at >= 0);
+
+    if (pArray->length > sizeof(pArray->items)/sizeof(pArray->items[0]))
+    {
+        return false;
+    }
+
+    for (int i = pArray->length - 1; i >= at; i--)
+    {
+        pArray->items[i+1] = pArray->items[i];
+    }
+
+    pArray->items[at] = newElement;
+    pArray->length = pArray->length+1;
+
+    return true;
+}
+
+bool arrayInsertAtBeginning2(Array* pArray, int newElement)
+{
+    assert(NULL != pArray);
+    
+    return arrayInsertAt2(pArray, 0, newElement);
+}
+
+bool arrayInsertAtEnd2(Array* pArray, int newElement)
+{
+    assert(NULL != pArray);
+
+    return arrayInsertAt2(pArray, pArray->length-1, newElement);
+}
+
 int main()
 {
     Array testArray = 
@@ -278,6 +317,39 @@ int main()
     arrayDeleteFromEnd(&testArray);
 
     arrayPrint(&testArray);
+
+    // second versions testing ares:
+    printf("Second version tests:\n");
+
+        Array testArray2 = 
+    {
+        {1, 3, 5, 7, 8, 4, 3},
+        3
+    };
+
+    printf("arrayFindMax: %d\n", arrayFindMax2(&testArray2));
+	printf("arrayFindMin: %d\n", arrayFindMin2(&testArray2));
+
+    arrayPrint2(&testArray2);
+
+    arrayInsertAtBeginning2(&testArray2, 15);
+
+    arrayPrint2(&testArray2);
+
+    arrayInsertAtEnd2(&testArray2, 6);
+
+    arrayPrint2(&testArray2);
+
+	printf("arrayFindMax: %d\n", arrayFindMax2(&testArray2));
+	printf("arrayFindMin: %d\n", arrayFindMin2(&testArray2));
+
+    arrayDeleteFromBeginning2(&testArray2);
+
+    arrayPrint2(&testArray2);
+
+    arrayDeleteFromEnd2(&testArray2);
+
+    arrayPrint2(&testArray2);
 
 	return 0;
 }

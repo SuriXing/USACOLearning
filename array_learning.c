@@ -31,6 +31,8 @@ int arrayFindMin2(Array* pArray);
 
 bool arraySort(Array* pArray);
 
+bool arrayTraversal_slow(Array* pArray);
+
 bool arrayPrint(Array* pArray);
 bool arrayPrint2(Array* pArray);
 
@@ -117,7 +119,6 @@ bool arrayDeleteAt2(Array* pArray, int at)
     return true;
 }
 
-
 bool arrayDeleteFromBeginning2(Array* pArray)
 {
     assert(NULL != pArray);
@@ -132,6 +133,42 @@ bool arrayDeleteFromEnd2(Array* pArray)
     assert(pArray->length >= 1);
 
     return arrayDeleteAt2(pArray, pArray->length-1);
+}
+
+bool arrayInsertAt2(Array* pArray, int at, int newElement)
+{
+    assert(NULL != pArray);
+    assert(at <= pArray->length);
+    assert(at >= 0);
+
+    if (pArray->length > sizeof(pArray->items)/sizeof(pArray->items[0]))
+    {
+        return false;
+    }
+
+    for (int i = pArray->length - 1; i >= at; i--)
+    {
+        pArray->items[i+1] = pArray->items[i];
+    }
+
+    pArray->items[at] = newElement;
+    pArray->length = pArray->length+1;
+
+    return true;
+}
+
+bool arrayInsertAtBeginning2(Array* pArray, int newElement)
+{
+    assert(NULL != pArray);
+    
+    return arrayInsertAt2(pArray, 0, newElement);
+}
+
+bool arrayInsertAtEnd2(Array* pArray, int newElement)
+{
+    assert(NULL != pArray);
+
+    return arrayInsertAt2(pArray, pArray->length-1, newElement);
 }
 
 bool arrayPrint(Array* pArray)
@@ -253,41 +290,27 @@ int arrayFindMin(Array* pArray)
     return min;
 }
 
-bool arrayInsertAt2(Array* pArray, int at, int newElement)
+
+bool arrayTraversal_slow(Array* pArray)
 {
     assert(NULL != pArray);
-    assert(at <= pArray->length);
-    assert(at >= 0);
 
-    if (pArray->length > sizeof(pArray->items)/sizeof(pArray->items[0]))
+    int arrayCopy[pArray->length];
+
+    for (int i = 0; i < pArray->length; i++)
     {
-        return false;
+        arrayCopy[i] = pArray->items[pArray->length-i-1];
     }
 
-    for (int i = pArray->length - 1; i >= at; i--)
+    for (int i = 0; i < pArray->length; i++)
     {
-        pArray->items[i+1] = pArray->items[i];
+        pArray->items[i] = arrayCopy[i];
     }
-
-    pArray->items[at] = newElement;
-    pArray->length = pArray->length+1;
 
     return true;
 }
 
-bool arrayInsertAtBeginning2(Array* pArray, int newElement)
-{
-    assert(NULL != pArray);
-    
-    return arrayInsertAt2(pArray, 0, newElement);
-}
 
-bool arrayInsertAtEnd2(Array* pArray, int newElement)
-{
-    assert(NULL != pArray);
-
-    return arrayInsertAt2(pArray, pArray->length-1, newElement);
-}
 
 int main()
 {
@@ -351,6 +374,10 @@ int main()
 
     arrayPrint2(&testArray2);
 
-	return 0;
+    arrayTraversal_slow(&testArray2);
+
+    arrayPrint2(&testArray2);
+	
+    return 0;
 }
 

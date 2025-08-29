@@ -32,6 +32,7 @@ int arrayFindMin2(Array* pArray);
 bool arraySort(Array* pArray);
 
 bool arrayTraversal_slow(Array* pArray);
+bool arrayTraversal_fast(Array* pArray);
 
 bool arrayPrint(Array* pArray);
 bool arrayPrint2(Array* pArray);
@@ -310,7 +311,19 @@ bool arrayTraversal_slow(Array* pArray)
     return true;
 }
 
+bool arrayTraversal_fast(Array* pArray)
+{
+    assert(NULL != pArray);
 
+    for (int i = 0; i < pArray->length/2; i++)
+    {
+        int temp = pArray->items[i];
+        pArray->items[i] = pArray->items[pArray->length-i-1];
+        pArray->items[pArray->length-i-1] = temp;
+    }
+
+    return true;
+}
 
 int main()
 {
@@ -378,6 +391,10 @@ int main()
 
     arrayPrint2(&testArray2);
 	
+    arrayTraversal_fast(&testArray2);
+    
+    arrayPrint2(&testArray2);
+    
     return 0;
 }
 

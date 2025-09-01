@@ -1,24 +1,24 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <stdbool.h>
-#include <time.h>
-#include <limits.h>
-#include <assert.h>
 
-void abcd()
+// Finds 4-digit numbers where product of first two and last two digits equals the number
+void findSpecialNumbers()
 {
     for (int i = 1; i < 10; i++)
     {
         for (int j = 0; j < 10; j++)
         {
+            int firstPair = 10 * i + j;
             for (int k = 0; k < 10; k++)
             {
                 for (int h = 0; h < 10; h++)
                 {
-                    if ((((10*i + j) * (10*k + h)) == 1000*i + 100*j + 10*k + h))
+                    int secondPair = 10 * k + h;
+                    int number = 1000 * i + 100 * j + 10 * k + h;
+                    if (firstPair * secondPair == number)
                     {
-                        printf("%d\n", (1000*i + 100*j + 10*k +h));
+                        printf("%d\n", number);
                     }
                 }
             }
@@ -26,21 +26,21 @@ void abcd()
     }
 }
 
-void printArray(int array[], int n)
+// Prints array elements separated by commas
+void printArray(int array[], int size)
 {
-    for (int i = 0; i < n; i++)
-    {
-        printf("%d, ", array[i]);
+    for (int i = 0; i < size; i++) {
+        printf("%d%s", array[i], (i < size - 1) ? ", " : "");
     }
-
     printf("\n");
 }
 
-void makeArraySmallToBig(int array[], int n)
+// Sorts array in ascending order using bubble sort
+void sortArray(int array[], int size)
 {
-    for (int i = 0; i < n - 1; i++)
+    for (int i = 0; i < size - 1; i++)
     {
-        for (int j = 0; j < n - i - 1; j++)
+        for (int j = 0; j < size - i - 1; j++)
         {
             if (array[j] > array[j + 1])
             {
@@ -52,114 +52,124 @@ void makeArraySmallToBig(int array[], int n)
     }
 }
 
-int averageOfArray(int array[], int n)
+// Calculates average of array elements
+float calculateAverage(int array[], int size)
 {
-    int sum;
-
-    for (int i = 0; i < n; i++)
+    if (size <= 0) return 0.0f;
+    
+    int sum = 0;
+    for (int i = 0; i < size; i++)
     {
         sum += array[i];
     }
-
-    return sum/n;
+    return (float)sum / size;
 }
 
-void printAstrics(int n)
+// Prints n asterisks
+void printAsterisks(int n)
 {
     for (int i = 0; i < n; i++)
     {
         printf("*");
     }
+    printf("\n");
 }
 
-int changeValue(int *a, int *b)
+// Swaps values of two integers
+void swapValues(int *a, int *b)
 {
     int temp = *a;
     *a = *b;
     *b = temp;
-    return 0;
 }
 
-void returnCommentToGrades()
+// Provides feedback based on grade input
+void evaluateGrade()
 {
     char grade;
-    printf("Enter your grade (A, B, C, D, F): \n");
+    printf("Enter your grade (A, B, C, D, F): ");
     scanf(" %c", &grade);
-    switch (grade) {
-        case 'A':
-            printf("Excellent work!\n");
-            break;
-        case 'B':
-            printf("Good job!\n");
-            break;
-        case 'C':
-            printf("You passed.\n");
-            break;
-        case 'D':
-            printf("You need to improve.\n");
-            break;
-        case 'F':
-            printf("You failed. Please try again.\n");
-            break;
-        default:
-            printf("Invalid grade entered.\n");
-    }
-}
-
-void twoIntegersCalculation() {
-    char operation;
-    int a, b;
     
-    printf("Enter two integers and the operation you want at the end\n");
-    scanf("%d %d %c", &a, &b, &operation);
-
-    if (operation == '+') {
-        printf("The sum of %d and %d is: %d\n", a, b, a + b);
-    }
-    else if (operation == '-') {
-        printf("The difference of %d and %d is: %d\n", a, b, a - b);
-    }
-    else if (operation == '*') {
-        printf("The product of %d and %d is: %d\n", a, b, a * b);
-    }
-    else if (operation == '/') {
-        if (b != 0) {
-            printf("The division of %d by %d is: %.2f\n", a, b, (double)a / b);
-        }
-        else {
-            printf("Division by zero is not allowed.\n");
-        }
-    }
-    else {
-        printf("Invalid operation. Please use +, -, *, or /.\n");   
+    switch (grade)
+    {
+        case 'A': case 'a': printf("Excellent work!\n"); break;
+        case 'B': case 'b': printf("Good job!\n"); break;
+        case 'C': case 'c': printf("You passed.\n"); break;
+        case 'D': case 'd': printf("You need to improve.\n"); break;
+        case 'F': case 'f': printf("You failed. Please try again.\n"); break;
+        default: printf("Invalid grade entered.\n");
     }
 }
 
-bool determineTriangle(int a, int b, int c)
+// Performs basic arithmetic operations
+void calculator()
 {
-    if ((a+b > c) && (a+c > b) && (b+c > a))
+    int a, b;
+    char operation;
+    
+    printf("Enter two integers and an operation (+, -, *, /): ");
+    if (scanf("%d %d %c", &a, &b, &operation) != 3)
     {
-        return true;
+        printf("Invalid input.\n");
+        return;
     }
-    else
+
+    switch (operation)
     {
-        return false;
+        case '+': printf("%d + %d = %d\n", a, b, a + b); break;
+        case '-': printf("%d - %d = %d\n", a, b, a - b); break;
+        case '*': printf("%d * %d = %d\n", a, b, a * b); break;
+        case '/': 
+            if (b != 0) {
+                printf("%d / %d = %.2f\n", a, b, (float)a / b);
+            } else {
+                printf("Division by zero is not allowed.\n");
+            }
+            break;
+        default: printf("Invalid operation.\n");
     }
 }
 
-bool determineLeapYear(int year)
+// Checks if three sides can form a triangle
+bool isTriangleValid(int a, int b, int c)
 {
-    if (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0))
-    {
-        return true; // It's a leap year
-    }
-    else
-    {
-        return false; // It's not a leap year
-    }
+    return (a > 0 && b > 0 && c > 0) && 
+           (a + b > c) && 
+           (a + c > b) && 
+           (b + c > a);
+}
+
+// Checks if a year is a leap year
+bool isLeapYear(int year)
+{
+    return (year % 400 == 0) || (year % 100 != 0 && year % 4 == 0);
 }
 
 int main()
 {
-	return 0;
+    // Test cases
+    findSpecialNumbers();
+    
+    int numbers[] = {5, 2, 8, 1, 4};
+    const int size = sizeof(numbers) / sizeof(numbers[0]);
+    
+    printf("Original array: ");
+    printArray(numbers, size);
+    
+    sortArray(numbers, size);
+    printf("Sorted array: ");
+    printArray(numbers, size);
+    
+    printf("Average: %.2f\n", calculateAverage(numbers, size));
+    printAsterisks(5);
+    
+    evaluateGrade();
+    calculator();
+    
+    printf("Can form triangle (3,4,5)? %s\n", 
+           isTriangleValid(3, 4, 5) ? "Yes" : "No");
+    printf("Is 2024 a leap year? %s\n", 
+           isLeapYear(2024) ? "Yes" : "No");
+    
+    return 0;
 }

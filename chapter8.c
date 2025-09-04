@@ -6,6 +6,30 @@
 #include <limits.h>
 #include <assert.h>
 
+float algebraProblem()
+{
+    int a, b, c, d;
+    char x;
+    
+    printf("Please enter the equation in the form of ax + b = cx + d: ");
+
+    scanf("%dx + %d = %dx + %d", &a, &b, &c, &d);
+    
+    if (a == c)
+    {
+        if (b == d)
+        {
+            printf("Infinite solutions (all real numbers are solutions)\n");
+        }
+        else
+        {
+            printf("No solution (contradiction)\n");
+        }
+    }
+
+    float result = (float)(d - b) / (a - c);
+    return result;
+}
 
 void nlanterns(int n)
 {
@@ -18,6 +42,9 @@ void nlanterns(int n)
 }
 
 int main()
-{
+{   
+    float x = algebraProblem();
+    printf("The solution is x = %.2f\n", x);
+
 	return 0;
 }

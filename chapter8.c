@@ -6,6 +6,31 @@
 #include <limits.h>
 #include <assert.h>
 
+int fourthPower(int num)
+{
+    return num * num * num * num;
+}
+
+int fourleafCloverNum(int num)
+{
+    assert(num >= 1000 && num <= 9999);
+    
+    int thousands = num / 1000;
+    int hundreds = (num / 100) % 10;
+    int tens = (num / 10) % 10;
+    int units = num % 10;
+
+    return (fourthPower(thousands)) + (fourthPower(hundreds)) + (fourthPower(tens)) + (fourthPower(units));
+}
+
+float fractionToDecimal(int numerator, int denominator)
+{
+    assert(numerator > 0);
+    assert(100000 > denominator && denominator > 0);
+
+    return (float)numerator / (float)denominator;
+}
+
 float algebraProblem()
 {
     int a, b, c, d;
@@ -43,8 +68,11 @@ void nlanterns(int n)
 
 int main()
 {   
-    float x = algebraProblem();
-    printf("The solution is x = %.2f\n", x);
+    /*    float x = algebraProblem();
+    printf("The solution is x = %.2f\n", x);*/
+
+    int sumOfFourLeafClover = fourleafCloverNum(1634);
+    printf("The sum of the four-leaf clover number is: %d\n", sumOfFourLeafClover);
 
 	return 0;
 }

@@ -6,6 +6,65 @@
 #include <limits.h>
 #include <assert.h>
 
+#define CHESS_ROW 5
+#define CHESS_COLUMN 5
+
+int isASeven(int chess[][CHESS_COLUMN], int i, int j, int x)
+{
+    for (int k=j; k<j+x; k++)
+    {
+        if (k >= CHESS_COLUMN) // over
+        {
+            return 0;
+        }
+
+        if (chess[i][k] == 0)
+        {
+            return 0;
+        }
+    }
+
+    for (int n=i+1; n<i+x+1; n++)
+    {
+        if (n >= CHESS_ROW)
+        {
+            return 0;
+        }
+
+        if (chess[n][j+x-1] == 0)
+        {
+            return 0;
+        }
+    }
+
+    return 1;
+}
+
+void chessMakeSeven()
+{
+    int chess[CHESS_ROW][CHESS_COLUMN] = {0};
+    chess[0][0] = chess[0][1] = chess[0][2] = chess[0][3] = chess[0][4] = 1;
+    chess[3][0] = chess[3][1] = chess[3][2] = chess[3][3] = chess[3][4] = 1;
+    chess[4][0] = chess[4][1] = chess[4][2] = chess[4][3] = chess[4][4] = 1;
+
+    for (int i = 0; i < CHESS_ROW; i++)
+    {
+        for (int j = 0; j < CHESS_COLUMN; j++)
+        {
+            if (chess[i][j] == 0)
+            {
+                continue;
+            }
+            
+            if (chess[i][j+1] == 1)
+            {
+
+            }
+        }
+
+    }
+}
+
 int fourthPower(int num)
 {
     return num * num * num * num;

@@ -67,6 +67,64 @@ void chessMakeSeven()
     printf("%d\n", count);
 }
 
+int isASeven2(int chess[][CHESS_COLUMN], int i, int j, int x)
+{
+    for (int k=j; k<j+x; k++)
+    {
+        if (k >= CHESS_COLUMN)
+        {
+            return 0;
+        }
+
+        if (chess[i][k] == 0)
+        {
+            return 0;
+        }
+    }
+
+    for (int k = i; k < i+x+1; k++)
+    {
+        if (k >= CHESS_ROW)
+        {
+            return 0;
+        }
+
+        if (chess[k][j+x-1] == 0)
+        {
+            return 0;
+        }
+    }
+
+    return 1;
+}
+
+void chessMakeSeven2()
+{
+    int chess[CHESS_ROW][CHESS_COLUMN] = {0};
+
+    chess[0][0] = chess[0][1] = chess[0][2] = chess[0][3] = chess[0][4] = 1;
+    chess[1][0] = chess[1][1] = chess[1][2] = chess[1][3] = chess[1][4] = 1;
+    chess[2][0] = chess[2][1] = chess[2][2] = chess[2][3] = chess[2][4] = 1;
+    chess[3][0] = chess[3][1] = chess[3][2] = chess[3][3] = chess[3][4] = 1;
+    chess[4][0] = chess[4][1] = chess[4][2] = chess[4][3] = chess[4][4] = 1;
+
+    int count = 0;
+
+    for (int i = 0; i < CHESS_ROW; i++)
+    {
+        for (int j = 0; j < CHESS_COLUMN; j++)
+        {
+            for (int x = 2; x <= MIN(CHESS_COLUMN - j, CHESS_ROW - i - 1); x++)
+            {
+                count += isASeven(chess, i, j, x);
+            }
+        }
+
+    }
+
+    printf("%d\n", count);
+}
+
 int fourthPower(int num)
 {
     return num * num * num * num;

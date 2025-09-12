@@ -6,6 +6,35 @@
 #include <limits.h>
 #include <assert.h>
 
+int binaryFindXDescending(int* array, int length, int x)
+{
+    assert(array != NULL);
+    assert(length > 0);
+
+    int startIndex = 0;
+    int endIndex = length - 1;
+
+    while (endIndex >= startIndex)
+    {
+        int mid = (startIndex + endIndex)/2;
+
+        if (array[mid] == x)
+        {
+            return mid;
+        }
+        else if(array[mid] < x)
+        {
+            endIndex = mid - 1;
+        }
+        else
+        {
+            startIndex = mid + 1;
+        }
+    }
+
+    return -1;
+}
+
 // 1, 3, 9, 13, 56, 256, 781, 1000
 int binaryFindXAscending(int* array, int length, int x) // array has to be ascending
 {

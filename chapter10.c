@@ -6,6 +6,42 @@
 #include <limits.h>
 #include <assert.h>
 
+int binaryFindfirstXInReachableAscendingArray(int* array, int length, int x)
+{
+    assert(array != NULL);
+    assert(length > 0);
+    
+    int startIndex = 0;
+    int endIndex = length-1;
+
+    while (startIndex <= endIndex)
+    {
+        int mid = (startIndex + endIndex)/2;
+        
+        if (array[mid] == x)
+        {
+            for (int i = mid -1; i > 0; i--)
+            {
+                if (array[mid - 1] == x)
+                {
+                    return mid -1;
+                }
+            }
+            return mid;
+        }
+        else if (array[mid] < x)
+        {
+            startIndex = mid + 1;
+        }
+        else 
+        {
+            endIndex = mid - 1;
+        }
+    }
+
+    return -1;
+}
+
 int binaryFindXDescendingReachable(int* array, int length, int x)
 {
     assert(array != NULL);
@@ -214,6 +250,12 @@ int main()
 
     int arr12[] = {888, 666, 88, 66, 8, 6};
     runTestDescendingArray(arr12, 6, 4, "Descending array, target does not exists");
+
+    //Now to duplicate
+
+    int arr13[] = {1, 2, 2, 2, 2, 2, 6};
+    int result = binaryFindfirstXInReachableAscendingArray(arr13, 7, 2);
+    printf("%d\n", result);
 
     return 0;
 }

@@ -6,6 +6,35 @@
 #include <limits.h>
 #include <assert.h>
 
+int binaryFindFirstXInAscendingArray(int* array, int length, int x) // array has to be ascending
+{
+    assert(array != NULL);
+    assert(length > 0);
+
+    int startIndex = 0;
+    int endIndex = length;
+
+    while (startIndex < endIndex)
+    {
+        int mid = (startIndex + endIndex)/2;
+    
+        if (array[mid] == x)
+        {
+            return mid;
+        }
+        else if (array[mid] < x)
+        {
+            startIndex = mid + 1;
+        }
+        else
+        {
+            endIndex = mid;
+        }
+    }
+
+    return -1;
+}
+
 int binaryFindfirstXInReachableDescendingArray(int* array, int length, int x)
 {
     assert(array != NULL);

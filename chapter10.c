@@ -6,6 +6,35 @@
 #include <limits.h>
 #include <assert.h>
 
+int binaryFindFirstXInDescendingReachableArray(int* array, int length, int x)
+{
+    assert(array != NULL);
+    assert(length > 0);
+
+    int startIndex = 0;
+    int endIndex = length;
+
+    while (endIndex > startIndex)
+    {
+        int mid = (startIndex + endIndex)/2;
+
+        if (mid == x)
+        {
+            return mid;
+        }
+        else if (array[mid] < x)
+        {
+            endIndex = mid - 1;
+        }
+        else
+        {
+            startIndex = mid;
+        }
+    }
+
+    return -1;
+}
+
 int binaryFindFirstXInAscendingArray(int* array, int length, int x) // array has to be ascending
 {
     assert(array != NULL);
@@ -320,6 +349,30 @@ int main()
 
     int arr13[] = {1, 2, 2, 2, 2, 2, 6};
     int result = binaryFindfirstXInReachableAscendingArray(arr13, 7, 2);
+    printf("%d\n", result);
+
+    int arr14[] = {888, 666, 88, 66, 8, 6};
+    result = binaryFindfirstXInReachableAscendingArray(arr13, 7, 2);
+    printf("%d\n", result);
+
+    int arr15[] = {888, 666, 88, 66, 8, 6};
+    result = binaryFindfirstXInReachableAscendingArray(arr13, 7, 2);
+    printf("%d\n", result);
+
+    int arr16[] = {888, 666, 88, 66, 8, 6};
+    result = binaryFindfirstXInReachableAscendingArray(arr13, 7, 2);
+    printf("%d\n", result);
+
+    int arr17[] = {888, 666, 88, 66, 8, 6};
+    result = binaryFindfirstXInReachableAscendingArray(arr13, 7, 2);
+    printf("%d\n", result);
+    
+    int arr18[] = {888, 666, 88, 66, 8, 6};
+    result = binaryFindfirstXInReachableAscendingArray(arr13, 7, 2);
+    printf("%d\n", result);
+    
+    int arr19[] = {888, 666, 88, 66, 8, 6};
+    result = binaryFindfirstXInReachableAscendingArray(arr13, 7, 2);
     printf("%d\n", result);
 
     return 0;

@@ -6,6 +6,48 @@
 #include <limits.h>
 #include <assert.h>
 
+int binaryFindNumberOfXInReachableDescendingArray(int* array, int length, int x)
+{
+    assert(array != NULL);
+    assert(length > 0);
+    
+    int startIndex = 0;
+    int endIndex = length-1;
+
+    while (startIndex <= endIndex)
+    {
+        int mid = (startIndex + endIndex)/2;
+        
+        if (array[mid] == x)
+        {
+            int sum = 1;    // mid is 1
+            int temp = mid-1;
+            while ((temp >= 0) && array[temp] == x)
+            {
+                sum += 1;
+            }
+
+            temp = mid+1;
+            while ((temp <= length-1) && array[temp] == x)
+            {
+                sum += 1;
+            }
+
+            return sum;
+        }
+        else if (array[mid] < x)
+        {
+            startIndex = mid + 1;
+        }
+        else 
+        {
+            endIndex = mid - 1;
+        }
+    }
+
+    return 0;
+}
+
 int binaryFindNumberOfXInReachableAscendingArray(int* array, int length, int x)
 {
     assert(array != NULL);
@@ -413,7 +455,7 @@ int main()
     result = binaryFindfirstXInReachableAscendingArray(arr13, 7, 2);
     printf("%d\n", result);
     
-    int arr19[] = {888, 666, 88, 66, 8, 6};
+    int arr19[] = {8888, 6666, 868, 686, 8, 6};
     result = binaryFindfirstXInReachableAscendingArray(arr13, 7, 2);
     printf("%d\n", result);
 

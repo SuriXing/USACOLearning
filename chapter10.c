@@ -6,6 +6,50 @@
 #include <limits.h>
 #include <assert.h>
 
+int binaryFindNumberOfXInAscendingArray(int* array, int length, int x)
+{
+    assert(array != NULL);
+    assert(length > 0);
+    
+    int startIndex = 0;
+    int endIndex = length;
+
+    while (startIndex < endIndex)
+    {
+        int mid = (startIndex + endIndex)/2;
+        
+        if (array[mid] == x)
+        {
+            int sum = 1;
+            int temp = mid-1;
+            while ((temp >= startIndex) && array[temp] == x)
+            {
+                sum += 1;
+                temp -= 1;
+            }
+
+            temp = mid+1;
+            while ((temp < endIndex) && array[temp] == x)
+            {
+                sum += 1;
+                temp += 1;
+            }
+
+            return sum;
+        }
+        else if(array[mid] < x)
+        {
+            startIndex = mid + 1;
+        }
+        else 
+        {
+            endIndex = mid;
+        }
+    }
+
+    return 0;
+}
+
 int binaryFindNumberOfXInReachableDescendingArray(int* array, int length, int x)
 {
     assert(array != NULL);
@@ -67,12 +111,14 @@ int binaryFindNumberOfXInReachableAscendingArray(int* array, int length, int x)
             while ((temp >= 0) && array[temp] == x)
             {
                 sum += 1;
+                temp -= 1;
             }
 
             temp = mid+1;
             while ((temp <= length-1) && array[temp] == x)
             {
                 sum += 1;
+                temp += 1;
             }
 
             return sum;
@@ -96,15 +142,21 @@ int binaryFindFirstXInDescendingReachableArray(int* array, int length, int x)
     assert(length > 0);
 
     int startIndex = 0;
-    int endIndex = length;
+    int endIndex = length - 1;
 
-    while (endIndex > startIndex)
+    while (endIndex >= startIndex)
     {
         int mid = (startIndex + endIndex)/2;
 
         if (array[mid] == x)
         {
-            return mid;
+            int temp = mid - 1;
+            while ((temp >= startIndex) && (array[temp] == x))
+            {
+                temp -= 1;
+            }
+
+            return temp+1;
         }
         else if (array[mid] < x)
         {
@@ -436,28 +488,31 @@ int main()
     printf("%d\n", result);
 
     int arr14[] = {888, 666, 88, 66, 8, 6};
-    result = binaryFindfirstXInReachableAscendingArray(arr13, 7, 2);
+    result = binaryFindfirstXInReachableAscendingArray(arr14, 7, 2);
     printf("%d\n", result);
 
     int arr15[] = {888, 666, 88, 66, 8, 6};
-    result = binaryFindfirstXInReachableAscendingArray(arr13, 7, 2);
+    result = binaryFindfirstXInReachableAscendingArray(arr15, 7, 2);
     printf("%d\n", result);
 
     int arr16[] = {888, 666, 88, 66, 8, 6};
-    result = binaryFindfirstXInReachableAscendingArray(arr13, 7, 2);
+    result = binaryFindfirstXInReachableAscendingArray(arr16, 7, 2);
     printf("%d\n", result);
 
     int arr17[] = {888, 666, 88, 66, 8, 6};
-    result = binaryFindfirstXInReachableAscendingArray(arr13, 7, 2);
+    result = binaryFindfirstXInReachableAscendingArray(arr17, 7, 2);
     printf("%d\n", result);
     
     int arr18[] = {888, 666, 88, 66, 8, 6};
-    result = binaryFindfirstXInReachableAscendingArray(arr13, 7, 2);
+    result = binaryFindfirstXInReachableAscendingArray(arr18, 7, 2);
     printf("%d\n", result);
     
     int arr19[] = {8888, 6666, 868, 686, 8, 6};
-    result = binaryFindfirstXInReachableAscendingArray(arr13, 7, 2);
+    result = binaryFindfirstXInReachableAscendingArray(arr19, 7, 2);
     printf("%d\n", result);
+
+    int arr20[] = {666, 66, 66, 66, 66, 66, 6};
+    result = binaryFindNumberOfXInReachableAscendingArray(arr20, 7, 66);
 
     return 0;
 }

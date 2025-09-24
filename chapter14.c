@@ -6,6 +6,46 @@
 #include <limits.h>
 #include <assert.h>
 
+int waysToGetUpTheStairWithTwoOrThreeRecursive(int num)
+{
+    assert(num > 0);
+    if (num == 2) 
+    {
+        return 1;
+    }
+    else if (num == 3)
+    { 
+        return 1;
+    }
+
+    return waysToGetUpTheStairWithTwoOrThreeRecursive(num - 2) + waysToGetUpTheStairWithTwoOrThreeRecursive(num - 3);
+}
+
+int waysToGetUpTheStairWithTwoOrThree(int num)
+{
+    assert(num > 0);
+    if (num == 2) 
+    {
+        return 1;
+    }
+    else if (num == 3)
+    { 
+        return 1;
+    }
+
+    int array[num];
+    array[0] = 0;
+    array[1] = 0;
+    array[2] = 1;
+    array[3] = 1;
+    for (int i = 4; i <= num; i++)
+    {
+        array[i] = array[i-2] + array[i-3];
+    }
+
+    return array[num - 1];
+}
+
 int waysToGetUpTheStairWithOneOrTwoRecursive(int num)
 {
     assert(num > 0);

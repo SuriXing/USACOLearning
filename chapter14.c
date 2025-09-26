@@ -6,6 +6,29 @@
 #include <limits.h>
 #include <assert.h>
 
+int waysToGetUpTheStairWithTwoOrThreeOrFourRecursive(int num)
+{
+    assert(num > 0);
+    if (num == 1)
+    {
+        return 0;
+    }
+    else if (num == 2)
+    {
+        return 1;
+    }
+    else if (num == 3)
+    {
+        return 1;
+    }
+    else if (num == 4)
+    {
+        return 2;
+    }
+
+    return waysToGetUpTheStairWithTwoOrThreeOrFourRecursive(num - 2) + waysToGetUpTheStairWithTwoOrThreeOrFourRecursive(num - 3) + waysToGetUpTheStairWithTwoOrThreeOrFourRecursive(num - 4);
+}
+
 int waysToGetUpTheStairWithOneOrTwoOrThreeRecursive(int num)
 {
     assert(num > 0);
@@ -137,27 +160,41 @@ int main()
     {
         printf("%d\t", findFibonacci(i));
     }
-    printf("\n");
+    printf("\n\n");
 
     for (int i=1; i<=10; i++)
     {
         printf("%d\t", recursiveFindFibonacci(i));
     }
-    printf("\n");
+    printf("\n\n");
 
    for (int i = 1; i <= 10; i++)
    {
         printf("%d\t", waysToGetUpTheStairWithOneOrTwo(i));
    }
 
-   printf("\n");
+   printf("\n\n");
 
     for (int i = 1; i <= 10; i++)
     {
         printf("%d\t", waysToGetUpTheStairWithOneOrTwoRecursive(i));
     }
    
-   printf("\n");
+   printf("\n\n");
+
+    for (int i = 1; i <= 10; i++)
+    {
+        printf("%d\t", waysToGetUpTheStairWithOneOrTwoOrThreeRecursive(i));
+    }
+    
+    printf("\n\n");
+
+    for (int i = 1; i <= 10; i++)
+    {
+        printf("%d\t", waysToGetUpTheStairWithTwoOrThreeOrFourRecursive(i));
+    }
+    
+    printf("\n\n");
 
     return 0;
 }

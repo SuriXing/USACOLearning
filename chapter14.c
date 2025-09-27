@@ -9,21 +9,12 @@
 int waysToGetUpTheStairWithTwoOrThreeOrFourRecursive(int num)
 {
     assert(num > 0);
-    if (num == 1)
+
+    const int numOrder[4] = {0, 1, 1, 2};
+
+    if (num <= 4)
     {
-        return 0;
-    }
-    else if (num == 2)
-    {
-        return 1;
-    }
-    else if (num == 3)
-    {
-        return 1;
-    }
-    else if (num == 4)
-    {
-        return 2;
+        return numOrder[num - 1];
     }
 
     return waysToGetUpTheStairWithTwoOrThreeOrFourRecursive(num - 2) + waysToGetUpTheStairWithTwoOrThreeOrFourRecursive(num - 3) + waysToGetUpTheStairWithTwoOrThreeOrFourRecursive(num - 4);

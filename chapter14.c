@@ -20,6 +20,34 @@ int waysToGetUpTheStairWithTwoOrThreeOrFourRecursive(int num)
     return waysToGetUpTheStairWithTwoOrThreeOrFourRecursive(num - 2) + waysToGetUpTheStairWithTwoOrThreeOrFourRecursive(num - 3) + waysToGetUpTheStairWithTwoOrThreeOrFourRecursive(num - 4);
 }
 
+int waysToGetUpTheStairWithTwoOrThreeOrFourRecursivePractice(int num)
+{
+    assert(num > 0);
+
+    const int numOrder[4] = {0, 1, 1, 2};
+
+    if (num <= 4)
+    {
+        return numOrder[num - 1];
+    }
+
+    return waysToGetUpTheStairWithTwoOrThreeOrFourRecursive(num - 2) + waysToGetUpTheStairWithTwoOrThreeOrFourRecursive(num - 3) + waysToGetUpTheStairWithTwoOrThreeOrFourRecursive(num - 4);
+}
+
+int waysToGetUpTheStairWithOneOrTwoOrThreeRecursiveSmart(int num)
+{
+    assert(num > 0);
+
+    const int numOrder[3] = {1, 1, 2};
+
+    if (num <= 3)
+    {
+        return numOrder[num - 1];
+    }
+
+    return waysToGetUpTheStairWithOneOrTwoOrThreeRecursiveSmart(num - 1) + waysToGetUpTheStairWithOneOrTwoOrThreeRecursiveSmart(num - 2) + waysToGetUpTheStairWithOneOrTwoOrThreeRecursiveSmart(num - 3);
+}
+
 int waysToGetUpTheStairWithOneOrTwoOrThreeRecursive(int num)
 {
     assert(num > 0);

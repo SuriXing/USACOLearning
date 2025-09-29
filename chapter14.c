@@ -6,6 +6,40 @@
 #include <limits.h>
 #include <assert.h>
 
+/*
+You have a sorted list of N integers (1 ≤ N ≤ 1,000). Your task is to answer Q queries where each query asks: "How many numbers in the list are less than or equal to X?"
+*/
+
+int numLessThanOrEqualToX(int n, int* array, int x)
+{
+    int num = 0;
+
+    for (int i = 0; i < n; i++)
+    {
+        if (array[i] <= x)
+        {
+            num ++;
+        }
+    }
+
+    return num;
+}
+
+int numGreaterOrEqualToX(int n, int* array, int x)
+{
+    int num = 0;
+
+    for (int i = 0; i < n; i++)
+    {
+        if (array[i] >= x)
+        {
+            num ++;
+        }
+    }
+
+    return num;
+}
+
 int waysToGetUpTheStairWithTwoOrThreeOrFourRecursive(int num)
 {
     assert(num > 0);
@@ -175,6 +209,9 @@ int recursiveFindFibonacci(int n)
 
 int main()
 {
+    int result = 0;
+    int array[5] = {1, 124, 35, 13, 24};
+
     for (int i=1; i<=10; i++)
     {
         printf("%d\t", findFibonacci(i));
@@ -214,6 +251,12 @@ int main()
     }
     
     printf("\n\n");
+
+    result = numLessThanOrEqualToX(5, array, 25);//3
+    printf("%d\n", result);
+
+    result = numGreaterOrEqualToX(5, array, 25);//2
+    printf("%d\n", result);
 
     return 0;
 }

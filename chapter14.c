@@ -12,7 +12,7 @@ Your task is to answer Q queries where each query asks:
 "Find the number in the list that is closest to X. If there are two numbers equally close, choose the smaller one."
 */
 
-int findClosestNumInArrayToX(int* array, int n, int x)
+int findClosestNumInArrayToXless(int* array, int n, int x)
 {
     assert(NULL != array);
     assert(n >= 0);
@@ -30,6 +30,50 @@ int findClosestNumInArrayToX(int* array, int n, int x)
 
     return array[closestIndex];
 }
+
+int findClosestNumInArrayToXGreater(int* array, int n, int x)
+{
+    assert(NULL != array);
+    assert(n >= 0);
+
+    int closestValue = abs(array[0] - x);
+    int closestIndex = 0;
+
+    for (int i = 1; i < n; i++)
+    {
+        if (closestValue < abs(array[i] - x))
+        {
+            closestIndex = i;
+        }
+    }
+
+    return array[closestIndex];
+}
+
+int findClosestNumInArrayToX2(int* array, int n, int x)
+{
+    assert(NULL != array);
+    assert(n >= 0);
+    int closestValue = abs(array[0] - x);
+    int closestIndex = 0;
+
+    for (int i = 1; i < n; i++)
+    {
+        if (closestValue > abs(array[i] - x))
+        {
+            closestIndex = i;
+        }
+    }
+
+    return array[closestIndex];
+}
+
+/*
+int findClosestNumInArrayToXBinary(int* array, int n, int x)
+{
+
+}
+*/
 
 /*
 You have a sorted list of N integers (1 ≤ N ≤ 1,000). Your task is to answer Q queries where each query asks: "How many numbers in the list are less than or equal to X?"
@@ -283,10 +327,10 @@ int main()
     result = numGreaterOrEqualToX(5, array, 25);//2
     printf("%d\n", result);
 
-    result = findClosestNumInArrayToX(array, 5, 6); //1
+    result = findClosestNumInArrayToXless(array, 5, 6); //1
     printf("%d\n", result);
 
-    result = findClosestNumInArrayToX(array, 5, 24); //24
+    result = findClosestNumInArrayToXless(array, 5, 24); //24
     printf("%d\n", result);
 
     return 0;

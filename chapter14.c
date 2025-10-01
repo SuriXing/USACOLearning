@@ -6,6 +6,52 @@
 #include <limits.h>
 #include <assert.h>
 
+void printArray(int* array, int length)
+{
+    for(int i = 0; i < length; i++)
+    {
+        printf("%d,", array[i]);
+    }
+    printf("\n\n");
+}
+
+void selectsortAscending(int* array, int length)
+{
+    int temp = 0;
+
+    for (int i = 0; i < length; i++)
+    {
+        for (int j = 0; j < length-i-1; j++)
+        {
+            if (array[j] > array[j+1])
+            {
+                temp = array[j];
+                array[j] = array[j+1];
+                array[j+1] = temp;
+            }
+        }
+    }
+}
+
+/*
+int bubbleSortAscending(int* array, int length)
+{
+    int temp = 0;
+
+    for (int i = 0; i < length; i++)
+    {
+        for ()
+        {
+            if (array[i] > array[i+1])
+            {
+                temp = array[i];
+                array[i] = array[i+1];
+            }
+        }
+    }
+}
+*/
+
 /*
 You have a sorted list of N distinct integers (1 ≤ N ≤ 100,000).
 Your task is to answer Q queries where each query asks: 
@@ -279,7 +325,9 @@ int recursiveFindFibonacci(int n)
 int main()
 {
     int result = 0;
-    int array[5] = {1, 124, 35, 13, 24};
+    int array1[5] = {1, 124, 35, 13, 24};
+    int array2[6] = {6, 8, 3, 5, 2, 5};
+    int array3[8] = {1, 56, 3, 3, 74, 2, 66, 88};
 
     for (int i=1; i<=10; i++)
     {
@@ -321,17 +369,22 @@ int main()
     
     printf("\n\n");
 
-    result = numLessThanOrEqualToX(5, array, 25);//3
+    result = numLessThanOrEqualToX(5, array1, 25);//3
     printf("%d\n", result);
 
-    result = numGreaterOrEqualToX(5, array, 25);//2
+    result = numGreaterOrEqualToX(5, array1, 25);//2
     printf("%d\n", result);
 
-    result = findClosestNumInArrayToXless(array, 5, 6); //1
+    result = findClosestNumInArrayToXless(array1, 5, 6); //1
     printf("%d\n", result);
 
-    result = findClosestNumInArrayToXless(array, 5, 24); //24
+    result = findClosestNumInArrayToXless(array1, 5, 24); //24
     printf("%d\n", result);
+
+    //sortings:
+    printArray(array1, 5);
+    selectsortAscending(array1, 5);
+    printArray(array1, 5);
 
     return 0;
 }

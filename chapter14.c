@@ -15,7 +15,7 @@ void printArray(int* array, int length)
     printf("\n\n");
 }
 
-void selectsortAscending(int* array, int length)
+void selectSortAscending(int* array, int length)
 {
     int temp = 0;
 
@@ -24,6 +24,24 @@ void selectsortAscending(int* array, int length)
         for (int j = 0; j < length-i-1; j++)
         {
             if (array[j] > array[j+1])
+            {
+                temp = array[j];
+                array[j] = array[j+1];
+                array[j+1] = temp;
+            }
+        }
+    }
+}
+
+void selectSortDescending(int * array, int length)
+{
+    int temp = 0;
+
+    for (int i = 0; i < length; i++)
+    {
+        for (int j = 0; j < length; j++)
+        {
+            if (array[j] < array[j+1])
             {
                 temp = array[j];
                 array[j] = array[j+1];
@@ -383,7 +401,11 @@ int main()
 
     //sortings:
     printArray(array1, 5);
-    selectsortAscending(array1, 5);
+    selectSortAscending(array1, 5);
+    printArray(array1, 5);
+
+    printArray(array1, 5);
+    selectSortDescending(array1, 5);
     printArray(array1, 5);
 
     return 0;

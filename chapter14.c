@@ -15,7 +15,7 @@ void printArray(int* array, int length)
     printf("\n\n");
 }
 
-void selectSortAscending(int* array, int length)
+void bubbleSortAscending(int* array, int length)
 {
     int temp = 0;
 
@@ -33,15 +33,33 @@ void selectSortAscending(int* array, int length)
     }
 }
 
-void selectSortDescending(int * array, int length)
+void bubbleSortDescending(int * array, int length)
 {
     int temp = 0;
 
     for (int i = 0; i < length; i++)
     {
-        for (int j = 0; j < length; j++)
+        for (int j = 0; j < length-i-1; j++)
         {
             if (array[j] < array[j+1])
+            {
+                temp = array[j];
+                array[j] = array[j+1];
+                array[j+1] = temp;
+            }
+        }
+    }
+}
+
+void bubbleSortAscendingFromBeginning(int* array, int length)
+{
+    int temp = 0;
+
+    for (int i = 0; i < length; i++)
+    {
+        for (int j = length-2; j >= i; j--)
+        {
+            if (array[j] > array[j+1])
             {
                 temp = array[j];
                 array[j] = array[j+1];
@@ -401,12 +419,16 @@ int main()
 
     //sortings:
     printArray(array1, 5);
-    selectSortAscending(array1, 5);
+    bubbleSortAscending(array1, 5);
     printArray(array1, 5);
 
-    printArray(array1, 5);
-    selectSortDescending(array1, 5);
-    printArray(array1, 5);
+    printArray(array2, 6);
+    bubbleSortDescending(array2, 6);
+    printArray(array2, 6);
+
+    printArray(array3, 8);
+    bubbleSortAscendingFromBeginning(array3, 8);
+    printArray(array3, 8);
 
     return 0;
 }

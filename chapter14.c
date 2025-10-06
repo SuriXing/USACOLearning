@@ -15,6 +15,36 @@ void printArray(int* array, int length)
     printf("\n\n");
 }
 
+int quickSortPartitionAscendingNonReachable(int *array, int start, int end)
+{
+    int pivot = array[end-1];  
+    int i = (start - 1);    
+    for (int j = start; j < end-1; j++) {
+        if (array[j] <= pivot) {
+            i++;  
+            swap(&array[i], &array[j]);
+        }
+    }
+    swap(&array[i + 1], &array[end-1]);
+    return (i + 1);
+}
+
+void quickSortAsceningNonReachable(int* array, int start, int end)
+{
+    if (start < end)
+    {
+        int pivot = quickSortPartitionAscending(array, start, end);
+
+        quickSortAsceningNonReachable(array, start, pivot);
+        quickSortAsceningNonReachable(array, pivot+1, end);
+    }
+}
+
+void quickSortAscening(int* array, int length)
+{
+    quickSortAsceningNonReachable(array, 0, length);
+}
+
 void bubbleSortAscending(int* array, int length)
 {
     int temp = 0;

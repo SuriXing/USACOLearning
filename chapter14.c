@@ -29,14 +29,14 @@ int quickSortPartitionAscendingNonReachable(int *array, int start, int end)
     return (i + 1);
 }
 
-void quickSortAsceningNonReachable(int* array, int start, int end)
+void quickSortAscendingNonReachable(int* array, int start, int end)
 {
     if (start < end)
     {
         int pivot = quickSortPartitionAscendingNonReachable(array, start, end);
 
-        quickSortAsceningNonReachable(array, start, pivot);
-        quickSortAsceningNonReachable(array, pivot+1, end);
+        quickSortAscendingNonReachable(array, start, pivot);
+        quickSortAscendingNonReachable(array, pivot+1, end);
     }
 }
 
@@ -51,9 +51,25 @@ void quickSortAscendingReachable(int* array, int start, int end)
     }
 }
 
-void quickSortAscening(int* array, int length)
+void quickSortAscending(int* array, int length)
 {
-    quickSortAsceningNonReachable(array, 0, length);
+    quickSortAscendingNonReachable(array, 0, length);
+}
+
+void quickSortDescendingReachable(int* array, int start, int end)
+{
+    if (start < end)
+    {
+        int pivot = quickSortPartitionDesecendingReachable(array, start, end);
+
+        quickSortDescendingReachable(array, start, pivot-1);
+        quickSortDescendingReachable(array, pivot+1, end);
+    }
+}
+
+void quicksortDescending(int* array, int length)
+{
+    quickSortDescendingReachable(array, 0, length-1);
 }
 
 void bubbleSortAscending(int* array, int length)

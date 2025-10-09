@@ -67,6 +67,17 @@ void quickSortDescendingReachable(int* array, int start, int end)
     }
 }
 
+void quickSortDescendingNonReachable(int* array, int start, int end)
+{
+    if (start < end)
+    {
+        int pivot = quickStartPartitionDescendingReachable(array, start, end-1);
+        
+        quickSortDescendingNonReachable(array, start, pivot);
+        quickSortDescendingNonReachable(array, pivot+1, end);
+    }
+}
+
 void quicksortDescending(int* array, int length)
 {
     quickSortDescendingReachable(array, 0, length-1);

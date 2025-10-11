@@ -47,6 +47,22 @@ int quickSortPartitionAscendingReachable(int *array, int start, int end)
     return (i + 1);
 }
 
+int quickSortPartitionDecendingNonReachable(int *array, int start, int end)
+{
+    int pivot = array[end-1];  
+    int i = (start - 1);    
+    for (int j = start; j < end-1; j++) 
+    {
+        if (array[j] >= pivot) 
+        {
+            i++;  
+            swap(&array[i], &array[j]);
+        }
+    }
+    swap(&array[i + 1], &array[end-1]);
+    return (i + 1);
+}
+
 void quickSortAscendingNonReachable(int* array, int start, int end)
 {
     if (start < end)

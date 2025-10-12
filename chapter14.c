@@ -24,10 +24,16 @@ int quickSortPartitionAscendingNonReachable(int *array, int start, int end)
         if (array[j] <= pivot) 
         {
             i++;  
-            swap(&array[i], &array[j]);
+            int temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
         }
     }
-    swap(&array[i + 1], &array[end-1]);
+
+    int temp = array[i+1];
+    array[i+1] = array[end-1];
+    array[end-1] = temp;
+    
     return (i + 1);
 }
 
@@ -40,14 +46,20 @@ int quickSortPartitionAscendingReachable(int *array, int start, int end)
         if (array[j] <= pivot) 
         {
             i++;  
-            swap(&array[i], &array[j]);
+            int temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
         }
     }
-    swap(&array[i + 1], &array[end]);
+    
+    int temp = array[i+1];
+    array[i+1] = array[end];
+    array[end] = temp;
+
     return (i + 1);
 }
 
-int quickSortPartitionDecendingNonReachable(int *array, int start, int end)
+int quickSortPartitionDescendingNonReachable(int *array, int start, int end)
 {
     int pivot = array[end-1];  
     int i = (start - 1);    
@@ -56,10 +68,40 @@ int quickSortPartitionDecendingNonReachable(int *array, int start, int end)
         if (array[j] >= pivot) 
         {
             i++;  
-            swap(&array[i], &array[j]);
+
+            int temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
         }
     }
-    swap(&array[i + 1], &array[end-1]);
+    
+    int temp = array[i+1];
+    array[i+1] = array[end-1];
+    array[end-1] = temp;
+
+    return (i + 1);
+}
+
+int quickSortPartitionDescendingReachable(int *array, int start, int end)
+{
+    int pivot = array[end];  
+    int i = (start - 1);    
+    for (int j = start; j < end; j++) 
+    {
+        if (array[j] >= pivot) 
+        {
+            i++;
+
+            int temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+    }
+    
+    int temp = array[i+1];
+    array[i+1] = array[end];
+    array[end] = temp;
+
     return (i + 1);
 }
 
@@ -94,7 +136,7 @@ void quickSortDescendingReachable(int* array, int start, int end)
 {
     if (start < end)
     {
-        int pivot = quickSortPartitionDesecendingReachable(array, start, end);
+        int pivot = quickSortPartitionDescendingReachable(array, start, end);
 
         quickSortDescendingReachable(array, start, pivot-1);
         quickSortDescendingReachable(array, pivot+1, end);
@@ -105,7 +147,7 @@ void quickSortDescendingNonReachable(int* array, int start, int end)
 {
     if (start < end)
     {
-        int pivot = quickStartPartitionDescendingReachable(array, start, end-1);
+        int pivot = quickSortPartitionDescendingNonReachable(array, start, end);
         
         quickSortDescendingNonReachable(array, start, pivot);
         quickSortDescendingNonReachable(array, pivot+1, end);

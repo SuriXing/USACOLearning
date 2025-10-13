@@ -6,6 +6,18 @@
 #include <limits.h>
 #include <assert.h>
 
+void swapInteger(int* pa, int* pb)
+{
+//   int a = 0;
+//   int* pa = &a;
+//   int** ppa = &pa;
+//   int*** pppa = &ppa;
+
+    int temp = *pa;
+    *pa = *pb;
+    *pb = temp;
+}
+
 void printArray(int* array, int length)
 {
     for(int i = 0; i < length; i++)
@@ -23,10 +35,9 @@ int quickSortPartitionAscendingNonReachable(int *array, int start, int end)
     {
         if (array[j] <= pivot) 
         {
-            i++;  
-            int temp = array[i];
-            array[i] = array[j];
-            array[j] = temp;
+            i++;
+
+            swapInteger(&array[i], &array[j]);
         }
     }
 
@@ -46,15 +57,11 @@ int quickSortPartitionAscendingReachable(int *array, int start, int end)
         if (array[j] <= pivot) 
         {
             i++;  
-            int temp = array[i];
-            array[i] = array[j];
-            array[j] = temp;
+            swapInteger(&array[i], &array[j]);
         }
     }
     
-    int temp = array[i+1];
-    array[i+1] = array[end];
-    array[end] = temp;
+    swapInteger(&array[i+1], &array[end]);
 
     return (i + 1);
 }
@@ -69,15 +76,11 @@ int quickSortPartitionDescendingNonReachable(int *array, int start, int end)
         {
             i++;  
 
-            int temp = array[i];
-            array[i] = array[j];
-            array[j] = temp;
+            swapInteger(&array[i], &array[j]);
         }
     }
     
-    int temp = array[i+1];
-    array[i+1] = array[end-1];
-    array[end-1] = temp;
+    swapInteger(&array[i+1], &array[end-1]);
 
     return (i + 1);
 }
@@ -92,15 +95,11 @@ int quickSortPartitionDescendingReachable(int *array, int start, int end)
         {
             i++;
 
-            int temp = array[i];
-            array[i] = array[j];
-            array[j] = temp;
+            swapInteger(&array[i], &array[j]);
         }
     }
     
-    int temp = array[i+1];
-    array[i+1] = array[end];
-    array[end] = temp;
+    swapInteger(&array[i+1], &array[end]);
 
     return (i + 1);
 }

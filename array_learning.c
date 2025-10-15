@@ -32,6 +32,28 @@ bool arrayPrint(Array* pArray)
     return true;
 }
 
+bool arrayInsertAt(Array* pArray, int at, int newElement)
+{
+    assert(NULL != pArray);
+    assert(at <= pArray->length); //abcdefghijklmnopqrstuvwxyz
+    assert(at >= 0);
+    
+    if (pArray->length >= sizeof(pArray->items)/sizeof(pArray->items[0]))
+    {
+        return false;
+    }
+
+    for (int i = pArray->length-1; i >= at; i--)
+    {
+        pArray->items[i+1] = pArray->items[i];
+    }
+
+    pArray->items[at] = newElement;
+    pArray->length = pArray->length+1;
+
+    return true;
+}
+
 int main()
 {
 	return 0;

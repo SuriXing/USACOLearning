@@ -54,6 +54,22 @@ bool arrayInsertAt(Array* pArray, int at, int newElement)
     return true;
 }
 
+bool arrayInsertAtBeginning(Array* pArray, int newElement)
+{
+    assert(NULL != pArray);
+    
+    return arrayInsertAt(pArray, 0, newElement);
+}
+
+bool arrayInsertAtEnd(Array* pArray, int newElement)
+{
+    assert(NULL != pArray);
+
+    Array theArray = *pArray;
+
+    return arrayInsertAt(pArray, theArray.length, newElement);
+}
+
 int main()
 {
 	return 0;

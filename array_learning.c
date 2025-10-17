@@ -13,7 +13,7 @@ bool arrayInsertAtBeginning(Array* pArray, int newElement);
 bool arrayInsertAtEnd(Array* pArray, int newElement);
 bool arrayDeleteFromBeginning(Array* pArray);
 bool arrayDeleteFromEnd(Array* pArray);
-bool arrayDeleteAt(Array* pArray);
+bool arrayDeleteAt(Array* pArray, int at);
 bool arrayFindMax(Array* pArray);
 bool arrayFindMin(Array* pArray);
 bool arraySort(Array* pArray);
@@ -70,8 +70,44 @@ bool arrayInsertAtEnd(Array* pArray, int newElement)
     return arrayInsertAt(pArray, theArray.length, newElement);
 }
 
+bool arrayDeleteAt(Array* pArray, int at)
+{
+    assert(NULL != pArray);
+    assert(at >= 0);
+
+    if (at >= pArray->length)
+    {
+        return false;
+    }
+
+    for (int i = at; i < pArray->length-1; i++)
+    {
+        pArray->items[i] = pArray->items[i+1];
+    }
+
+    pArray->length = pArray->length-1;
+
+    return true;
+}
+
 int main()
 {
+    Array testArray = 
+    {
+        { 0 },
+        0
+    };
+
+    arrayPrint(&testArray);
+
+    arrayInsertAtBeginning(&testArray, 15);
+
+    arrayPrint(&testArray);
+
+    arrayInsertAtEnd(&testArray, 3);
+
+    arrayPrint(&testArray);
+
 	return 0;
 }
 

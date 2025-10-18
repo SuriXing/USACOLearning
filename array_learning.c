@@ -70,6 +70,21 @@ bool arrayInsertAtEnd(Array* pArray, int newElement)
     return arrayInsertAt(pArray, theArray.length, newElement);
 }
 
+bool arrayDeleteFromBeginning(Array* pArray)
+{
+    assert(NULL != pArray);
+
+    return arrayDeleteAt(pArray, 0);
+}
+
+bool arrayDeleteFromEnd(Array* pArray)
+{
+    assert(NULL != pArray);
+    assert(pArray->length >= 1);
+
+    return arrayDeleteAt(pArray, pArray->length-1);
+}
+
 bool arrayDeleteAt(Array* pArray, int at)
 {
     assert(NULL != pArray);
@@ -105,6 +120,14 @@ int main()
     arrayPrint(&testArray);
 
     arrayInsertAtEnd(&testArray, 3);
+
+    arrayPrint(&testArray);
+
+    arrayDeleteFromBeginning(&testArray);
+
+    arrayPrint(&testArray);
+
+    arrayDeleteFromEnd(&testArray);
 
     arrayPrint(&testArray);
 

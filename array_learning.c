@@ -15,7 +15,7 @@ bool arrayDeleteFromBeginning(Array* pArray);
 bool arrayDeleteFromEnd(Array* pArray);
 bool arrayDeleteAt(Array* pArray, int at);
 int arrayFindMax(Array* pArray);
-bool arrayFindMin(Array* pArray);
+int arrayFindMin(Array* pArray);
 bool arraySort(Array* pArray);
 bool arrayTraversal(Array* pArray);
 bool arrayPrint(Array* pArray);
@@ -109,7 +109,7 @@ int arrayFindMax(Array* pArray)
 {
     assert(NULL != pArray);
 
-    int max = 0;
+    int max = pArray->items[0];
 
     for (int i = 0; i<pArray->length; i++)
     {
@@ -122,6 +122,22 @@ int arrayFindMax(Array* pArray)
     return max;
 }
 
+int arrayFindMin(Array* pArray)
+{
+    assert(NULL != pArray);
+
+    int min = pArray->items[0];
+
+    for (int i = 0; i<pArray->length; i++)
+    {
+        if (min > pArray->items[i])
+        {
+            min = pArray->items[i];
+        }
+    }
+
+    return min;
+}
 
 int main()
 {
@@ -141,7 +157,8 @@ int main()
 
     arrayPrint(&testArray);
 
-	printf("%d\n", arrayFindMax(&testArray));
+	printf("arrayFindMax: %d\n", arrayFindMax(&testArray));
+	printf("arrayFindMin: %d\n", arrayFindMin(&testArray));
 
     arrayDeleteFromBeginning(&testArray);
 

@@ -10,6 +10,8 @@ typedef struct _Array2D
 } Array2D;
 
 bool array2DPrint(Array2D* pArray);
+int array2DFindMax(Array2D* pArray);
+int array2DFindMin(Array2D* pArray);
 
 bool array2DPrint(Array2D* pArray)
 {
@@ -29,6 +31,46 @@ bool array2DPrint(Array2D* pArray)
     return true;
 }
 
+int array2DFindMax(Array2D* pArray)
+{
+    assert(NULL != pArray);
+
+    int max = pArray->items[0][0];
+
+    for (int i = 0; i < pArray->rowLength; i++)
+    {
+        for (int j = 0; j < pArray->colLength; j++)
+        {
+            if (max < pArray->items[i][j])
+            {
+                max = pArray->items[i][j];
+            }
+        }
+    }
+
+    return max;
+}
+
+int array2DFindMin(Array2D* pArray)
+{
+    assert(NULL != pArray);
+
+    int min = pArray->items[0][0];
+
+    for (int i = 0; i < pArray->rowLength; i++)
+    {
+        for (int j = 0; j < pArray->colLength; j++)
+        {
+            if (min > pArray->items[i][j])
+            {
+                min = pArray->items[i][j];
+            }
+        }
+    }
+
+    return min;
+}
+
 int main()
 {
     Array2D testArray =
@@ -42,6 +84,9 @@ int main()
     };
 
     array2DPrint(&testArray);
+
+    printf("array find max: %d\n", array2DFindMax(&testArray));
+    printf("array find min: %d\n", array2DFindMin(&testArray));
 
     return 0;
 }

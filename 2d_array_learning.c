@@ -2,11 +2,13 @@
 #include <stdbool.h>
 #include <assert.h>
 
+#define ROW_LENGTH 5
+#define COL_LENGTH 5
+
 typedef struct _Array2D
 {
-    int items[66][66];
-    int rowLength;
-    int colLength;
+    int items[ROW_LENGTH][COL_LENGTH];
+    int numOfItems;
 } Array2D;
 
 bool array2DPrint(Array2D* pArray);
@@ -17,11 +19,11 @@ bool array2DPrint(Array2D* pArray)
 {
     assert(NULL != pArray);
 
-    for (int i = 0; i < pArray->rowLength; i++)
+    for (int i = 0; i < ROW_LENGTH; i++)
     {
-        for (int j = 0; j < pArray->colLength; j++)
+        for (int j = 0; j < COL_LENGTH; j++)
         {
-            printf("%d ", pArray->items[i][j]);
+            printf("%d\t", pArray->items[i][j]);
         }
         printf("\n");
     }
@@ -37,14 +39,22 @@ int array2DFindMax(Array2D* pArray)
 
     int max = pArray->items[0][0];
 
-    for (int i = 0; i < pArray->rowLength; i++)
+    for (int i = 0; i < pArray->numOfItems/COL_LENGTH; i++)
     {
-        for (int j = 0; j < pArray->colLength; j++)
+        for (int j = 0; j < COL_LENGTH; j++)
         {
             if (max < pArray->items[i][j])
             {
                 max = pArray->items[i][j];
             }
+        }
+    }
+
+    for (int i = 0; i < pArray->numOfItems % COL_LENGTH; i++)
+    {
+        if (max < pArray->items[pArray->numOfItems/COL_LENGTH][i])
+        {
+            max = pArray->items[pArray->numOfItems/COL_LENGTH][i];
         }
     }
 
@@ -57,14 +67,22 @@ int array2DFindMin(Array2D* pArray)
 
     int min = pArray->items[0][0];
 
-    for (int i = 0; i < pArray->rowLength; i++)
+    for (int i = 0; i < pArray->numOfItems / COL_LENGTH; i++)
     {
-        for (int j = 0; j < pArray->colLength; j++)
+        for (int j = 0; j < COL_LENGTH; j++)
         {
             if (min > pArray->items[i][j])
             {
                 min = pArray->items[i][j];
             }
+        }
+    }
+
+    for (int j = 0; j < pArray->numOfItems % COL_LENGTH; j++)
+    {
+        if (min > pArray->items[pArray->numOfItems / COL_LENGTH][j])
+        {
+            min = pArray->items[pArray->numOfItems / COL_LENGTH][j];
         }
     }
 
@@ -76,11 +94,10 @@ int main()
     Array2D testArray =
     {
         {
-            { 1, 2, 5, 6 }, 
-            { 2, 4, 5, 6 }
+            { 1, 2, 5, 6, 8 }, 
+            { 2, 4, 5, 6, 10 }
         },
-        2,
-        4
+        10
     };
 
     array2DPrint(&testArray);

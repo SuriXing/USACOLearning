@@ -15,6 +15,23 @@ bool array2DPrint(Array2D* pArray);
 int array2DFindMax(Array2D* pArray);
 int array2DFindMin(Array2D* pArray);
 
+bool array2DIsFull(Array2D* pArray);
+bool array2DIsEmpty(Array2D* pArray);
+
+bool array2DIsFull(Array2D* pArray)
+{
+    assert(NULL != pArray);
+
+    return (ROW_LENGTH * COL_LENGTH <= pArray->numOfItems);
+}
+
+bool array2DIsEmpty(Array2D* pArray)
+{
+        assert(NULL != pArray);
+
+    return (pArray->numOfItems > 0);
+}
+
 bool array2DPrint(Array2D* pArray)
 {
     assert(NULL != pArray);

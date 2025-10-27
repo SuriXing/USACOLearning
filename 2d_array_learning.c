@@ -11,6 +11,8 @@ typedef struct _Array2D
     int numOfItems;
 } Array2D;
 
+bool array2DInsertAt(Array2D* pArray, int rowAt, int colAt, int newElement);
+
 bool array2DPrint(Array2D* pArray);
 int array2DFindMax(Array2D* pArray);
 int array2DFindMin(Array2D* pArray);
@@ -106,6 +108,42 @@ int array2DFindMin(Array2D* pArray)
     return min;
 }
 
+
+bool array2DInsertAt(Array2D* pArray, int rowAt, int colAt, int newElement)
+{
+    assert(NULL != pArray);
+    assert((rowAt >= 0) && (rowAt < ROW_LENGTH));
+    assert((colAt >= 0) && (colAt < COL_LENGTH));
+
+    if (array2DIsFull(pArray))
+    {
+        return false;
+    }
+
+    // == means insert at the end of the array
+    if ((rowAt * COL_LENGTH + colAt) > pArray->numOfItems)
+    {
+        return false;
+    }
+
+    int numOfElementsNeedMove = (pArray->numOfItems - (rowAt * COL_LENGTH + colAt));    // Calculate how many items need move
+    /* 
+        Pointer to the insert position, but I force type cast to one dimension integer array.
+        Because I know two dimension arrray is actually continously in memory (just like one dimension array)
+    */
+    int *pInsertAt = (int*)(&pArray->items[rowAt][colAt]);
+    while (numOfElementsNeedMove >= 0)
+    {
+        pInsertAt[numOfElementsNeedMove+1] = pInsertAt[numOfElementsNeedMove];
+        numOfElementsNeedMove--;
+    }
+
+    *pInsertAt = newElement;
+    pArray->numOfItems++;
+
+    return true;
+}
+
 int main()
 {
     Array2D testArray =
@@ -121,6 +159,9 @@ int main()
 
     printf("array find max: %d\n", array2DFindMax(&testArray));
     printf("array find min: %d\n", array2DFindMin(&testArray));
+
+    array2DInsertAt(&testArray, 0, 0, 100);
+    array2DPrint(&testArray);
 
     return 0;
 }

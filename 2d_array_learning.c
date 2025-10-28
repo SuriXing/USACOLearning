@@ -12,6 +12,8 @@ typedef struct _Array2D
 } Array2D;
 
 bool array2DInsertAt(Array2D* pArray, int rowAt, int colAt, int newElement);
+bool array2DInsertAtBeginning(Array2D* pArray, int newElement);
+bool array2DInsertAtEnd(Array2D* pArray, int newElement);
 
 bool array2DPrint(Array2D* pArray);
 int array2DFindMax(Array2D* pArray);
@@ -144,6 +146,27 @@ bool array2DInsertAt(Array2D* pArray, int rowAt, int colAt, int newElement)
     return true;
 }
 
+bool array2DInsertAtBeginning(Array2D* pArray, int newElement)
+{
+    assert(NULL != pArray);
+
+    array2DInsertAt(pArray, 0, 0, newElement);
+
+    return true;
+}
+
+bool array2DInsertAtEnd(Array2D* pArray, int newElement)
+{
+    assert(NULL != pArray);
+
+    int rowAt = pArray->numOfItems / COL_LENGTH;
+    int colAt = pArray->numOfItems % COL_LENGTH;
+
+    array2DInsertAt(pArray, rowAt, colAt, newElement);
+
+    return true;
+}
+
 int main()
 {
     Array2D testArray =
@@ -161,6 +184,12 @@ int main()
     printf("array find min: %d\n", array2DFindMin(&testArray));
 
     array2DInsertAt(&testArray, 0, 0, 100);
+    array2DPrint(&testArray);
+
+    array2DInsertAtBeginning(&testArray, 66);
+    array2DPrint(&testArray);
+
+    array2DInsertAtEnd(&testArray, 66);
     array2DPrint(&testArray);
 
     return 0;

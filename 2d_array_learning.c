@@ -22,6 +22,10 @@ int array2DFindMin(Array2D* pArray);
 bool array2DIsFull(Array2D* pArray);
 bool array2DIsEmpty(Array2D* pArray);
 
+bool array2DPrint2(Array2D* pArray);
+int array2DFindMax2(Array2D* pArray);
+int array2DFindMin2(Array2D* pArray);
+
 bool array2DIsFull(Array2D* pArray)
 {
     assert(NULL != pArray);
@@ -167,6 +171,79 @@ bool array2DInsertAtEnd(Array2D* pArray, int newElement)
     return true;
 }
 
+
+bool array2DPrint2(Array2D* pArray)
+{
+    assert(NULL != pArray);
+
+    for (int i = 0; i < ROW_LENGTH;  i++)
+    {
+        for (int j = 0; j < COL_LENGTH; j++)
+        {
+            printf("%d", pArray->items[i][j]);
+        }
+        printf("\n");
+    }
+
+    return true;
+}
+
+int array2DFindMax2(Array2D* pArray)
+{
+    assert(NULL != pArray);
+
+    int max = pArray->items[0][0];
+
+    for (int i = 0; i < pArray->numOfItems/COL_LENGTH; i++)
+    {
+        for (int j = 0; j < COL_LENGTH; j++)
+        {
+            if (max < pArray->items[i][j])
+            {
+                max = pArray->items[i][j];
+            }
+        }
+    }
+
+    for (int i = 0; i < pArray->numOfItems% COL_LENGTH; i++)
+    {
+        if (max < pArray->items[pArray->numOfItems/COL_LENGTH][i])
+        {
+            max = pArray->items[pArray->numOfItems/COL_LENGTH][i];
+        }
+    }
+
+    return max;
+}
+
+int array2DFindMin2(Array2D* pArray)
+{
+    assert(NULL != pArray);
+
+    int min = pArray->items[0][0];
+
+    for (int i = 0; i < pArray->numOfItems/COL_LENGTH; i++)
+    {
+        for (int j = 0; j < COL_LENGTH; j++)
+        {
+            if (min > pArray->items[i][j])
+            {
+                min = pArray->items[i][j];
+            }
+        }
+    }
+
+    for (int j = 0; j < pArray->numOfItems % COL_LENGTH; j++)
+    {
+        if (min > pArray->items[pArray->numOfItems / COL_LENGTH][j])
+        {
+            min = pArray->items[pArray->numOfItems / COL_LENGTH][j];
+        }
+    }
+
+    return min;
+}
+
 int main()
 {
     Array2D testArray =
@@ -182,6 +259,9 @@ int main()
 
     printf("array find max: %d\n", array2DFindMax(&testArray));
     printf("array find min: %d\n", array2DFindMin(&testArray));
+    
+    printf("array find max: %d\n", array2DFindMax2(&testArray));
+    printf("array find min: %d\n", array2DFindMin2(&testArray));
 
     array2DInsertAt(&testArray, 0, 0, 100);
     array2DPrint(&testArray);

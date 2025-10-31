@@ -27,6 +27,8 @@ int array2DFindMax2(Array2D* pArray);
 int array2DFindMin2(Array2D* pArray);
 
 bool array2DInsertAt2(Array2D* pArray, int rowAt, int colAt, int newElement);
+bool array2DInsertAtBeginning2(Array2D* pArray, int newElement);
+bool array2DInsertAtEnd2(Array2D* pArray, int newElement);
 
 bool array2DIsFull(Array2D* pArray)
 {
@@ -282,6 +284,27 @@ bool array2DInsertAt2(Array2D* pArray, int rowAt, int colAt, int newElement)
     return true;
 }
 
+bool array2DInsertAtBeginning2(Array2D* pArray, int newElement)
+{
+    assert(NULL != pArray);
+
+    array2DInsertAt2(pArray, 0, 0, newElement);
+
+    return true;
+}
+
+bool array2DInsertAtEnd2(Array2D* pArray, int newElement)
+{
+    assert(NULL != pArray);
+
+    int rowAt = pArray->numOfItems / COL_LENGTH;
+    int colAt = pArray->numOfItems % COL_LENGTH;
+
+    array2DInsertAt2(pArray, rowAt, colAt, newElement);
+
+    return true;
+}
+
 int main()
 {
     Array2D testArray =
@@ -311,6 +334,12 @@ int main()
     array2DPrint(&testArray);
 
     array2DInsertAt2(&testArray, 0, 0, 100);
+    array2DPrint(&testArray);
+
+    array2DInsertAtBeginning2(&testArray, 101);
+    array2DPrint(&testArray);
+
+    array2DInsertAtEnd2(&testArray, 102);
     array2DPrint(&testArray);
 
     return 0;

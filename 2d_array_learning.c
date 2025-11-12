@@ -11,20 +11,25 @@ typedef struct _Array2D
     int numOfItems;
 } Array2D;
 
+bool array2DPrint(Array2D* pArray);
+bool array2DPrint2(Array2D* pArray);
+bool array2DPrint3(Array2D* pArray);
+
+int array2DFindMax(Array2D* pArray);
+int array2DFindMin(Array2D* pArray);
+
+int array2DFindMax2(Array2D* pArray);
+int array2DFindMin2(Array2D* pArray);
+
+int array2DFindMax3(Array2D* pArray);
+int array2DFindMin3(Array2D* pArray);
+
 bool array2DInsertAt(Array2D* pArray, int rowAt, int colAt, int newElement);
 bool array2DInsertAtBeginning(Array2D* pArray, int newElement);
 bool array2DInsertAtEnd(Array2D* pArray, int newElement);
 
-bool array2DPrint(Array2D* pArray);
-int array2DFindMax(Array2D* pArray);
-int array2DFindMin(Array2D* pArray);
-
 bool array2DIsFull(Array2D* pArray);
 bool array2DIsEmpty(Array2D* pArray);
-
-bool array2DPrint2(Array2D* pArray);
-int array2DFindMax2(Array2D* pArray);
-int array2DFindMin2(Array2D* pArray);
 
 bool array2DInsertAt2(Array2D* pArray, int rowAt, int colAt, int newElement);
 bool array2DInsertAtBeginning2(Array2D* pArray, int newElement);
@@ -58,6 +63,38 @@ bool array2DPrint(Array2D* pArray)
     }
 
     printf("\n");
+
+    return true;
+}
+
+bool array2DPrint2(Array2D* pArray)
+{
+    assert(NULL != pArray);
+
+    for (int i = 0; i < ROW_LENGTH;  i++)
+    {
+        for (int j = 0; j < COL_LENGTH; j++)
+        {
+            printf("%d", pArray->items[i][j]);
+        }
+        printf("\n");
+    }
+
+    return true;
+}
+
+bool array2DPrint3(Array2D* pArray)
+{
+    assert(NULL != pArray);
+
+    for (int i = 0; i < ROW_LENGTH; i++)
+    {
+        for (int j = 0; j < COL_LENGTH; j++)
+        {
+            printf("%d\t", pArray->items[i][j]);
+        }
+        printf("\n");
+    }
 
     return true;
 }
@@ -118,80 +155,6 @@ int array2DFindMin(Array2D* pArray)
     return min;
 }
 
-
-bool array2DInsertAt(Array2D* pArray, int rowAt, int colAt, int newElement)
-{
-    assert(NULL != pArray);
-    assert((rowAt >= 0) && (rowAt < ROW_LENGTH));
-    assert((colAt >= 0) && (colAt < COL_LENGTH));
-
-    if (array2DIsFull(pArray))
-    {
-        return false;
-    }
-
-    // == means insert at the end of the array
-    if ((rowAt * COL_LENGTH + colAt) > pArray->numOfItems)
-    {
-        return false;
-    }
-
-    int numOfElementsNeedMove = (pArray->numOfItems - (rowAt * COL_LENGTH + colAt));    // Calculate how many items need move
-    /* 
-        Pointer to the insert position, but I force type cast to one dimension integer array.
-        Because I know two dimension arrray is actually continously in memory (just like one dimension array)
-    */
-    int *pInsertAt = (int*)(&pArray->items[rowAt][colAt]);
-    while (numOfElementsNeedMove >= 0)
-    {
-        pInsertAt[numOfElementsNeedMove+1] = pInsertAt[numOfElementsNeedMove];
-        numOfElementsNeedMove--;
-    }
-
-    *pInsertAt = newElement;
-    pArray->numOfItems++;
-
-    return true;
-}
-
-bool array2DInsertAtBeginning(Array2D* pArray, int newElement)
-{
-    assert(NULL != pArray);
-
-    array2DInsertAt(pArray, 0, 0, newElement);
-
-    return true;
-}
-
-bool array2DInsertAtEnd(Array2D* pArray, int newElement)
-{
-    assert(NULL != pArray);
-
-    int rowAt = pArray->numOfItems / COL_LENGTH;
-    int colAt = pArray->numOfItems % COL_LENGTH;
-
-    array2DInsertAt(pArray, rowAt, colAt, newElement);
-
-    return true;
-}
-
-
-bool array2DPrint2(Array2D* pArray)
-{
-    assert(NULL != pArray);
-
-    for (int i = 0; i < ROW_LENGTH;  i++)
-    {
-        for (int j = 0; j < COL_LENGTH; j++)
-        {
-            printf("%d", pArray->items[i][j]);
-        }
-        printf("\n");
-    }
-
-    return true;
-}
-
 int array2DFindMax2(Array2D* pArray)
 {
     assert(NULL != pArray);
@@ -248,6 +211,118 @@ int array2DFindMin2(Array2D* pArray)
     return min;
 }
 
+
+int array2DFindMax3(Array2D* pArray)
+{
+    assert(NULL != pArray);
+
+    int max = pArray->items[0][0];
+
+    for (int i = 0; i < pArray->numOfItems / COL_LENGTH; i++)
+    {
+        for (int j = 0; j < COL_LENGTH; j++)
+        {
+            if (max < pArray->items[i][j])
+            {
+                max = pArray->items[i][j];
+            }
+        }
+    }
+
+    for (int i = 0; i < pArray->numOfItems % COL_LENGTH; i++)
+    {
+        if (max < pArray->items[pArray->numOfItems/COL_LENGTH][i])
+        {
+            max = pArray->items[pArray->numOfItems/COL_LENGTH][i];
+        }
+    }
+
+    return max;
+}
+
+int array2DFindMin3(Array2D* pArray)
+{
+    assert(NULL != pArray);
+
+    int min = pArray->items[0][0];
+
+    for (int i = 0; i < pArray->numOfItems / COL_LENGTH; i++)
+    {
+        for (int j = 0; j < COL_LENGTH; j++)
+        {
+            if (min > pArray->items[i][j])
+            {
+                min = pArray->items[i][j];
+            }
+        }
+    }
+
+    for (int i = 0; i < pArray->numOfItems % COL_LENGTH; i++)
+    {
+        if (min > pArray->items[pArray->numOfItems/COL_LENGTH][i])
+        {
+            min = pArray->items[pArray->numOfItems/COL_LENGTH][i];
+        }
+    }
+
+    return min;
+}
+
+bool array2DInsertAt(Array2D* pArray, int rowAt, int colAt, int newElement)
+{
+    assert(NULL != pArray);
+    assert((rowAt >= 0) && (rowAt < ROW_LENGTH));
+    assert((colAt >= 0) && (colAt < COL_LENGTH));
+
+    if (array2DIsFull(pArray))
+    {
+        return false;
+    }
+
+    // == means insert at the end of the array
+    if ((rowAt * COL_LENGTH + colAt) > pArray->numOfItems)
+    {
+        return false;
+    }
+
+    int numOfElementsNeedMove = (pArray->numOfItems - (rowAt * COL_LENGTH + colAt));    // Calculate how many items need move
+    /* 
+        Pointer to the insert position, but I force type cast to one dimension integer array.
+        Because I know two dimension arrray is actually continously in memory (just like one dimension array)
+    */
+    int *pInsertAt = (int*)(&pArray->items[rowAt][colAt]);
+    while (numOfElementsNeedMove >= 0)
+    {
+        pInsertAt[numOfElementsNeedMove+1] = pInsertAt[numOfElementsNeedMove];
+        numOfElementsNeedMove--;
+    }
+
+    *pInsertAt = newElement;
+    pArray->numOfItems++;
+
+    return true;
+}
+
+bool array2DInsertAtBeginning(Array2D* pArray, int newElement)
+{
+    assert(NULL != pArray);
+
+    array2DInsertAt(pArray, 0, 0, newElement);
+
+    return true;
+}
+
+bool array2DInsertAtEnd(Array2D* pArray, int newElement)
+{
+    assert(NULL != pArray);
+
+    int rowAt = pArray->numOfItems / COL_LENGTH;
+    int colAt = pArray->numOfItems % COL_LENGTH;
+
+    array2DInsertAt(pArray, rowAt, colAt, newElement);
+
+    return true;
+}
 
 bool array2DInsertAt2(Array2D* pArray, int rowAt, int colAt, int newElement)
 {
@@ -325,19 +400,19 @@ int main()
     printf("array find min: %d\n", array2DFindMin2(&testArray));
 
     array2DInsertAt(&testArray, 0, 0, 100);
-    array2DPrint(&testArray);
+    array2DPrint2(&testArray);
 
     array2DInsertAtBeginning(&testArray, 66);
-    array2DPrint(&testArray);
+    array2DPrint3(&testArray);
 
     array2DInsertAtEnd(&testArray, 66);
     array2DPrint(&testArray);
 
     array2DInsertAt2(&testArray, 0, 0, 100);
-    array2DPrint(&testArray);
+    array2DPrint2(&testArray);
 
     array2DInsertAtBeginning2(&testArray, 101);
-    array2DPrint(&testArray);
+    array2DPrint3(&testArray);
 
     array2DInsertAtEnd2(&testArray, 102);
     array2DPrint(&testArray);

@@ -24,6 +24,9 @@ int array2DFindMin2(Array2D* pArray);
 int array2DFindMax3(Array2D* pArray);
 int array2DFindMin3(Array2D* pArray);
 
+int array2DFindMax4(Array2D* pArray);
+int array2DFindMin4(Array2D* pArray);
+
 bool array2DInsertAt(Array2D* pArray, int rowAt, int colAt, int newElement);
 bool array2DInsertAtBeginning(Array2D* pArray, int newElement);
 bool array2DInsertAtEnd(Array2D* pArray, int newElement);
@@ -75,7 +78,7 @@ bool array2DPrint2(Array2D* pArray)
     {
         for (int j = 0; j < COL_LENGTH; j++)
         {
-            printf("%d", pArray->items[i][j]);
+            printf("%d\t", pArray->items[i][j]);
         }
         printf("\n");
     }
@@ -268,6 +271,62 @@ int array2DFindMin3(Array2D* pArray)
     return min;
 }
 
+int array2DFindMax4(Array2D* pArray)
+{
+    assert(NULL != pArray);
+
+    int max = pArray->items[0][0];
+
+    for (int i = 0; i < pArray->numOfItems/COL_LENGTH; i++)
+    {
+        for (int j = 0; j < COL_LENGTH; j++)
+        {
+            if (max < pArray->items[i][j])
+            {
+                max = pArray->items[i][j];
+            }
+        }
+    }
+
+    for (int i = 0; i < pArray->numOfItems % COL_LENGTH; i++)
+    {
+        if (max < pArray->items[pArray->numOfItems/COL_LENGTH][i])
+        {
+            max = pArray->items[pArray->numOfItems/COL_LENGTH][i];
+        }
+    }
+
+    return max;
+}
+
+int array2DFindMin4(Array2D* pArray)
+{
+    assert(NULL != pArray);
+
+    int min = pArray->items[0][0];
+
+    for (int i = 0; i < pArray->numOfItems/COL_LENGTH; i++)
+    {
+        for (int j = 0; j < COL_LENGTH; j++)
+        {
+            if (min > pArray->items[i][j])
+            {
+                min = pArray->items[i][j];
+            }
+        }
+    }
+
+    for (int i = 0; i < pArray->numOfItems % COL_LENGTH; i++)
+    {
+        if (min > pArray->items[pArray->numOfItems/COL_LENGTH][i])
+        {
+            min = pArray->items[pArray->numOfItems/COL_LENGTH][i];
+        }
+    }
+
+    return min;
+}
+
 bool array2DInsertAt(Array2D* pArray, int rowAt, int colAt, int newElement)
 {
     assert(NULL != pArray);
@@ -393,29 +452,40 @@ int main()
 
     array2DPrint(&testArray);
 
-    printf("array find max: %d\n", array2DFindMax(&testArray));
-    printf("array find min: %d\n", array2DFindMin(&testArray));
+    printf("array find max2: %d\n", array2DFindMax(&testArray));
+    printf("array find min3: %d\n", array2DFindMin2(&testArray));
     
-    printf("array find max: %d\n", array2DFindMax2(&testArray));
-    printf("array find min: %d\n", array2DFindMin2(&testArray));
+    printf("array find max3: %d\n", array2DFindMax3(&testArray));
+    printf("array find min4: %d\n", array2DFindMin4(&testArray));
 
+    printf("\nStart: array2DInsertAt(&testArray, 0, 0, 100);\n");
     array2DInsertAt(&testArray, 0, 0, 100);
     array2DPrint2(&testArray);
+    printf("End: array2DInsertAt(&testArray, 0, 0, 100);\n");
 
     array2DInsertAtBeginning(&testArray, 66);
     array2DPrint3(&testArray);
+    printf("End: array2DInsertAtBeginning(&testArray, 66);\n");
 
+    printf("\nStart: array2DInsertAtEnd(&testArray, 66);\n");
     array2DInsertAtEnd(&testArray, 66);
     array2DPrint(&testArray);
+    printf("End: array2DInsertAtEnd(&testArray, 66);\n");
 
+    printf("\nStart: array2DInsertAt2(&testArray, 0, 0, 100);\n");
     array2DInsertAt2(&testArray, 0, 0, 100);
     array2DPrint2(&testArray);
+    printf("End: array2DInsertAt2(&testArray, 0, 0, 100);\n");
 
+    printf("\nStart: array2DInsertAtBeginning2(&testArray, 101);\n");
     array2DInsertAtBeginning2(&testArray, 101);
     array2DPrint3(&testArray);
+    printf("End: array2DInsertAtBeginning2(&testArray, 101);\n");
 
+    printf("\nStart: array2DInsertAtEnd2(&testArray, 102);\n");
     array2DInsertAtEnd2(&testArray, 102);
     array2DPrint(&testArray);
+    printf("End: array2DInsertAtEnd2(&testArray, 102);\n");
 
     return 0;
 }

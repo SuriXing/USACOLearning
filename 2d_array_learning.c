@@ -11,6 +11,9 @@ typedef struct _Array2D
     int numOfItems;
 } Array2D;
 
+bool array2DIsFull(Array2D* pArray);
+bool array2DIsEmpty(Array2D* pArray);
+
 bool array2DPrint(Array2D* pArray);
 bool array2DPrint2(Array2D* pArray);
 bool array2DPrint3(Array2D* pArray);
@@ -31,12 +34,13 @@ bool array2DInsertAt(Array2D* pArray, int rowAt, int colAt, int newElement);
 bool array2DInsertAtBeginning(Array2D* pArray, int newElement);
 bool array2DInsertAtEnd(Array2D* pArray, int newElement);
 
-bool array2DIsFull(Array2D* pArray);
-bool array2DIsEmpty(Array2D* pArray);
-
 bool array2DInsertAt2(Array2D* pArray, int rowAt, int colAt, int newElement);
 bool array2DInsertAtBeginning2(Array2D* pArray, int newElement);
 bool array2DInsertAtEnd2(Array2D* pArray, int newElement);
+
+bool array2DInsertAt3(Array2D* pArray, int rowAt, int colAt, int newElement);
+bool array2DInsertAtBeginning3(Array2D* pArray, int newElement);
+bool array2DInsertAtEnd3(Array2D* pArrray, int newElement);
 
 bool array2DIsFull(Array2D* pArray)
 {
@@ -213,7 +217,6 @@ int array2DFindMin2(Array2D* pArray)
 
     return min;
 }
-
 
 int array2DFindMax3(Array2D* pArray)
 {
@@ -439,6 +442,55 @@ bool array2DInsertAtEnd2(Array2D* pArray, int newElement)
     return true;
 }
 
+bool array2DInsertAt3(Array2D* pArray, int rowAt, int colAt, int newElement)
+{
+    assert(NULL != pArray);
+    assert((rowAt >= 0) && (rowAt < ROW_LENGTH));
+    assert((colAt >= 0) && (colAt < COL_LENGTH));
+
+    if (array2DIsFull(pArray))
+    {
+        return false;
+    }
+
+    if ((rowAt * COL_LENGTH + colAt) > pArray->numOfItems)
+    {
+        return false;
+    }
+
+    int numOfElementsNeedMove = (pArray->numOfItems - (rowAt * COL_LENGTH + colAt));
+
+    int *pInsertAt = (int*)(&pArray->items[rowAt][colAt]);
+    
+    while (numOfElementsNeedMove >= 0)
+    {
+        pInsertAt[numOfElementsNeedMove+1] = pInsertAt[numOfElementsNeedMove];
+        numOfElementsNeedMove--;
+    }
+
+    *pInsertAt = newElement;
+    pArray->numOfItems++;
+
+    return true;
+}
+
+bool array2DInsertAtBeginning3(Array2D* pArray, int newElement)
+{
+    assert(NULL != pArray);
+
+    return array2DInsertAt(pArray, 0, 0, newElement);
+}
+
+bool array2DInsertAtEnd3(Array2D* pArray, int newElement)
+{
+    assert(NULL != pArray);
+
+    int rowAt = pArray->numOfItems / COL_LENGTH;
+    int colAt = pArray->numOfItems % COL_LENGTH;
+
+    return array2DInsertAt(pArray, rowAt, colAt, newElement);
+}
+
 int main()
 {
     Array2D testArray =
@@ -486,6 +538,16 @@ int main()
     array2DInsertAtEnd2(&testArray, 102);
     array2DPrint(&testArray);
     printf("End: array2DInsertAtEnd2(&testArray, 102);\n");
+
+    printf("\nStart: array2DInsertAtBeginning3(&testArray, 55);\n");
+    array2DInsertAtBeginning3(&testArray, 55);
+    array2DPrint3(&testArray);
+    printf("End: array2DInsertAtBeginning3(&testArray, 55);\n");
+
+    printf("\nStart: array2DInsertAtEnd3(&testArray, 66);\n");
+    array2DInsertAtEnd3(&testArray, 66);
+    array2DPrint(&testArray);
+    printf("End: array2DInsertAtEnd3(&testArray, 66);\n");
 
     return 0;
 }

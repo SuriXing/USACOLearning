@@ -30,6 +30,9 @@ int array2DFindMin3(Array2D* pArray);
 int array2DFindMax4(Array2D* pArray);
 int array2DFindMin4(Array2D* pArray);
 
+int array2DFindMax5(Array2D* pArray);
+int array2DFindMin5(Array2D* pArray);
+
 bool array2DInsertAt(Array2D* pArray, int rowAt, int colAt, int newElement);
 bool array2DInsertAtBeginning(Array2D* pArray, int newElement);
 bool array2DInsertAtEnd(Array2D* pArray, int newElement);
@@ -324,6 +327,62 @@ int array2DFindMin4(Array2D* pArray)
         if (min > pArray->items[pArray->numOfItems/COL_LENGTH][i])
         {
             min = pArray->items[pArray->numOfItems/COL_LENGTH][i];
+        }
+    }
+
+    return min;
+}
+
+int array2DFindMax5(Array2D* pArray)
+{
+    assert(NULL != pArray);
+
+    int max = pArray->items[0][0];
+
+    for (int i = 0; i < pArray->numOfItems/COL_LENGTH; i++)
+    {
+        for (int j= 0; j < COL_LENGTH; j++)
+        {
+            if (max < pArray->items[i][j])
+            {
+                max = pArray->items[i][j];
+            }
+        }
+    }
+
+    for (int i = 0; i < pArray->numOfItems % COL_LENGTH; i++)
+    {
+        if (max < pArray->items[pArray->numOfItems/COL_LENGTH][i])
+        {
+            max = pArray->items[pArray->numOfItems/COL_LENGTH][i];
+        }
+    }
+
+    return max;
+}
+
+int array2DFindMin5(Array2D* pArray)
+{
+    assert(NULL != pArray);
+
+    int min = pArray->items[0][0];
+
+    for (int i = 0; i < pArray->numOfItems/COL_LENGTH; i++)
+    {
+        for (int j = 0; j < COL_LENGTH; j++)
+        {
+            if (min > pArray->items[i][j])
+            {
+                min = pArray->items[i][j];
+            }
+        }
+    }
+
+    for (int i = 0; i < pArray->numOfItems % COL_LENGTH; i++)
+    {
+        if (min > pArray->items[pArray->numOfItems / COL_LENGTH][i])
+        {
+            min = pArray->items[pArray->numOfItems / COL_LENGTH][i];
         }
     }
 

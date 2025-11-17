@@ -49,6 +49,10 @@ bool array2DDeleteAt(Array2D* pArray, int rowAt, int colAt);
 bool array2DDeleteAtBeginning(Array2D* pArray);
 bool array2DDeleteAtEnd(Array2D* pArray);
 
+bool array2DDeleteAt2(Array2D* pArray, int rowAt, int colAt);
+bool array2DDeleteAtBeginning2(Array2D* pArray);
+bool array2DDeleteAtEnd2(Array2D* pArray);
+
 bool array2DIsFull(Array2D* pArray)
 {
     assert(NULL != pArray);
@@ -600,6 +604,36 @@ bool array2DDeleteAtEnd(Array2D* pArray)
     int colAt = pArray->numOfItems % COL_LENGTH;
 
     array2DDeleteAt(pArray, rowAt, colAt);
+
+    return true;
+}
+
+bool array2DDeleteAt2(Array2D* pArray, int rowAt, int colAt)
+{
+    assert(NULL != pArray);
+    assert((rowAt >= 0) && (rowAt < ROW_LENGTH));
+    assert((colAt >= 0) && (colAt < COL_LENGTH));
+
+    if (array2DIsEmpty(pArray))
+    {
+        return false;
+    }
+
+    if ((rowAt * COL_LENGTH + colAt) >= pArray->numOfItems)
+    {
+        return false;
+    }
+
+    int numOfElementsNeedMove = (pArray->numOfItems - (rowAt * COL_LENGTH + colAt)) - 1;
+
+    int *pDeleteAt = (int*)(&pArray->items[rowAt][colAt]);
+
+    for (int i = 0; i < numOfElementsNeedMove; i++)
+    {
+        pDeleteAt[i] = pDeleteAt[i+1];
+    }
+
+    pArray->numOfItems--;
 
     return true;
 }

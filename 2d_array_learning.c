@@ -638,6 +638,27 @@ bool array2DDeleteAt2(Array2D* pArray, int rowAt, int colAt)
     return true;
 }
 
+bool array2DDeleteAtBeginning2(Array2D* pArray)
+{
+    assert(NULL != pArray);
+
+    array2DDeleteAt(pArray, 0, 0);
+
+    return true;
+}
+
+bool array2DDeleteAtEnd2(Array2D* pArray)
+{
+    assert(NULL != pArray);
+
+    int rowAt = pArray->numOfItems / COL_LENGTH;
+    int colAt = pArray->numOfItems % COL_LENGTH;
+
+    array2DDeleteAt(pArray, rowAt, colAt);
+
+    return true;    
+}
+
 int main()
 {
     Array2D testArray =

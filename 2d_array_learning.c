@@ -62,7 +62,7 @@ bool array2DIsFull(Array2D* pArray)
 
 bool array2DIsEmpty(Array2D* pArray)
 {
-        assert(NULL != pArray);
+    assert(NULL != pArray);
 
     return (pArray->numOfItems > 0);
 }

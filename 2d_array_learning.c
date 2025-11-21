@@ -45,6 +45,10 @@ bool array2DInsertAt3(Array2D* pArray, int rowAt, int colAt, int newElement);
 bool array2DInsertAtBeginning3(Array2D* pArray, int newElement);
 bool array2DInsertAtEnd3(Array2D* pArrray, int newElement);
 
+bool array2DInsertAt4(Array2D* pArray, int rowAt, int colAt, int newElement);
+bool array2DInsertAtBeginning4(Array2D* pArray, int newElement);
+bool array2DInsertAtEnd4(Array2D* pArrray, int newElement);
+
 bool array2DDeleteAt(Array2D* pArray, int rowAt, int colAt);
 bool array2DDeleteAtBeginning(Array2D* pArray);
 bool array2DDeleteAtEnd(Array2D* pArray);
@@ -461,7 +465,7 @@ bool array2DInsertAt2(Array2D* pArray, int rowAt, int colAt, int newElement)
 {
     assert(NULL != pArray);
     assert((rowAt >= 0) && (rowAt < ROW_LENGTH));
-    assert((colAt >= 0) && (rowAt < COL_LENGTH));
+    assert((colAt >= 0) && (colAt < COL_LENGTH));
 
     if (array2DIsFull(pArray))
     {
@@ -550,6 +554,61 @@ bool array2DInsertAtBeginning3(Array2D* pArray, int newElement)
     assert(NULL != pArray);
 
     return array2DInsertAt(pArray, 0, 0, newElement);
+}
+
+bool array2DInsertAt4(Array2D* pArray, int rowAt, int colAt, int newElement)
+{
+    assert(NULL != pArray);
+    assert((rowAt >= 0) && (rowAt < ROW_LENGTH));
+    assert((colAt >= 0) && (colAt < COL_LENGTH));
+
+    if (array2DIsFull(pArray))
+    {
+        return false;
+    }
+
+    if ((rowAt * COL_LENGTH + colAt) > pArray->numOfItems)
+    {
+        return false;
+    }
+
+    int numOfElementsNeedMove = (pArray->numOfItems - (rowAt * COL_LENGTH + colAt));
+
+    int* pInsertAt = (int*) (&pArray->items - (rowAt * COL_LENGTH + colAt));
+
+    while (numOfElementsNeedMove >= 0)
+    {
+        pInsertAt[numOfElementsNeedMove +1] = pInsertAt[numOfElementsNeedMove];
+
+        numOfElementsNeedMove--;
+    }
+
+    *pInsertAt = newElement;
+
+    pArray->numOfItems++;
+
+    return true;
+}
+
+bool array2DInsertAtBeginning4(Array2D* pArray, int newElement)
+{
+    assert(NULL != pArray);
+
+    array2DInsertAt4(pArray, 0, 0, newElement);
+
+    return true;
+}
+
+bool array2DInsertAtEnd4(Array2D* pArray, int newElement)
+{
+    assert(NULL != pArray);
+
+    int rowAt = pArray->numOfItems / COL_LENGTH;
+    int colAt = pArray->numOfItems % COL_LENGTH;
+
+    array2DInsertAt(pArray, rowAt, colAt, newElement);
+
+    return true;
 }
 
 bool array2DInsertAtEnd3(Array2D* pArray, int newElement)
@@ -662,7 +721,6 @@ bool array2DDeleteAtEnd2(Array2D* pArray)
 
     return true;    
 }
-
 
 bool array2DDeleteAt3(Array2D* pArray, int rowAt, int colAt)
 {

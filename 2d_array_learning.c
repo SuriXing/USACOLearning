@@ -832,12 +832,27 @@ int main()
     printf("End: array2DDeleteAtEnd(&testArray);\n");
 
     printf("\nStart: array2DInsertAtBeginning3(&testArray, 55);\n");
-    array2DInsertAtBeginning3(&testArray, 55);
-    array2DPrint3(&testArray);
+    array2DInsertAtBeginning(&testArray, 55);
+    array2DPrint(&testArray);
     printf("End: array2DInsertAtBeginning3(&testArray, 55);\n");
 
     printf("\nStart: array2DDeleteAtBeginning(&testArray);\n");
-    array2DDeleteAtBeginning(&testArray);
+    array2DDeleteAtBeginning3(&testArray);
+    array2DPrint(&testArray);
+    printf("End: array2DDeleteAtBeginning(&testArray);\n");
+
+    printf("\nStart: array2DDeleteAtEnd3(&testArray);\n");
+    array2DDeleteAtEnd3(&testArray);
+    array2DPrint(&testArray);
+    printf("End: array2DDeleteAtEnd3(&testArray);\n");
+
+    printf("\nStart: array2DInsertAtBeginning3(&testArray, 66);\n");
+    array2DInsertAtBeginning4(&testArray, 66);
+    array2DPrint(&testArray);
+    printf("End: array2DInsertAtBeginning3(&testArray, 66);\n");
+
+    printf("\nStart: array2DDeleteAtBeginning(&testArray);\n");
+    array2DDeleteAtBeginning3(&testArray);
     array2DPrint(&testArray);
     printf("End: array2DDeleteAtBeginning(&testArray);\n");
 

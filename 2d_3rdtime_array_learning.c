@@ -28,6 +28,9 @@ bool array2DInsertAtBeginning(Array2D* pArray, int newElement);
 
 bool array2DInsertAtEnd(Array2D* pArray, int newElement);
 
+bool array2DDeleteAt(Array2D* pArray, int rowAt, int colAt);
+
+
 bool array2DIsFull(Array2D* pArray)
 {
     assert(NULL != pArray);
@@ -118,7 +121,6 @@ int array2DFindMin(Array2D* pArray)
     return min;
 }
 
-
 bool array2DInsertAt(Array2D* pArray, int rowAt, int colAt, int newElement)
 {
     assert(NULL != pArray);
@@ -171,6 +173,35 @@ bool array2DInsertAtEnd(Array2D* pArray, int newElement)
     return true;
 }
 
+bool array2DDeleteAt(Array2D* pArray, int rowAt, int colAt)
+{
+    assert(NULL != pArray);
+    assert((rowAt >= 0) && (rowAt < ROW_LENGTH));
+    assert((colAt >= 0) && (colAt < COL_LENGTH));
+
+    if (array2DIsEmpty(pArray))
+    {
+        return false;
+    }
+
+    if ((rowAt * COL_LENGTH + colAt) > pArray->numOfItems)
+    {
+        return false;
+    }
+
+    int numOfElementsNeedMove = (pArray->numOfItems - (rowAt+COL_LENGTH + colAt)) -1;
+
+    int* pDeleteAt = (int*)(&pArray->items[rowAt][colAt]);
+    for (int i = 0; i < numOfElementsNeedMove; i++)
+    {
+        pDeleteAt[i] = pDeleteAt[i+1];
+    }
+
+    pArray->numOfItems--;
+
+    return true;
+}
+
 int main()
 {
     Array2D testArray =
@@ -184,24 +215,32 @@ int main()
 
     array2DPrint(&testArray);
 
+    //Find Max & Min
     printf("array find max: %d\n", array2DFindMax(&testArray));
     printf("array find min: %d\n", array2DFindMin(&testArray));
 
-
+    //Insert At & Begginning & End
     printf("\nStart: array2DInsertAt(&testArray, 0, 0, 100);\n");
     array2DInsertAt(&testArray, 0, 0, 100);
     array2DPrint(&testArray);
     printf("End: array2DInsertAt(&testArray, 0, 0, 100);\n");
+
+    printf("\nStart: array2DInsertAtBeginning(&testArray, 55);\n");
+    array2DInsertAtBeginning(&testArray, 55);
+    array2DPrint(&testArray);
+    printf("End: array2DInsertAtBeginning(&testArray, 55);\n");
 
     printf("\nStart: array2DInsertAtEnd(&testArray);\n");
     array2DInsertAtEnd(&testArray, 6);
     array2DPrint(&testArray);
     printf("End: array2DDeleteAtEnd(&testArray);\n");
 
-    printf("\nStart: array2DInsertAtBeginning(&testArray, 55);\n");
-    array2DInsertAtBeginning(&testArray, 55);
+    //Delete At & Beginning & End
+    printf("\nStart: array2DDeleteAt(&testArray, 0, 0);\n");
+    array2DDeleteAt(&testArray, 0, 0);
     array2DPrint(&testArray);
-    printf("End: array2DInsertAtBeginning(&testArray, 55);\n");
+    printf("End: array2DDeleteAt(&testArray, 0, 0);\n");
+
     
     return 0;
 }

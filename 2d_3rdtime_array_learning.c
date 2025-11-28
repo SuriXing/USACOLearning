@@ -12,24 +12,20 @@ typedef struct _Array2D
 } Array2D;
 
 bool array2DIsFull(Array2D* pArray);
-
 bool array2DIsEmpty(Array2D* pArray);
 
 bool array2DPrint(Array2D* pArray);
 
 int array2DFindMax(Array2D* pArray);
-
 int array2DFindMin(Array2D* pArray);
 
-
 bool array2DInsertAt(Array2D* pArray, int rowAt, int colAt, int newElement);
-
 bool array2DInsertAtBeginning(Array2D* pArray, int newElement);
-
 bool array2DInsertAtEnd(Array2D* pArray, int newElement);
 
 bool array2DDeleteAt(Array2D* pArray, int rowAt, int colAt);
-
+bool array2DDeleteAtBeginning(Array2D* pArray);
+bool array2DDeleteAtEnd(Array2D* pArray);
 
 bool array2DIsFull(Array2D* pArray)
 {
@@ -63,7 +59,6 @@ bool array2DPrint(Array2D* pArray)
 
     return true;
 }
-
 
 int array2DFindMax(Array2D* pArray)
 {
@@ -202,6 +197,27 @@ bool array2DDeleteAt(Array2D* pArray, int rowAt, int colAt)
     return true;
 }
 
+bool array2DDeleteAtBeginning(Array2D* pArray)
+{
+    assert(NULL != pArray);
+
+    array2DDeleteAt(pArray, 0, 0);
+
+    return true;
+}
+
+bool array2DDeleteAtEnd(Array2D* pArray)
+{
+    assert(NULL != pArray);
+
+    int rowAt = pArray->numOfItems / COL_LENGTH;
+    int colAt = pArray->numOfItems % COL_LENGTH;
+
+    array2DDeleteAt(pArray, rowAt, colAt);
+
+    return true;
+}
+
 int main()
 {
     Array2D testArray =
@@ -241,6 +257,15 @@ int main()
     array2DPrint(&testArray);
     printf("End: array2DDeleteAt(&testArray, 0, 0);\n");
 
-    
+    printf("\nStart: array2DDeleteAtBeginning(&testArray);\n");
+    array2DDeleteAtBeginning(&testArray);
+    array2DPrint(&testArray);
+    printf("End: array2DDeleteAtBeginning(&testArray);\n");
+
+    printf("\nStart: array2DDeleteAtEnd(&testArray);\n");
+    array2DDeleteAtEnd(&testArray);
+    array2DPrint(&testArray);
+    printf("End: array2DDeleteAtEnd(&testArray);\n");
+        
     return 0;
 }

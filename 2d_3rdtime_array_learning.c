@@ -27,6 +27,10 @@ bool array2DDeleteAt(Array2D* pArray, int rowAt, int colAt);
 bool array2DDeleteAtBeginning(Array2D* pArray);
 bool array2DDeleteAtEnd(Array2D* pArray);
 
+bool array2DDeleteAt2(Array2D* pArray, int rowAt, int colAt);
+bool array2DDeleteAtBeginning2(Array2D* pArray);
+bool array2DDeleteAtEnd2(Array2D* pArray);
+
 bool array2DIsFull(Array2D* pArray)
 {
     assert(NULL != pArray);
@@ -218,6 +222,57 @@ bool array2DDeleteAtEnd(Array2D* pArray)
     return true;
 }
 
+bool array2DDeleteAt2(Array2D* pArray, int rowAt, int colAt)
+{
+    assert(NULL != pArray);
+    assert((rowAt >= 0) && (rowAt < ROW_LENGTH));
+    assert((colAt >= 0) && (colAt < COL_LENGTH));
+
+    if (array2DIsEmpty(pArray))
+    {
+        return false;
+    }
+
+    if (((rowAt * COL_LENGTH) + colAt) >= pArray->numOfItems)
+    {
+        return false;
+    }
+
+    int numOfElementsNeedMove = (pArray->numOfItems - (rowAt * COL_LENGTH + colAt)) -1;
+
+    int* pDeleteAt = (int*)(&pArray->items[rowAt][colAt]);
+
+    for (int i = 0; i < numOfElementsNeedMove; i++)
+    {
+        pDeleteAt[i] = pDeleteAt[i+1];
+    }
+
+    pArray->numOfItems--;
+
+    return true;
+}
+
+bool array2DDeleteAtBeginning2(Array2D* pArray)
+{
+    assert(NULL != pArray);
+
+    array2DDeleteAt2(pArray, 0, 0);
+
+    return true;
+}
+
+bool array2DDeleteAtEnd2(Array2D* pArray)
+{
+    assert(NULL != pArray);
+
+    int rowAt = pArray->numOfItems / COL_LENGTH;
+    int colAt = pArray->numOfItems % COL_LENGTH;
+
+    array2DDeleteAt2(pArray, rowAt, colAt);
+
+    return true;
+}
+
 int main()
 {
     Array2D testArray =
@@ -266,6 +321,23 @@ int main()
     array2DDeleteAtEnd(&testArray);
     array2DPrint(&testArray);
     printf("End: array2DDeleteAtEnd(&testArray);\n");
-        
+
+    //Delete At2 & Beginning2 & End2
+    printf("\nStart: array2DDeleteAt2(&testArray, 0, 0);\n");
+    array2DDeleteAt2(&testArray, 0, 0);
+    array2DPrint(&testArray);
+    printf("End: array2DDeleteAt2(&testArray, 0, 0);\n");
+
+    printf("\nStart: array2DDeleteAtBeginning2(&testArray);\n");
+    array2DDeleteAtBeginning2(&testArray);
+    array2DPrint(&testArray);
+    printf("End: array2DDeleteAtBeginning2(&testArray);\n");
+
+    printf("\nStart: array2DDeleteAtEnd2(&testArray);\n");
+    array2DDeleteAtEnd2(&testArray);
+    array2DPrint(&testArray);
+    printf("End: array2DDeleteAtEnd2(&testArray);\n");
+
+
     return 0;
 }

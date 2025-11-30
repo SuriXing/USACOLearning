@@ -31,6 +31,10 @@ bool array2DDeleteAt2(Array2D* pArray, int rowAt, int colAt);
 bool array2DDeleteAtBeginning2(Array2D* pArray);
 bool array2DDeleteAtEnd2(Array2D* pArray);
 
+bool array2DDeleteAt3(Array2D* pArray, int rowAt, int colAt);
+bool array2DDeleteAtBeginning3(Array2D* pArray);
+bool array2DDeleteAtEnd3(Array2D* pArray);
+
 bool array2DIsFull(Array2D* pArray)
 {
     assert(NULL != pArray);
@@ -273,6 +277,57 @@ bool array2DDeleteAtEnd2(Array2D* pArray)
     return true;
 }
 
+bool array2DDeleteAt3(Array2D* pArray, int rowAt, int colAt)
+{
+    assert(NULL != pArray);
+    assert((rowAt >= 0) && (rowAt < ROW_LENGTH));
+    assert((colAt >= 0) && (colAt < COL_LENGTH));
+
+    if (array2DIsEmpty(pArray))
+    {
+        return false;
+    }
+
+    if ((rowAt * COL_LENGTH + colAt) > pArray->numOfItems)
+    {
+        return false;
+    }
+
+    int numOfItemsNeedMove = (pArray->numOfItems - (rowAt+COL_LENGTH + colAt)) -1;
+
+    int* pDeleteAt = (int*)(&pArray->items[rowAt][colAt]);
+
+    for (int i = 0; i < numOfItemsNeedMove; i++)
+    {
+        pDeleteAt[i] = pDeleteAt[i+1];
+    }
+
+    pArray->numOfItems--;
+
+    return true;
+}
+
+bool array2DDeleteAtBeginning3(Array2D* pArray)
+{
+    assert(NULL != pArray);
+
+    array2DDeleteAt3(pArray, 0, 0);
+
+    return true;
+}
+
+bool array2DDeleteAtEnd3(Array2D* pArray)
+{
+    assert(NULL != pArray);
+
+    int rowAt = pArray->numOfItems / COL_LENGTH;
+    int colAt = pArray->numOfItems % COL_LENGTH;
+
+    array2DDeleteAt3(pArray, rowAt, colAt);
+
+    return true;
+}
+
 int main()
 {
     Array2D testArray =
@@ -338,6 +393,21 @@ int main()
     array2DPrint(&testArray);
     printf("End: array2DDeleteAtEnd2(&testArray);\n");
 
+    //Delete At2 & Beginning3 & End3
+    printf("\nStart: array2DDeleteAt3(&testArray, 0, 0);\n");
+    array2DDeleteAt3(&testArray, 0, 0);
+    array2DPrint(&testArray);
+    printf("End: array2DDeleteAt3(&testArray, 0, 0);\n");
+
+    printf("\nStart: array2DDeleteAtBeginning3(&testArray);\n");
+    array2DDeleteAtBeginning3(&testArray);
+    array2DPrint(&testArray);
+    printf("End: array2DDeleteAtBeginning3(&testArray);\n");
+
+    printf("\nStart: array2DDeleteAtEnd3(&testArray);\n");
+    array2DDeleteAtEnd3(&testArray);
+    array2DPrint(&testArray);
+    printf("End: array2DDeleteAtEnd3(&testArray);\n");
 
     return 0;
 }

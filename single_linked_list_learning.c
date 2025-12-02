@@ -18,6 +18,9 @@ typedef struct _SingleLinkedList
 bool singleLinkedListPrint(SingleLinkedList* pList);
 bool singleLinkedListIsEmpty(SingleLinkedList* pList);
 
+int singleLinkedListFindMax(SingleLinkedList* pList);
+int singleLinkedListFindMin(SingleLinkedList* pList);
+
 bool singleLinkedListIsEmpty(SingleLinkedList* pList)
 {
     assert(NULL != pList);
@@ -51,6 +54,56 @@ bool singleLinkedListPrint(SingleLinkedList* pList)
     printf("\n");
 
     return true;
+}
+
+int singleLinkedListFindMax(SingleLinkedList* pList)
+{
+    assert(NULL != pList);
+
+    if (singleLinkedListIsEmpty(pList))
+    {
+        return -1;
+    }
+
+    Node* pCurrent = pList->dummyHead.pNext;
+    int maxValue = pCurrent->item;
+
+    while (NULL != pCurrent)
+    {
+        if (maxValue < pCurrent->item)
+        {
+            maxValue = pCurrent->item;
+        }
+
+        pCurrent = pCurrent->pNext;
+    }
+
+    return maxValue;
+}
+
+int singleLinkedListFindMin(SingleLinkedList* pList)
+{
+    assert(NULL != pList);
+
+    if (singleLinkedListIsEmpty(pList))
+    {
+        return -1;
+    }
+
+    Node* pCurrent = pList->dummyHead.pNext;
+    int minValue = pCurrent->item;
+
+    while (NULL != pList)
+    {
+        if (minValue > pCurrent->item)
+        {
+            minValue = pCurrent->item;
+        }
+
+        pCurrent = pCurrent->pNext;
+    }
+
+    return minValue;
 }
 
 int main()

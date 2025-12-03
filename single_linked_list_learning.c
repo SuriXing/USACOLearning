@@ -21,6 +21,8 @@ bool singleLinkedListIsEmpty(SingleLinkedList* pList);
 int singleLinkedListFindMax(SingleLinkedList* pList);
 int singleLinkedListFindMin(SingleLinkedList* pList);
 
+bool singleLinkedListAddItem(SingleLinkedList* pList, int newItem);
+
 bool singleLinkedListIsEmpty(SingleLinkedList* pList)
 {
     assert(NULL != pList);
@@ -104,6 +106,35 @@ int singleLinkedListFindMin(SingleLinkedList* pList)
     }
 
     return minValue;
+}
+
+bool singleLinkedListAddItem(SingleLinkedList* pList, int newItem)
+{
+    assert(NULL != pList);
+
+    Node* pNewNode = (Node*)malloc(sizeof(Node));
+    if (NULL == pNewNode)
+    {
+        return false;
+    }
+    pNewNode->item = newItem;
+    pNewNode->pNext = NULL;
+
+    if (singleLinkedListIsEmpty(pList))
+    {
+        pList->dummyHead.pNext = pNewNode;
+    }
+    else
+    {
+        Node* pCurrent = pList->dummyHead.pNext;
+        while (NULL != pCurrent->pNext)
+        {
+            pCurrent = pCurrent->pNext;
+        }
+        pCurrent->pNext = pNewNode;
+    }
+
+    return true;
 }
 
 int main()

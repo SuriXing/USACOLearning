@@ -18,6 +18,8 @@ typedef struct _SingleLinkedList
 bool singleLinkedListPrint(SingleLinkedList* pList);
 bool singleLinkedListIsEmpty(SingleLinkedList* pList);
 
+bool singleLinkedListPrint2(SingleLinkedList* pList);
+
 int singleLinkedListFindMax(SingleLinkedList* pList);
 int singleLinkedListFindMin(SingleLinkedList* pList);
 
@@ -31,6 +33,34 @@ bool singleLinkedListIsEmpty(SingleLinkedList* pList)
 }
 
 bool singleLinkedListPrint(SingleLinkedList* pList)
+{
+    assert(NULL != pList);
+
+    if (singleLinkedListIsEmpty(pList))
+    {
+        return false;
+    }
+
+    Node* pCurrent = pList->dummyHead.pNext;
+
+    while (NULL != pCurrent)
+    {
+        printf("%d", pCurrent->item);
+
+        if (NULL != pCurrent->pNext)
+        {
+            printf("->");
+        }
+
+        pCurrent = pCurrent->pNext;
+    }
+
+    printf("\n");
+
+    return true;
+}
+
+bool singleLinkedListPrint2(SingleLinkedList* pList)
 {
     assert(NULL != pList);
 

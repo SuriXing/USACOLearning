@@ -25,6 +25,8 @@ int singleLinkedListFindMin(SingleLinkedList* pList);
 
 bool singleLinkedListAddItem(SingleLinkedList* pList, int newItem);
 
+bool singleLinkedListAddItem2(SingleLinkedList* pList, int newItem);
+
 bool singleLinkedListIsEmpty(SingleLinkedList* pList)
 {
     assert(NULL != pList);
@@ -167,6 +169,36 @@ bool singleLinkedListAddItem(SingleLinkedList* pList, int newItem)
     return true;
 }
 
+bool singleLinkedListAddItem2(SingleLinkedList* pList, int newItem)
+{
+    assert(NULL != pList);
+
+    Node* pNewNode = (Node*)malloc(sizeof(Node));
+    if (NULL == pNewNode)
+    {
+        return false;
+    }
+
+    pNewNode->item = newItem;
+    pNewNode->pNext = NULL;
+
+    if (singleLinkedListIsEmpty(pList))
+    {
+        return false;
+    }
+    else
+    {
+        Node* pCurrent = pList->dummyHead.pNext;
+        while (NULL != pCurrent->pNext)
+        {
+            pCurrent = pCurrent->pNext;
+        }
+        pCurrent->pNext = pNewNode;
+    }
+
+    return true;
+}
+
 int main()
 {
     SingleLinkedList list;
@@ -176,6 +208,10 @@ int main()
     singleLinkedListAddItem(&list, 1);
     singleLinkedListAddItem(&list, 2);
     singleLinkedListAddItem(&list, 6);
+
+    singleLinkedListAddItem2(&list, 8);
+    singleLinkedListAddItem2(&list, 8);
+    singleLinkedListAddItem2(&list, 8);
     
     printf("Linked list: ");
     singleLinkedListPrint(&list);

@@ -24,8 +24,9 @@ int singleLinkedListFindMax(SingleLinkedList* pList);
 int singleLinkedListFindMin(SingleLinkedList* pList);
 
 bool singleLinkedListAddItem(SingleLinkedList* pList, int newItem);
-
 bool singleLinkedListAddItem2(SingleLinkedList* pList, int newItem);
+
+bool singleLinkedListDeleteItem(SingleLinkedList* pList, int deletedItem);
 
 bool singleLinkedListIsEmpty(SingleLinkedList* pList)
 {
@@ -152,19 +153,13 @@ bool singleLinkedListAddItem(SingleLinkedList* pList, int newItem)
     pNewNode->item = newItem;
     pNewNode->pNext = NULL;
 
-    if (singleLinkedListIsEmpty(pList))
+    Node* pCurrent = &pList->dummyHead;
+    while (NULL != pCurrent->pNext)
     {
-        pList->dummyHead.pNext = pNewNode;
+        pCurrent = pCurrent->pNext;
     }
-    else
-    {
-        Node* pCurrent = pList->dummyHead.pNext;
-        while (NULL != pCurrent->pNext)
-        {
-            pCurrent = pCurrent->pNext;
-        }
-        pCurrent->pNext = pNewNode;
-    }
+
+    pCurrent->pNext = pNewNode;
 
     return true;
 }
@@ -182,18 +177,44 @@ bool singleLinkedListAddItem2(SingleLinkedList* pList, int newItem)
     pNewNode->item = newItem;
     pNewNode->pNext = NULL;
 
+    Node* pCurrent = &pList->dummyHead;
+    while (NULL != pCurrent->pNext)
+    {
+        pCurrent = pCurrent->pNext;
+    }
+
+    pCurrent->pNext = pNewNode;
+
+    return true;
+}
+
+bool singleLinkedListDeleteItem(SingleLinkedList* pList, int deletedItem)
+{
+    assert(NULL != pList);
+    
     if (singleLinkedListIsEmpty(pList))
     {
         return false;
     }
-    else
+
+    Node* pPrev = &pList->dummyHead;
+    Node* pCurrent = pPrev->pNext;
+
+    while (NULL != pCurrent)
     {
-        Node* pCurrent = pList->dummyHead.pNext;
-        while (NULL != pCurrent->pNext)
+        if (pCurrent->item == deletedItem)
+        {
+            pPrev->pNext = pCurrent->pNext;
+
+            free(pCurrent);
+
+            pCurrent = pPrev->pNext;
+        }
+        else
         {
             pCurrent = pCurrent->pNext;
+            pPrev = pPrev->pNext;
         }
-        pCurrent->pNext = pNewNode;
     }
 
     return true;
@@ -224,5 +245,18 @@ int main()
     printf("\nFind Max value in single linked list:\n");
     printf("Max value: %d\n", singleLinkedListFindMax(&list));
 
+    // Delete
+    int deleteItem = 1;
+    printf("\nDelete %d in single linked list:\n", deleteItem);
+    singleLinkedListDeleteItem(&list, deleteItem);
+    singleLinkedListPrint(&list);
+
+    singleLinkedListAddItem(&list, 1);
+
+    // Delete2
+    printf("\nDelete %d in single linked list:\n", deleteItem);
+    singleLinkedListDeleteItem(&list, deleteItem);
+    singleLinkedListPrint(&list);
+  
     return 0;
 }

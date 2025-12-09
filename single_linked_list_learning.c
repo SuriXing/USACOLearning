@@ -27,6 +27,7 @@ bool singleLinkedListAddItem(SingleLinkedList* pList, int newItem);
 bool singleLinkedListAddItem2(SingleLinkedList* pList, int newItem);
 
 bool singleLinkedListDeleteItem(SingleLinkedList* pList, int deletedItem);
+bool singleLinkedListDeleteItem2(SingleLinkedList* pList, int deletedItem);
 
 bool singleLinkedListIsEmpty(SingleLinkedList* pList)
 {
@@ -192,6 +193,38 @@ bool singleLinkedListDeleteItem(SingleLinkedList* pList, int deletedItem)
 {
     assert(NULL != pList);
     
+    if (singleLinkedListIsEmpty(pList))
+    {
+        return false;
+    }
+
+    Node* pPrev = &pList->dummyHead;
+    Node* pCurrent = pPrev->pNext;
+
+    while (NULL != pCurrent)
+    {
+        if (pCurrent->item == deletedItem)
+        {
+            pPrev->pNext = pCurrent->pNext;
+
+            free(pCurrent);
+
+            pCurrent = pPrev->pNext;
+        }
+        else
+        {
+            pCurrent = pCurrent->pNext;
+            pPrev = pPrev->pNext;
+        }
+    }
+
+    return true;
+}
+
+bool singleLinkedListDeleteItem2(SingleLinkedList* pList, int deletedItem)
+{
+    assert(NULL != pList);
+
     if (singleLinkedListIsEmpty(pList))
     {
         return false;

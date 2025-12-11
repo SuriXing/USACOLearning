@@ -29,6 +29,11 @@ bool singleLinkedListAddItem2(SingleLinkedList* pList, int newItem);
 bool singleLinkedListDeleteItem(SingleLinkedList* pList, int deletedItem);
 bool singleLinkedListDeleteItem2(SingleLinkedList* pList, int deletedItem);
 
+bool singleLinkedListFindItem(SingleLinkedList* pList, int item);
+
+bool singleLinkedListReverse(SingleLinkedList* pList);
+
+
 bool singleLinkedListIsEmpty(SingleLinkedList* pList)
 {
     assert(NULL != pList);
@@ -253,6 +258,54 @@ bool singleLinkedListDeleteItem2(SingleLinkedList* pList, int deletedItem)
     return true;
 }
 
+bool singleLinkedListFindItem(SingleLinkedList* pList, int item)
+{
+    assert(NULL != pList);
+
+    if (singleLinkedListIsEmpty(pList))
+    {
+        return false;
+    }
+
+    Node* pCurrent = pList->dummyHead.pNext;
+
+    while (NULL != pList)
+    {
+        if (pCurrent->item == item)
+        {
+            return true;
+        }
+        else
+        {
+            pCurrent = pCurrent->pNext;
+        }
+    }
+
+    return false;
+}
+
+bool singleLinkedListReverse(SingleLinkedList* pList)
+{
+    assert(NULL != pList);
+
+    Node* pCurrent = pList->dummyHead.pNext;
+    Node* pPrev = NULL; // very important, because first element will become last element, whose pNext should be NULL
+    Node* pNext = NULL;
+    
+    while (NULL != pCurrent)
+    {
+        pPrev = pCurrent;
+        pNext = pCurrent->pNext;
+        
+        pCurrent->pNext = pPrev;
+        
+        pCurrent = pNext;
+    }
+    pList->dummyHead.pNext = pPrev;
+
+    return true;
+}
+
 int main()
 {
     SingleLinkedList list;
@@ -291,5 +344,10 @@ int main()
     singleLinkedListDeleteItem(&list, deleteItem);
     singleLinkedListPrint(&list);
   
+    // Find
+    int item = 8;
+    printf("\nFind Whether %d is in the list:\n", item);
+    printf("%d\n", singleLinkedListFindItem(&list, item));
+
     return 0;
 }

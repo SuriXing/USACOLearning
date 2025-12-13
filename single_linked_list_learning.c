@@ -33,6 +33,7 @@ bool singleLinkedListFindItem(SingleLinkedList* pList, int item);
 
 bool singleLinkedListReverse(SingleLinkedList* pList);
 bool singleLinkedListReverse2(SingleLinkedList* pList);
+bool singleLinkedListReverse3(SingleLinkedList* pList);
 
 bool singleLinkedListIsEmpty(SingleLinkedList* pList)
 {
@@ -330,6 +331,28 @@ bool singleLinkedListReverse2(SingleLinkedList* pList)
     return true;
 }
 
+bool singleLinkedListReverse3(SingleLinkedList* pList)
+{
+    assert(NULL != pList);
+
+    Node* pCurrent = pList->dummyHead.pNext;
+    Node* pPrev = NULL;
+    Node* pNext = NULL;
+
+    while (NULL != pCurrent)
+    {
+        pNext = pCurrent->pNext;
+
+        pCurrent->pNext = pPrev;
+
+        pPrev = pCurrent;
+        pCurrent = pNext;
+    }
+    pList->dummyHead.pNext = pPrev;
+
+    return true;
+}
+
 int main()
 {
     SingleLinkedList list;
@@ -382,6 +405,10 @@ int main()
     printf("\nReverse single linked list:\n");
     singleLinkedListReverse2(&list);
     singleLinkedListPrint(&list);
-    
+
+        // Reverse
+    printf("\nReverse single linked list:\n");
+    singleLinkedListReverse3(&list);
+    singleLinkedListPrint(&list);
     return 0;
 }

@@ -19,6 +19,8 @@ typedef struct _DoubleLinkedList
 bool doubleLinkedListPrint(DoubleLinkedList* pList);
 bool doubleLinkedListIsEmpty(DoubleLinkedList* pList);
 
+int doubleLinkedListFindMax(DoubleLinkedList* pList);
+int doubleLinkedListFindMin(DoubleLinkedList* pList);
 
 bool doubleLinkedListIsEmpty(DoubleLinkedList* pList)
 {
@@ -48,6 +50,57 @@ bool doubleLinkedListPrint(DoubleLinkedList* pList)
     printf("\n");
 
     return true;
+}
+
+int doubleLinkedListFindMax(DoubleLinkedList* pList)
+{
+    assert(NULL != pList);
+
+    if (doubleLinkedListIsEmpty(pList))
+    {
+        return 0;
+    }
+
+    Node* pCurrent = pList->dummyHead.pNext;
+
+    int maxValue = pCurrent->item;
+
+    while (NULL != pCurrent)
+    {
+        if (maxValue < pCurrent->item)
+        {
+            maxValue = pCurrent->item;
+        }
+
+        pCurrent = pCurrent->pNext;
+    }
+
+    return maxValue;
+}
+
+int doubleLinkedListFindMin(DoubleLinkedList* pList)
+{
+    assert(NULL != pList);
+
+    if(doubleLinkedListIsEmpty(pList))
+    {
+        return 0;
+    }
+
+    Node* pCurrent = pList->dummyHead.pNext;
+    int minValue = pCurrent->item;
+
+    while (NULL != pCurrent)
+    {
+        if (minValue > pCurrent->item)
+        {
+            minValue = pCurrent->item;
+        }
+
+        pCurrent = pCurrent->pNext;
+    }
+
+    return minValue;
 }
 
 int main()

@@ -23,6 +23,7 @@ int doubleLinkedListFindMax(DoubleLinkedList* pList);
 int doubleLinkedListFindMin(DoubleLinkedList* pList);
 
 bool doubleLinkedListAddItem(DoubleLinkedList* pList, int newItem);
+bool doubleLinkedListDeleteItem(DoubleLinkedList* pList, int deletedItem);
 
 bool doubleLinkedListIsEmpty(DoubleLinkedList* pList)
 {
@@ -130,6 +131,42 @@ bool doubleLinkedListAddItem(DoubleLinkedList* pList, int newItem)
     return true;
 }
 
+bool doubleLinkedListDeleteItem(DoubleLinkedList* pList, int deletedItem)
+{
+    assert(NULL != pList);
+
+    if (doubleLinkedListIsEmpty(pList))
+    {
+        return false;
+    }
+
+    Node* pCurrent = pList->dummyHead.pNext;
+
+    while (NULL != pCurrent)
+    {
+        if (pCurrent->item == deletedItem)
+        {
+            pCurrent->pPrev->pNext = pCurrent->pNext;
+
+            Node* pNext = pCurrent->pNext;
+            if (NULL != pNext)
+            {
+                pCurrent->pNext->pPrev = pCurrent->pPrev;
+            }
+
+            free(pCurrent);
+
+            pCurrent = pNext;
+        }
+        else
+        {
+            pCurrent = pCurrent->pNext;
+        }
+    }
+
+    return true;
+}
+
 int main()
 {
     DoubleLinkedList list;
@@ -153,6 +190,12 @@ int main()
     //min
     printf("Double Linked List find Min:\n");
     printf("Min value: %d\n", doubleLinkedListFindMin(&list));
+
+    //delete
+    int deletedItem = 1;
+    printf("Double Linked List delete %d from list:\n", deletedItem);
+    doubleLinkedListDeleteItem(&list, deletedItem);
+    doubleLinkedListPrint(&list);
 
     return 0;
 }

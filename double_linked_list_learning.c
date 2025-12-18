@@ -23,7 +23,20 @@ int doubleLinkedListFindMax(DoubleLinkedList* pList);
 int doubleLinkedListFindMin(DoubleLinkedList* pList);
 
 bool doubleLinkedListAddItem(DoubleLinkedList* pList, int newItem);
+bool doubleLinkedListAddItem2(DoubleLinkedList* pList, int newItem);
+
 bool doubleLinkedListDeleteItem(DoubleLinkedList* pList, int deletedItem);
+bool doubleLinkedListDeleteItem2(DoubleLinkedList* pList, int deletedItem);
+
+bool doubleLinkedListFindItem(DoubleLinkedList* pList, int item);
+
+bool doubleLinkedListReverse(DoubleLinkedList* pList);
+
+DoubleLinkedList* doubleLinkedListClone(DoubleLinkedList* pList);
+
+bool doubleLinkedListIsSame(DoubleLinkedList* pList1, DoubleLinkedList* pList2);
+
+int doubleLinkedListCompare(DoubleLinkedList* pList1, DoubleLinkedList* pList2);
 
 bool doubleLinkedListIsEmpty(DoubleLinkedList* pList)
 {
@@ -131,6 +144,32 @@ bool doubleLinkedListAddItem(DoubleLinkedList* pList, int newItem)
     return true;
 }
 
+bool doubleLinkedListAddItem2(DoubleLinkedList* pList, int newItem)
+{
+    assert(NULL != pList);
+
+    Node* pNewNode = (Node*)malloc(sizeof(Node));
+    if (NULL == pNewNode)
+    {
+        return false;
+    }
+
+    pNewNode->item = newItem;
+    pNewNode->pNext = NULL;
+    pNewNode->pPrev = NULL;
+
+    Node* pCurrent = pList->dummyHead.pNext;
+    while (NULL != pCurrent->pNext)
+    {
+        pCurrent = pCurrent->pNext;
+    }
+
+    pCurrent->pNext = pNewNode;
+    pNewNode->pPrev = pCurrent;
+    
+    return true;
+}
+
 bool doubleLinkedListDeleteItem(DoubleLinkedList* pList, int deletedItem)
 {
     assert(NULL != pList);
@@ -167,6 +206,141 @@ bool doubleLinkedListDeleteItem(DoubleLinkedList* pList, int deletedItem)
     return true;
 }
 
+bool doubleLinkedListDeleteItem2(DoubleLinkedList* pList, int deletedItem)
+{
+    assert(NULL != pList);
+
+    if (doubleLinkedListIsEmpty(pList))
+    {
+        return false;
+    }
+
+    Node* pCurrent = pList->dummyHead.pNext;
+
+    while (NULL != pCurrent)
+    {
+        if (pCurrent->item == deletedItem)
+        {
+            pCurrent->pPrev->pNext = pCurrent->pNext;
+            
+            Node* pNext = pCurrent->pNext;
+
+            if (NULL != pNext)
+            {
+                pCurrent->pNext->pPrev = pCurrent->pPrev;
+            }
+
+            free(pCurrent);
+
+            pCurrent = pNext;
+        }
+        else
+        {
+            pCurrent = pCurrent->pNext;
+        }
+    }
+
+    return true;
+}
+
+bool doubleLinkedListFindItem(DoubleLinkedList* pList, int item)
+{
+    assert(NULL != pList);
+
+    if (doubleLinkedListIsEmpty(pList))
+    {
+        return false;
+    }
+
+    Node* pCurrent = pList->dummyHead.pNext;
+
+    while (NULL != pCurrent)
+    {
+        if (item == pCurrent->item)
+        {
+            return true;
+        }
+        else
+        {
+            pCurrent = pCurrent->pNext;
+        }
+    }
+
+    return false;
+}
+
+bool doubleLinkedListIsSame(DoubleLinkedList* pList1, DoubleLinkedList* pList2)
+{
+    assert(NULL != pList1);
+    assert(NULL != pList2);
+
+    Node* pCurrent1 = pList1->dummyHead.pNext;
+    Node* pCurrent2 = pList2->dummyHead.pNext;
+
+    while ((NULL != pCurrent1) && (NULL != pCurrent2))
+    {
+        if (pCurrent1->item != pCurrent2->item)
+        {
+            return false;
+        }
+
+        pCurrent1 = pCurrent1->pNext;
+        pCurrent2 = pCurrent2->pNext;
+    }
+
+    if ((NULL == pCurrent1) && (NULL == pCurrent2))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+int doubleLinkedListCompare(DoubleLinkedList* pList1, DoubleLinkedList* pList2)
+{
+    //if list1 > list2, return 1
+    //if list1 = list2, return 0
+    //if list1 < list2, reutrn -1
+
+    assert(NULL != pList1);
+    assert(NULL != pList2);
+
+    Node* pCurrent1 = pList1->dummyHead.pNext;
+    Node* pCurrent2 = pList2->dummyHead.pNext;
+
+    while ((NULL != pCurrent1) && (NULL != pCurrent2))
+    {
+        if (pCurrent1->item == pCurrent2->item)
+        {
+            pCurrent1 = pCurrent1->pNext;
+            pCurrent2 = pCurrent2->pNext;
+        }
+        else if(pCurrent1->item > pCurrent2->item)
+        {
+            return 1;
+        }
+        else
+        {
+            return -1;
+        }
+    }
+
+    if ((NULL == pCurrent1) && (NULL == pCurrent2))
+    {
+        return 0;
+    }
+    else if ((NULL != pCurrent1) && (NULL == pCurrent2))
+    {
+        return 1;
+    }
+    else
+    { 
+        return -1;
+    }
+}
+
 int main()
 {
     DoubleLinkedList list;
@@ -195,6 +369,16 @@ int main()
     int deletedItem = 1;
     printf("Double Linked List delete %d from list:\n", deletedItem);
     doubleLinkedListDeleteItem(&list, deletedItem);
+    doubleLinkedListPrint(&list);
+
+    //add (2)
+    doubleLinkedListAddItem2(&list, 2);
+    doubleLinkedListPrint(&list);
+
+    //delete2
+    deletedItem = 2;
+    printf("Double Linked List 2.0 delete %d from list:\n", deletedItem);
+    doubleLinkedListDeleteItem2(&list, deletedItem);
     doubleLinkedListPrint(&list);
 
     return 0;

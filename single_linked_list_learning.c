@@ -35,6 +35,10 @@ bool singleLinkedListReverse(SingleLinkedList* pList);
 bool singleLinkedListReverse2(SingleLinkedList* pList);
 bool singleLinkedListReverse3(SingleLinkedList* pList);
 
+SingleLinkedList*  singleLinkedListClone(SingleLinkedList* pList);
+bool singleLinkedListIsSame(SingleLinkedList* pList1, SingleLinkedList* pList2);
+int singleLinkedListCompare(SingleLinkedList* pList1, SingleLinkedList* pList2);
+
 bool singleLinkedListIsEmpty(SingleLinkedList* pList)
 {
     assert(NULL != pList);
@@ -353,6 +357,77 @@ bool singleLinkedListReverse3(SingleLinkedList* pList)
     return true;
 }
 
+bool singleLinkedListIsSame(SingleLinkedList* pList1, SingleLinkedList* pList2)
+{
+    assert(NULL != pList1);
+    assert(NULL != pList2);
+
+    Node* pCurrent1 = pList1->dummyHead.pNext;
+    Node* pCurrent2 = pList2->dummyHead.pNext;
+
+    while ((NULL != pCurrent1) && (NULL != pCurrent2))
+    {
+        if (pCurrent1->item != pCurrent2->item)
+        {
+            return false;
+        }
+
+        pCurrent1 = pCurrent1->pNext;
+        pCurrent2 = pCurrent2->pNext;
+    }
+
+    if ((NULL == pCurrent1) && (NULL == pCurrent2))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+int singleLinkedListCompare(SingleLinkedList* pList1, SingleLinkedList* pList2)
+{
+    //if list1 > list2, return 1
+    //if list1 = list2, return 0
+    //if list1 < list2, reutrn -1
+
+    assert(NULL != pList1);
+    assert(NULL != pList2);
+
+    Node* pCurrent1 = pList1->dummyHead.pNext;
+    Node* pCurrent2 = pList2->dummyHead.pNext;
+
+    while ((NULL != pCurrent1) && (NULL != pCurrent2))
+    {
+        if (pCurrent1->item == pCurrent2->item)
+        {
+            pCurrent1 = pCurrent1->pNext;
+            pCurrent2 = pCurrent2->pNext;
+        }
+        else if (pCurrent1->item > pCurrent2->item)
+        {
+            return 1;
+        }
+        else
+        {
+            return -1;
+        }
+    }
+
+    if ((NULL == pCurrent1) && (NULL == pCurrent2))
+    {
+        return 0;
+    }
+    else if ((NULL != pCurrent1) && (NULL == pCurrent2))
+    {
+        return 1;
+    }
+    else
+    {
+        return -1;
+    }
+}
+
 int main()
 {
     SingleLinkedList list;
@@ -366,8 +441,16 @@ int main()
     singleLinkedListAddItem2(&list, 8);
     singleLinkedListAddItem2(&list, 8);
     singleLinkedListAddItem2(&list, 8);
+
+    SingleLinkedList list2;
+    list2.dummyHead.pNext = NULL;
+
+    singleLinkedListAddItem(&list2, 1);
+    singleLinkedListAddItem(&list2, 2);
+    singleLinkedListAddItem(&list2, 6);
+    singleLinkedListAddItem(&list2, 8);
     
-    printf("Linked list: ");
+    printf("Linked list1: ");
     singleLinkedListPrint(&list);
     
     // Find Min
@@ -396,19 +479,28 @@ int main()
     printf("\nFind Whether %d is in the list:\n", item);
     printf("%d\n", singleLinkedListFindItem(&list, item));
 
-    // Reverse
+    // Reverse1
     printf("\nReverse single linked list:\n");
     singleLinkedListReverse(&list);
     singleLinkedListPrint(&list);
     
-    // Reverse
+    // Reverse2
     printf("\nReverse single linked list:\n");
     singleLinkedListReverse2(&list);
     singleLinkedListPrint(&list);
 
-        // Reverse
+    // Reverse3
     printf("\nReverse single linked list:\n");
     singleLinkedListReverse3(&list);
     singleLinkedListPrint(&list);
+
+    //same
+    printf("Single Linked List 1.0 is same:\n");
+    printf("%d\n", singleLinkedListIsSame(&list, &list2));
+
+    //compare
+    printf("Double Linked List 1.0 compare:\n");
+    printf("%d\n", singleLinkedListCompare(&list, &list2));
+    
     return 0;
 }

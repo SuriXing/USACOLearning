@@ -35,6 +35,7 @@ bool doubleLinkedListReverse(DoubleLinkedList* pList);
 DoubleLinkedList* doubleLinkedListClone(DoubleLinkedList* pList);
 
 bool doubleLinkedListIsSame(DoubleLinkedList* pList1, DoubleLinkedList* pList2);
+bool doubleLinkedListIsSame2(DoubleLinkedList* pList1, DoubleLinkedList* pList2);
 
 int doubleLinkedListCompare(DoubleLinkedList* pList1, DoubleLinkedList* pList2);
 
@@ -340,6 +341,37 @@ int doubleLinkedListCompare(DoubleLinkedList* pList1, DoubleLinkedList* pList2)
         return -1;
     }
 }
+
+
+bool doubleLinkedListIsSame2(DoubleLinkedList* pList1, DoubleLinkedList* pList2)
+{
+    assert(NULL != pList1);
+    assert(NULL != pList2);
+
+    Node* pCurrent1 = pList1->dummyHead.pNext;
+    Node* pCurrent2 = pList2->dummyHead.pNext;
+
+    while ((NULL != pCurrent1) && (NULL != pCurrent2))
+    {
+        if (pCurrent1->item != pCurrent2->item)
+        {
+            return false;
+        }
+
+        pCurrent1 = pCurrent1->pNext;
+        pCurrent2 = pCurrent2->pNext;
+    }
+
+    if ((NULL == pCurrent1) && (NULL == pCurrent2))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 
 int main()
 {

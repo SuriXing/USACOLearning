@@ -489,6 +489,19 @@ int main()
     doubleLinkedListAddItem(&list, 8);
     doubleLinkedListAddItem(&list, 1);
 
+    DoubleLinkedList list2;
+    list2.dummyHead.pPrev = NULL;
+    list2.dummyHead.pNext = NULL;
+
+    doubleLinkedListAddItem(&list2, 6);
+    doubleLinkedListAddItem(&list2, 6);
+    doubleLinkedListAddItem(&list2, 8);
+    doubleLinkedListAddItem(&list2, 8);
+    doubleLinkedListAddItem(&list2, 8);
+    doubleLinkedListAddItem(&list2, 8);
+    doubleLinkedListAddItem(&list2, 8);
+    doubleLinkedListAddItem(&list2, 8);
+
     //print
     doubleLinkedListPrint(&list);
 
@@ -516,5 +529,41 @@ int main()
     printf("Double Linked List 2.0 delete %d from list:\n", deletedItem);
     doubleLinkedListDeleteItem2(&list, deletedItem);
     doubleLinkedListPrint(&list);
-    return -0;
+
+    //add (3)
+    printf("Double Linked List Add 3 to list:\n");
+    doubleLinkedListAddItem2(&list, 3);
+    doubleLinkedListPrint(&list);
+
+    //delete3
+    deletedItem = 3;
+    printf("Double Linked List 3.0 delete %d from list:\n", deletedItem);
+    doubleLinkedListDeleteItem3(&list, deletedItem);
+    doubleLinkedListPrint(&list);
+
+    //find1
+    printf("Double Linked List Find 8 from list:\n");
+    printf("%d\n",doubleLinkedListFindItem(&list, 8));
+
+    //find2
+    printf("Double Linked List Find 6 from list:\n");
+    printf("%d\n",doubleLinkedListFindItem2(&list, 6));
+
+    //same1
+    printf("Double Linked List 1.0 is same:\n");
+    printf("%d\n", doubleLinkedListIsSame(&list, &list2));
+
+    //compare1
+    printf("Double Linked List 1.0 compare:\n");
+    printf("%d\n", doubleLinkedListCompare(&list, &list2));
+
+    //same2
+    printf("Double Linked List 2.0 is same:\n");
+    printf("%d\n", doubleLinkedListIsSame2(&list, &list2));
+
+    //compare2
+    printf("Double Linked List 2.0 compare:\n");
+    printf("%d\n", doubleLinkedListCompare2(&list, &list2));
+
+    return 0;
 }

@@ -12,7 +12,7 @@ typedef struct _Node
 typedef struct _SingleLinkedList
 {
     Node dummyHead;
-//    int length;
+//  int length;
 } SingleLinkedList;
 
 bool singleLinkedListPrint(SingleLinkedList* pList);
@@ -35,7 +35,7 @@ bool singleLinkedListReverse(SingleLinkedList* pList);
 bool singleLinkedListReverse2(SingleLinkedList* pList);
 bool singleLinkedListReverse3(SingleLinkedList* pList);
 
-SingleLinkedList*  singleLinkedListClone(SingleLinkedList* pList);
+SingleLinkedList  singleLinkedListClone(SingleLinkedList* pList);
 bool singleLinkedListIsSame(SingleLinkedList* pList1, SingleLinkedList* pList2);
 int singleLinkedListCompare(SingleLinkedList* pList1, SingleLinkedList* pList2);
 
@@ -428,6 +428,31 @@ int singleLinkedListCompare(SingleLinkedList* pList1, SingleLinkedList* pList2)
     }
 }
 
+SingleLinkedList singleLinkedListClone(SingleLinkedList* pList)
+{
+    assert(NULL != pList);
+
+    SingleLinkedList newList;
+    newList.dummyHead.item = 0;
+    newList.dummyHead.pNext = NULL;
+
+    Node* pCurrent = pList->dummyHead.pNext;
+    Node* pNewCurrent = &newList.dummyHead;
+    while (NULL != pCurrent)
+    {
+        Node* pNewNode = (Node*)malloc(sizeof(Node));
+        pNewNode->item = pCurrent->item;
+        pNewNode->pNext = NULL;
+
+        pNewCurrent->pNext = pNewNode;
+
+        pNewCurrent = pNewCurrent->pNext;
+        pCurrent = pCurrent->pNext;
+    }
+
+    return newList;
+}
+
 int main()
 {
     SingleLinkedList list;
@@ -501,6 +526,10 @@ int main()
     //compare
     printf("Double Linked List 1.0 compare:\n");
     printf("%d\n", singleLinkedListCompare(&list, &list2));
+
+    //clone
+    SingleLinkedList newList = singleLinkedListClone(&list);
+    printf("%d\n", singleLinkedListIsSame(&list, &newList));
     
     return 0;
 }

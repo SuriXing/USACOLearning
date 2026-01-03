@@ -39,6 +39,8 @@ SingleLinkedList  singleLinkedListClone(SingleLinkedList* pList);
 bool singleLinkedListIsSame(SingleLinkedList* pList1, SingleLinkedList* pList2);
 int singleLinkedListCompare(SingleLinkedList* pList1, SingleLinkedList* pList2);
 
+SingleLinkedList  singleLinkedListClone2(SingleLinkedList* pList);
+
 bool singleLinkedListIsEmpty(SingleLinkedList* pList)
 {
     assert(NULL != pList);
@@ -429,6 +431,31 @@ int singleLinkedListCompare(SingleLinkedList* pList1, SingleLinkedList* pList2)
 }
 
 SingleLinkedList singleLinkedListClone(SingleLinkedList* pList)
+{
+    assert(NULL != pList);
+
+    SingleLinkedList newList;
+    newList.dummyHead.item = 0;
+    newList.dummyHead.pNext = NULL;
+
+    Node* pCurrent = pList->dummyHead.pNext;
+    Node* pNewCurrent = &newList.dummyHead;
+    while (NULL != pCurrent)
+    {
+        Node* pNewNode = (Node*)malloc(sizeof(Node));
+        pNewNode->item = pCurrent->item;
+        pNewNode->pNext = NULL;
+
+        pNewCurrent->pNext = pNewNode;
+
+        pNewCurrent = pNewCurrent->pNext;
+        pCurrent = pCurrent->pNext;
+    }
+
+    return newList;
+}
+
+SingleLinkedList  singleLinkedListClone2(SingleLinkedList* pList)
 {
     assert(NULL != pList);
 

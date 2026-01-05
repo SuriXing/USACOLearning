@@ -507,6 +507,45 @@ bool doubleLinkedListIsSame3(DoubleLinkedList* pList1, DoubleLinkedList* pList2)
     }
 }
 
+int doubleLinkedListCompare3(DoubleLinkedList* pList1, DoubleLinkedList* pList2)
+{
+    assert(NULL != pList1);
+    assert(NULL != pList2);
+
+    Node* pCurrent1 = pList1->dummyHead.pNext;
+    Node* pCurrent2 = pList2->dummyHead.pNext;
+
+    while ((NULL != pCurrent1) && (NULL != pCurrent2))
+    {
+        if (pCurrent1->item == pCurrent2->item)
+        {
+            pCurrent1 = pCurrent1->pNext;
+            pCurrent2 = pCurrent2->pNext;
+        }
+        else if (pCurrent1 > pCurrent2)
+        {
+            return 1;
+        }
+        else
+        {
+            return -1;
+        }
+    }
+
+    if ((NULL == pCurrent1) && (NULL == pCurrent2))
+    {
+        return 0;
+    }
+    else if ((NULL != pCurrent1) && (NULL == pCurrent2))
+    {
+        return 1;
+    }
+    else
+    {
+        return -1;
+    }
+}
+
 int main()
 {
     DoubleLinkedList list;
@@ -599,6 +638,11 @@ int main()
     //same3
     printf("Double Linked List 3.0 is same:\n");
     printf("%d\n", doubleLinkedListIsSame3(&list, &list2));
+
+
+    //compare3
+    printf("Double Linked List 3.0 compare:\n");
+    printf("%d\n", doubleLinkedListCompare3(&list, &list2));    
 
     return 0;
 }

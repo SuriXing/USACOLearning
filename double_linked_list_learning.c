@@ -43,6 +43,7 @@ bool doubleLinkedListIsSame3(DoubleLinkedList* pList1, DoubleLinkedList* pList2)
 int doubleLinkedListCompare(DoubleLinkedList* pList1, DoubleLinkedList* pList2);
 int doubleLinkedListCompare2(DoubleLinkedList* pList1, DoubleLinkedList* pList2);
 int doubleLinkedListCompare3(DoubleLinkedList* pList1, DoubleLinkedList* pList2);
+int doubleLinkedListCompare4(DoubleLinkedList* pList1, DoubleLinkedList* pList2);
 
 bool doubleLinkedListIsEmpty(DoubleLinkedList* pList)
 {
@@ -543,6 +544,36 @@ int doubleLinkedListCompare3(DoubleLinkedList* pList1, DoubleLinkedList* pList2)
     else
     {
         return -1;
+    }
+}
+
+int doubleLinkedListCompare4(DoubleLinkedList* pList1, DoubleLinkedList* pList2)
+{
+    //if list1 > list2, return 1
+    //if list1 = list2, return 0
+    //if list1 < list2, reutrn -1
+
+    assert(NULL != pList1);
+    assert(NULL != pList2);
+
+    Node* pCurrent1 = pList1->dummyHead.pNext;
+    Node* pCurrent2 = pList2->dummyHead.pNext;
+
+    while ((NULL != pCurrent1) && (NULL != pCurrent2))
+    {
+        if (pCurrent1->item == pCurrent2->item)
+        {
+            pCurrent1 = pCurrent1->pNext;
+            pCurrent2 = pCurrent2->pNext;
+        }
+        else if(pCurrent1->item > pCurrent2->item)
+        {
+            return 1;
+        }
+        else
+        {
+            return -1;
+        }
     }
 }
 

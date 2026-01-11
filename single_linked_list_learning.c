@@ -2,18 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <assert.h>
-
-typedef struct _Node
-{
-    int item;
-    struct _Node* pNext;
-} Node;
-
-typedef struct _SingleLinkedList
-{
-    Node dummyHead;
-//  int length;
-} SingleLinkedList;
+#include "single_linked_list.h"
 
 bool singleLinkedListPrint(SingleLinkedList* pList);
 bool singleLinkedListIsEmpty(SingleLinkedList* pList);
@@ -46,6 +35,9 @@ int singleLinkedListCompare2(SingleLinkedList* pList1, SingleLinkedList* pList2)
 SingleLinkedList  singleLinkedListClone3(SingleLinkedList* pList);
 bool singleLinkedListIsSame3(SingleLinkedList* pList1, SingleLinkedList* pList2);
 int singleLinkedListCompare3(SingleLinkedList* pList1, SingleLinkedList* pList2);
+
+int singleLinkedListFindFirstItem(SingleLinkedList* pList);
+int singleLinkedListFindLastItem(SingleLinkedList* pList);
 
 bool singleLinkedListIsEmpty(SingleLinkedList* pList)
 {
@@ -649,8 +641,30 @@ SingleLinkedList  singleLinkedListClone3(SingleLinkedList* pList)
     return newList;
 }
 
+int singleLinkedListFindFirstItem(SingleLinkedList* pList)
+{
+    assert(NULL != pList);
+    
+    Node* pCurrent = pList->dummyHead.pNext;
 
-int main()
+    return pCurrent->item;
+}
+
+int singleLinkedListFindLastItem(SingleLinkedList* pList)
+{
+    assert(NULL != pList);
+
+    Node* pCurrent = pList->dummyHead.pNext;
+
+    while (NULL != pCurrent->pNext)
+    {
+        pCurrent = pCurrent->pNext;
+    }
+
+    return pCurrent->item;
+}
+
+int single_linked_list_test()
 {
     SingleLinkedList list;
     list.dummyHead.pNext = NULL;    

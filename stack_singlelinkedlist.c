@@ -22,3 +22,41 @@ int stackTop(StackSingleLinkedList* pStack)
     return singleLinkedListFindLastItem(&pStack->list);
 }
 
+int stackSize(StackSingleLinkedList* pStack)
+{
+    assert(NULL != pStack);
+    
+    int count = 0;
+    Node* current = pStack->list.dummyHead.pNext;
+    
+    while (current != NULL)
+    {
+        count++;
+        current = current->pNext;
+    }
+    
+    return count;
+}
+
+bool stackIsEmpty(StackSingleLinkedList* pStack)
+{
+    assert(NULL != pStack);
+
+    Node* top = pStack->list.dummyHead.pNext;
+
+    if (NULL == top)
+    {
+        return true;
+    }
+
+    return false;
+}
+
+bool stackPrint(StackSingleLinkedList* pStack)
+{
+    assert(NULL != pStack);
+
+    Node* pCurrent = pStack->list.dummyHead.pNext;
+
+    return singleLinkedListPrint(&pStack->list);
+}

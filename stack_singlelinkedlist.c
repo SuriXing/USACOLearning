@@ -60,3 +60,52 @@ bool stackPrint(StackSingleLinkedList* pStack)
 
     return singleLinkedListPrint(&pStack->list);
 }
+
+bool stackClear(StackSingleLinkedList* pStack)
+{
+    Node *pCurrent = pStack->list.dummyHead.pNext;
+    
+    while (NULL != pCurrent)
+    {
+        Node *pNext = pCurrent->pNext;
+        
+        free(pCurrent);
+        pCurrent = pNext;
+    }
+
+    pStack->list.dummyHead.pNext = NULL;
+
+    return true;
+}
+
+int simpleStackTest()
+{
+    printf("=== Simple Stack Test ===\n");
+    
+    StackSingleLinkedList myStack;
+
+    // Test 1: Push and pop
+    printf("1. Push 10: ");
+    bool pushed = stackPush(&myStack, 10);
+    printf("%s\n", pushed ? "OK" : "FAILED");
+    
+    printf("   Pop: %d (should be 10)\n", stackPop(&myStack));
+    
+    // Test 2: Multiple pushes
+    printf("\n2. Pushing 1, 2, 3\n");
+    stackPush(&myStack, 1);
+    stackPush(&myStack, 2);
+    stackPush(&myStack, 3);
+    
+    printf("   Stack size: %d\n", stackSize(&myStack));
+    printf("   Top item: %d (should be 3)\n", stackTop(&myStack));
+    printf("   Pop: %d (should be 3)\n", stackPop(&myStack));
+    printf("   Pop: %d (should be 2)\n", stackPop(&myStack));
+    printf("   Pop: %d (should be 1)\n", stackPop(&myStack));
+    
+    printf("   Stack size now: %d (should be 0)\n", stackSize(&myStack));
+    
+    printf("=== Test Complete ===\n");
+
+    return 0;
+}

@@ -78,12 +78,12 @@ bool stackClear(StackSingleLinkedList* pStack)
     return true;
 }
 
-int simpleStackTest()
+int stackTest()
 {
     printf("=== Simple Stack Test ===\n");
     
     StackSingleLinkedList myStack;
-
+    myStack.list.dummyHead.pNext = NULL;  
     // Test 1: Push and pop
     printf("1. Push 10: ");
     bool pushed = stackPush(&myStack, 10);

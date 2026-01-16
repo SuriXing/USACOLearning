@@ -6,8 +6,9 @@
 #include "single_linked_list.h"
 #include "stack_singlelinkedlist.h"
 
-
 int main()
 {
+    stackTest();
+
     return 0;
 }

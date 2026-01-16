@@ -16,4 +16,6 @@ bool stackIsEmpty(StackSingleLinkedList* pStack);
 bool stackPrint(StackSingleLinkedList* pStack);
 bool stackClear(StackSingleLinkedList* pStack);
 
+int stackTest();
+
 #endif  // __STACK_SINGLE_LINKED_LIST_H__
